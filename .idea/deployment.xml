@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PublishConfigData" promptOnRemoteOverwrite="CHECK_CONTENT" serverName="crm.laravel" notifyRemoteChanges="true">
+    <serverData>
+      <paths name="0010150.ru">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$" web="/" />
+            <mapping local="$PROJECT_DIR$/node_modules/leaflet" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="LARADEV">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$" web="/" />
+            <mapping local="$PROJECT_DIR$/node_modules/leaflet" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="MCE">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$" web="/" />
+            <mapping local="$PROJECT_DIR$/node_modules/leaflet" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="_sesteam.ru">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$" web="/" />
+            <mapping local="$PROJECT_DIR$/node_modules/leaflet" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="bx">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$" web="/" />
+            <mapping local="$PROJECT_DIR$/node_modules/leaflet" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="cj21620 (offs)">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$" web="/" />
+            <mapping local="$PROJECT_DIR$/node_modules/leaflet" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="crm.laravel">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/" local="$PROJECT_DIR$" web="/" />
+          </mappings>
+          <excludedPaths>
+            <excludedPath path="/node_modules" />
+          </excludedPaths>
+        </serverdata>
+      </paths>
+      <paths name="jehost">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$" web="/" />
+            <mapping local="$PROJECT_DIR$/node_modules/leaflet" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="lara.cv05345.tmweb.ru">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$" web="/" />
+            <mapping local="$PROJECT_DIR$/node_modules/leaflet" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="mgcdru.beget.tech">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$" web="/" />
+            <mapping local="$PROJECT_DIR$/node_modules/leaflet" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="moskva-dez.ru">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$" web="/" />
+            <mapping local="$PROJECT_DIR$/node_modules/leaflet" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="mse.bx.crm">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$" web="/" />
+            <mapping local="$PROJECT_DIR$/node_modules/leaflet" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="red">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$" web="/" />
+            <mapping local="$PROJECT_DIR$/node_modules/leaflet" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="red-mersi">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$" web="/" />
+            <mapping local="$PROJECT_DIR$/node_modules/leaflet" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="red: kronopv-mobile">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$" web="/" />
+            <mapping local="$PROJECT_DIR$/node_modules/leaflet" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="red:altra-core.com">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$" web="/" />
+            <mapping local="$PROJECT_DIR$/node_modules/leaflet" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="red:estro-bx">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$" web="/" />
+            <mapping local="$PROJECT_DIR$/node_modules/leaflet" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="red:kronov-ssh">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$" web="/" />
+            <mapping local="$PROJECT_DIR$/node_modules/leaflet" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="red:studio">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$" web="/" />
+            <mapping local="$PROJECT_DIR$/node_modules/leaflet" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="rred:fermer">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$" web="/" />
+            <mapping local="$PROJECT_DIR$/node_modules/leaflet" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="sesteam.tmweb.ru">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$" web="/" />
+            <mapping local="$PROJECT_DIR$/node_modules/leaflet" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="st.cv05345">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$" web="/" />
+            <mapping local="$PROJECT_DIR$/node_modules/leaflet" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="uber">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$" web="/" />
+            <mapping local="$PROJECT_DIR$/node_modules/leaflet" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="vh130.timeweb.ru">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$" web="/" />
+            <mapping local="$PROJECT_DIR$/node_modules/leaflet" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="wwwww">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$" web="/" />
+            <mapping local="$PROJECT_DIR$/node_modules/leaflet" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+    </serverData>
+  </component>
+</project>
