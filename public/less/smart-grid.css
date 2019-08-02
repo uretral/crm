@@ -1,0 +1,41 @@
+.debug-in {
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  z-index: -1;
+}
+.debug-in > div {
+  height: inherit;
+  max-width: 100%;
+  margin: 0 auto;
+  padding-left: 0px;
+  padding-right: 0px;
+}
+@media screen and (max-width: 780px) {
+  .debug-in > div {
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+}
+.debug-in > div > div {
+  height: inherit;
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: -15px;
+  margin-right: -15px;
+}
+.debug-in > div > div > div {
+  box-sizing: border-box;
+  word-wrap: break-word;
+  margin-left: 15px;
+  margin-right: 15px;
+  width: calc(4.166666666666667% - 30px);
+  height: inherit;
+  border-right: 1px dotted gray;
+  background: rgba(0, 0, 0, 0.1);
+}
+/*# sourceMappingURL=smart-grid.css.map */
