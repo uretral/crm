@@ -46,6 +46,18 @@ Form::extend('dadataAddress', DadataAddress::class);
 Form::extend('selectFlat',SelectFlat::class);
 
 
+$vueRoute = [];
+$route = request()->getPathInfo();
+switch ($route):
+    case '/crm/lids/create':
+    case '/crm/lids/edit':
+        $vueRoute[] = '/js/implement.map.js';
+        break;
+    case "/logistic/routes":
+        $vueRoute[] = '/js/logistic.routes.js';
+        break;
+endswitch;
+
 Admin::css([
     '/less/helper.css',
 
@@ -58,8 +70,5 @@ Admin::navbar(function (\Encore\Admin\Widgets\Navbar $navbar) {
     $navbar->left(new Heading());
 });
 
-Admin::js([
-    '/js/implement.map.js',
-//    '/js/leafLet.js',
-]);
+Admin::js($vueRoute);
 

@@ -20,6 +20,8 @@ class VerifyCsrfToken extends Middleware
      */
     protected $except = [
         '/logistic/map/new',
-        '/logistic/map/update'
+        '/logistic/map/update',
+        '/logistic/map/many',
+        '/logistic/map/get_equipment',
     ];
 }

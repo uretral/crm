@@ -11,10 +11,12 @@
 |
 */
 
-Artisan::call('view:clear');
+//Artisan::call('view:clear');
 
-use App\Models\Helper\Method;
-use App\Models\Helper\Pest;
+
+use Carbon\Carbon;
+
+//dump(Carbon::make('2019-08-31')->add(1, 'day')->toDateString());
 
 Route::post('/logistic/map/new','\App\Http\Controllers\Ajax\LogisticController@new');
 
@@ -38,6 +40,10 @@ Route::get('/dadata/osm','\App\Http\Controllers\Ajax\Dadata@osm');
 
 Route::get('/logistic/map/new','\App\Http\Controllers\Ajax\LogisticController@get');
 Route::post('/logistic/map/update','\App\Http\Controllers\Ajax\LogisticController@update');
+Route::get('/logistic/map/many','\App\Http\Controllers\Ajax\LogisticController@getMany');
+Route::get('/logistic/map/get_equipment','\App\Http\Controllers\Ajax\LogisticController@getEquipment');
+Route::post('/logistic/map/update_equipment','\App\Http\Controllers\Ajax\LogisticController@updateEquipment');
+
 
 //Route::get('/test', '\App\Models\My\Test@tableTest');
 Route::get('/test', '\App\Models\My\Test@vue');

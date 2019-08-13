@@ -49,6 +49,7 @@
                 }
             }).success(function (data) {
                 window.addr = JSON.parse(data).suggestions;
+                // console.log(window.addr);
                 if (window.addr) {
                     for (var i = 0, len = window.addr.length; i < len; i++) {
                         list += `<li><a rel="` + i + `" href="javascript:;">` + window.addr[i].unrestricted_value + `</a></li>`;
@@ -58,13 +59,14 @@
 
                 $('.drop-address li a').on('click', function () {
                     var dadataAddress = window.addr[$(this).attr('rel')];
+                    console.log('dadataAddress',dadataAddress);
                     $('[name="{{$name}}"]').val(dadataAddress.unrestricted_value);
                     $('[name="customer[city]"]').val(dadataAddress.data.city);
                     $('[name="customer[region]"]').val(dadataAddress.data.region);
                     window.city = dadataAddress.data.city;
                     window.region = dadataAddress.data.region;
-                    window.lat = citiesArray[window.city].center_lat;
-                    window.lon = citiesArray[window.city].center_lon;
+                    window.lat = citiesArray[window.region].center_lat;
+                    window.lon = citiesArray[window.region].center_lon;
                     $('[name="center_lat"]').val(window.lat);
                     $('[name="center_lon"]').val(window.lon);
 
@@ -89,7 +91,6 @@
                                 "_token": "{{ csrf_token() }}"
                             }
                         }).success(function (data) {
-                            console.log(data);
 
                             var osm = JSON.parse(data);
                             map(osm.coordinates);

@@ -155,7 +155,12 @@ class LidController extends Controller
             return Servicing::find($servicing)->name;
         })->sortable();
         $grid->status('Статус')->display(function ($status){
-            return $status['date'].' (' .Status::find($status['status'])->name. ')';
+            if($status['status']){
+                return $status['date'].' (' .Status::find($status['status'])->name. ')';
+            } else {
+                return '';
+            }
+
         });
 //        $grid->status('Дата статус')->display(function ($status){
 //            return ;
@@ -217,22 +222,28 @@ class LidController extends Controller
 
         $form->tab('Основные данные',function (Form $form){
     // Дата обращения:
-            if($this->edit){
+/*            if($this->edit){
                 $form->datetime('date_start', 'Дата обращения:')->readOnly();
             } else {
                 $form->datetime('date_start', 'Дата обращения:')->value(Carbon::now())->readOnly();
-            }
+            }*/
+            $form->datetime('date_start', 'Дата обращения:');
 
     // Статус лида:
     // с (дата):
-            if($this->edit){
+
+
+/*            if($this->edit){
                 echo LidStatus::statusShow(request()->segment(3));
                 $form->select('status.status', ' Статус лида:')->options(Status::all()->pluck('name', 'id'));
                 $form->datetime('status.date', 'с (дата):');
             } else {
                 $form->select('status.status', ' Статус лида:')->options(Status::all()->pluck('name', 'id'))->default(4);
                 $form->datetime('status.date', 'с (дата):')->value(Carbon::now())->readOnly();
-            }
+            }*/
+
+            $form->select('status.status', ' Статус лида:')->options(Status::all()->pluck('name', 'id'));
+            $form->datetime('status.date', 'с (дата):');
 
     //Менеджер:
             if($this->edit) {
@@ -247,11 +258,12 @@ class LidController extends Controller
 
 
     //Тип обслуживания: Действие:
-            if($this->edit){
+/*            if($this->edit){
                 $form->text('contract', 'Номер договора:')->readOnly();
             } else {
                 $form->hidden('contract', 'Номер договора:')->value($this->contract());
-            }
+            }*/
+            $form->text('contract', 'Номер договора:');
 
             $form->select('servicing', 'Тип обслуживания:')->options(Servicing::all()->pluck('name', 'id'))->default(1);
             $form->select('action', 'Действие:')->options(Action::all()->pluck('name', 'id'))->required();
@@ -280,14 +292,15 @@ class LidController extends Controller
             $form->hidden('customer.region');
             $form->text('customer.geo_lat','Широта')->required();
             $form->text('customer.geo_lon','Долгота')->required();
-
+/*Московская обл, г Мытищи, ул Лётная, д 34/1, кв 5*/
             if($this->edit){
                 $latLon = Region::where('city',$this->customer->city)->first();
             } else {
                 $latLon = Region::where('city','Москва')->first();
+                $form->hidden('center_lat')->default($latLon->center_lat);
+                $form->hidden('center_lon')->default($latLon->center_lon);
             }
-            $form->hidden('center_lat')->default($latLon->center_lat);
-            $form->hidden('center_lon')->default($latLon->center_lon);
+
         });
 
 
