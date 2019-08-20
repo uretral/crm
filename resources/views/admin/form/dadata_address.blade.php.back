@@ -3,7 +3,6 @@
     @inject('cities', 'App\Models\Helper\Region')
     @php
         $citiesArray = $cities->cities();
-        $regionsArray = $cities->regions();
     @endphp
 
     {{--@dump($points)--}}
@@ -14,6 +13,7 @@
             <div id="mapContainer">
                 <div class="under" id="destinationMap"></div>
             </div>
+
             <span class="input-group-addon"><a id="toggleShow" href="javascript:;"><i
                         class="fa fa-map-marker fa-fw"></i></a></span>
             <input type="text" class="{{$class}} form-control" name="{{$name}}"
@@ -33,7 +33,6 @@
 <script>
 
     let citiesArray = @json($citiesArray);
-    let regionsArray = @json($regionsArray);
 
     $(document).on('keyup', '[name="{{$name}}"]', function () {
         $('#destinationMap').remove();
@@ -50,31 +49,45 @@
                 }
             }).success(function (data) {
                 window.addr = JSON.parse(data).suggestions;
+                // console.log(window.addr);
                 if (window.addr) {
                     for (var i = 0, len = window.addr.length; i < len; i++) {
                         list += `<li><a rel="` + i + `" href="javascript:;">` + window.addr[i].unrestricted_value + `</a></li>`;
                     }
-                    $(nest).html(list);
                 }
+                $(nest).html(list);
+
                 $('.drop-address li a').on('click', function () {
                     var dadataAddress = window.addr[$(this).attr('rel')];
+                    console.log('dadataAddress',dadataAddress);
+                    $('[name="{{$name}}"]').val(dadataAddress.unrestricted_value);
+                    $('[name="customer[city]"]').val(dadataAddress.data.city);
+                    $('[name="customer[region]"]').val(dadataAddress.data.region);
+                    window.city = dadataAddress.data.city;
+                    window.region = dadataAddress.data.region;
+                    window.lat = citiesArray[window.region].center_lat;
+                    window.lon = citiesArray[window.region].center_lon;
+                    $('[name="center_lat"]').val(window.lat);
+                    $('[name="center_lon"]').val(window.lon);
 
-                    console.log(dadataAddress);
 
-                    if(dadataAddress.data.geo_lat && dadataAddress.data.geo_lon){
-                        $('[name="{{$name}}"]').val(dadataAddress.unrestricted_value);
-                        $('[name="customer[city]"]').val(dadataAddress.data.city);
-                        $('[name="customer[region]"]').val(dadataAddress.data.region);
-                        $('[name="customer[geo_lat]"]').val(dadataAddress.data.geo_lat);
-                        $('[name="customer[geo_lon]"]').val(dadataAddress.data.geo_lon);
+                    for (var p = 0, len = window.points.length; p < len; p++) {
+                        if (dadataAddress.data.region === window.points[p].region || dadataAddress.data.region === window.points[p].region) {
+                            centerLat = window.points[p].center_lat;
+                            centerLon = window.points[p].center_lon;
+                        }
+                    }
+
+
+                    if (dadataAddress.data.geo_lat && dadataAddress.data.geo_lon) {
                         $.ajax({
                             type: "get",
                             url: "/dadata/osm",
                             data: {
                                 'lat': dadataAddress.data.geo_lat,
                                 'lon': dadataAddress.data.geo_lon,
-                                'flat': regionsArray[dadataAddress.data.region].center_lat,
-                                'flon': regionsArray[dadataAddress.data.region].center_lon,
+                                'flat': window.lat,
+                                'flon': window.lon,
                                 "_token": "{{ csrf_token() }}"
                             }
                         }).success(function (data) {
@@ -86,16 +99,16 @@
                             $('[name="customer[destination]"]').val(osm.properties.distance);
 
                         });
-                    } else {
-                        $('[name="{{$name}}"]').val(dadataAddress.unrestricted_value);
                     }
+
+                    $('[name="customer[geo_lat]"]').val(dadataAddress.data.geo_lat);
+                    $('[name="customer[geo_lon]"]').val(dadataAddress.data.geo_lon);
                     $(nest).html('');
                 });
+
             });
         }
     });
-
-
 
     $(document).on('click', '#toggleShow', function () {
         $('#destinationMap').toggleClass('under', 'over');

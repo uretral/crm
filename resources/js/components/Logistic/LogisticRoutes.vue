@@ -40,7 +40,7 @@
                 <span>Мастера</span>
             </div>
             <div class="log-head-schedule" v-for="(v,k) in res.multiSchedule" >
-                <span>{{k}}</span>
+                <a v-bind:href="'/logistic/routes/'+k+'/edit'"><span>{{k}}</span></a>
                 <a href="javascript:" v-if="k !== dateActive" @click="dateActive = k">Снаряжение</a>
             </div>
         </div>
@@ -64,20 +64,21 @@
                 </div>
                 <div class="log-schedule" >
 <!--Days-->
-                    <div v-for="mastersDay in res.multiSchedule" class="log-schedule-tr">
+                    <div v-for="(mastersDay,masterDate) in res.multiSchedule" v-bind:class="{active : masterDate === dateActive }" class="log-schedule-tr">
 
-                        <div v-for="oneMasterDay in mastersDay" class="log-schedule-td">
+                        <div v-for="oneMasterDay in mastersDay"  class="log-schedule-td">
 
 
                                 <label v-for="hour in 24"  class="cell drag-nest" >
                                     {{hour-1}}
                                     <template v-for="volume in oneMasterDay.volumes" v-if="Number(volume.start) === hour-1">
 
-											<span
+											<a v-bind:href="'/crm/lids/'+volume.lid_id+'/edit'"
                                                 v-bind:id="volume.id"
                                                 v-bind:style="markBusy(volume.length)"
                                                 class="drag"
-                                            ></span>
+                                               target="_blank"
+                                            ></a>
                                     </template>
 
                                 </label>
@@ -119,14 +120,14 @@
         props: {},
         data: function () {
             return {
-                date: '2019-05-07',// Moment().format('YYYY-MM-DD'),
+                date:  Moment().format('YYYY-MM-DD'), //'2019-05-07',
                 days: 3,
                 region: {
                     city: 'Москва'
                 },
                 regions: '',
                 res: '',
-                dateActive: '2019-05-07',
+                dateActive: Moment().format('YYYY-MM-DD'),
                 // equipment
                 modalEquipment: false,
                 equipmentSetArray: [],

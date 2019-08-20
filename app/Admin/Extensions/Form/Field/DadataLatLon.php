@@ -5,14 +5,13 @@ namespace App\Admin\Extensions\Form\Field;
 use App\Models\Helper\Region;
 use Encore\Admin\Form\Field;
 
-class DadataAddress extends Field
+class DadataLatLon extends Field
 {
-    protected static $js = [
-//        '/js/dadata.js',
-        '/js/leafLet.js',
-    ];
+//    protected static $js = [
+//        '/js/dadata.js'
+//    ];
 
-    protected $view = 'admin.form.dadata_address';
+    protected $view = 'admin.form.dadata_lat_lon';
 
     public $inputs = [];
 

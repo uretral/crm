@@ -4,7 +4,6 @@ namespace App\Admin\Controllers\Crm;
 
 
 use App\Admin\Extensions\Form\NestedFormFlat;
-use App\Models\Admin\AdminUser;
 use App\Models\Crm\Act;
 use App\Models\Crm\Customer;
 use App\Models\Crm\Implement;
@@ -48,8 +47,6 @@ class LidController extends Controller
 {
     use HasResourceActions;
 
-    public $modelData;
-
     private $edit = false;
 
     private $actHolder = [];
@@ -85,10 +82,6 @@ class LidController extends Controller
             return str_replace('20', '', $st->year) . '-' . $st->month . '-' . $oLid . '-' . $st->day . '-U';
         else
             return str_replace('20', '', $st->year) . '-' . $st->month . '-' . $oLid . '-' . $st->day;*/
-    }
-
-    public function modelData(){
-        return $this->modelData = Lid::where('id',request()->segment(3))->first();
     }
 
 
@@ -215,8 +208,6 @@ class LidController extends Controller
     {
         $form = new Form(new Lid);
 
-        $this->modelData();
-
         if(request()->segment(4)){
             $this->edit = true;
 
@@ -239,38 +230,63 @@ class LidController extends Controller
 // Основные данные:
 
         $form->tab('Основные данные',function (Form $form){
-
-
-
-            $form->htmlField('manager_starter','Мэнеджер начавший лид')
-                ->display(AdminUser::where('id',$this->modelData->manager_starter)->first()->name);
     // Дата обращения:
+/*            if($this->edit){
+                $form->datetime('date_start', 'Дата обращения:')->readOnly();
+            } else {
+                $form->datetime('date_start', 'Дата обращения:')->value(Carbon::now())->readOnly();
+            }*/
             $form->datetime('date_start', 'Дата обращения:');
 
     // Статус лида:
     // с (дата):
 
+
+/*            if($this->edit){
+                echo LidStatus::statusShow(request()->segment(3));
+                $form->select('status.status', ' Статус лида:')->options(Status::all()->pluck('name', 'id'));
+                $form->datetime('status.date', 'с (дата):');
+            } else {
+                $form->select('status.status', ' Статус лида:')->options(Status::all()->pluck('name', 'id'))->default(4);
+                $form->datetime('status.date', 'с (дата):')->value(Carbon::now())->readOnly();
+            }*/
+
             $form->select('status.status', ' Статус лида:')->options(Status::all()->pluck('name', 'id'))->default(4);
             $form->datetime('status.date', 'с (дата):')->default(Carbon::now()->toDateTimeString());
 
     //Менеджер:
+/*            if($this->edit) {
+                $d = Lid::find(request()->segment(3))->first();
 
-            $form->htmlField('manager','Мэнеджер')
-                ->display(AdminUser::where('id',$this->modelData->manager)->first()->name);
-            $form->hidden('manager')->value(config('const.admin')->user()->id);
+                $form->display('fake', 'Менеджер:')->value(config('const.admin')->user()->name)->readOnly();
+                $form->hidden('manager')->value(config('const.admin')->user()->id);
+            } else {
+                $form->display('fake', 'Менеджер:')->value(config('const.admin')->user()->name)->readOnly();
+                $form->hidden('manager')->value(config('const.admin')->user()->id);
+            }*/
+
+            $form->display('manager')->value(config('const.admin')->user()->id);
 
 
     //Тип обслуживания: Действие:
-
+/*            if($this->edit){
+                $form->text('contract', 'Номер договора:')->readOnly();
+            } else {
+                $form->hidden('contract', 'Номер договора:')->value($this->contract());
+            }*/
             $form->text('contract', 'Номер договора:');
+
             $form->select('servicing', 'Тип обслуживания:')->options(Servicing::all()->pluck('name', 'id'))->default(1);
             $form->select('action', 'Действие:')->options(Action::all()->pluck('name', 'id'))->required();
             $form->datetime('action_date', 'Дата и время действия:');
             $form->text('action_note', 'Примечание:');            //Комментарий:
             $form->textarea('comment','Комментарий:');
+
         });
 
+
         $form->tab('Данные клиента',function (Form $form){
+
             $states = [
                 'on' => ['value' => 1, 'text' => 'Юридический', 'color' => 'danger'],
                 'off' => ['value' => 0, 'text' => 'Физизический', 'color' => 'success'],
@@ -287,8 +303,20 @@ class LidController extends Controller
             $form->hidden('customer.region');
             $form->text('customer.geo_lat','Широта')->required();
             $form->text('customer.geo_lon','Долгота')->required();
-//            $form->hidden('center_lat');
-//            $form->hidden('center_lon');
+/*Московская обл, г Мытищи, ул Лётная, д 34/1, кв 5*/
+
+            /*
+            if($this->edit){
+                $latLon = Region::where('city',$this->customer->city)->first();
+            } else {
+                $latLon = Region::where('city','Москва')->first();
+                $form->hidden('center_lat')->default($latLon->center_lat);
+                $form->hidden('center_lon')->default($latLon->center_lon);
+            }*/
+
+            $form->hidden('center_lat');
+            $form->hidden('center_lon');
+
         });
 
 
@@ -299,10 +327,13 @@ class LidController extends Controller
 
             $form->hasManyFlat('act', 'Акт', function (Form\NestedForm $form) {
 
+//                $form->tab
+
                 $finished = [
                     'on' => ['value' => 1, 'text' => 'Закрыт', 'color' => 'success'],
                     'off' => ['value' => 0, 'text' => 'Открыт', 'color' => 'danger'],
                 ];
+
 
                 $form->text('act_nr','Номер акта');
                 $form->switch('floating','Плавающий?');
@@ -312,7 +343,6 @@ class LidController extends Controller
                 $form->dadataLatLon('address', 'Адрес');
                 $form->text('lat', 'Широта');
                 $form->text('lon', 'Долгота');
-                $form->select('region', 'Регион')->options(Region::all()->pluck('region','region'));
 
                 $form->tableFlat('volume','Обьем(ы)', function ($table) {
                     $table->select('pest','Предмет работ:')->options(Pest::all()->pluck('name','id'))->load('method', '/api/getter/methods');
@@ -345,6 +375,7 @@ class LidController extends Controller
             $form->text('id');
         });
         $form->hasMany('implements','Исполнители', function (Form\NestedForm $form) {
+//            $form->dateButton('choose_master','Дата');
             $form->text('master','Мастер');
             $form->datetime('start_date','Начало работ');
             $form->datetime('end_date','Окончание Работ');
@@ -471,12 +502,38 @@ class LidController extends Controller
         return $form;
     }
 
+
+
+
+/*    public function saveParent($data){
+
+    }
+    public function updateParent($data){
+
+    }
+
+    public function tableSave($data){
+
+        foreach ($data as $parentID => $parentData){
+
+            if(is_numeric($parentID)){
+                // update fn
+
+
+            } else {
+                // save fn
+            }
+        }
+
+    }*/
+
     public function formCreate(){
+
+
         $form = new Lid;
         $form->contract = $this->contract();
         $form->date_start = Carbon::now()->toDateTimeString();
         $form->manager = config('const.admin')->user()->id;
-        $form->manager_starter = config('const.admin')->user()->id;
 
         $form->save();
         $lastID = DB::getPdo()->lastInsertId();

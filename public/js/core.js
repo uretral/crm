@@ -7,12 +7,13 @@ $(document).on('change','.customer_status_',function(){
         $('#customer_organization').parents('.form-group').show();
     } else {
         $('#customer_organization').parents('.form-group').hide();
-    };
+    }
 });
 
 
 function appendImplement(ev){
-    $(window.master).select2('val', window.newImplement.master );
+    // $(window.master).select2('val',window.newImplement.master);
+    $(window.master).val(window.newImplement.master).trigger('change');
     $(window.startTime).val(window.newImplement.startTime);
     $(window.endTime).val(window.newImplement.endTime);
 }

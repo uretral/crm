@@ -96,6 +96,7 @@ class LogisticController extends Controller
     {
         $volume = Implement::whereBetween('start_date', [Carbon::make($this->date), Carbon::make($this->date)->add(1, 'day')])
             ->where('master', $master)
+            ->orderBy('start_date')
             ->get()->toArray();
         $vol = [];
         $geo = [];

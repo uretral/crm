@@ -16,6 +16,7 @@
         "jquery": "^3.2",
         "laravel-mix": "^2.0",
         "lodash": "^4.17.5",
+        "parcel-bundler": "^1.12.3",
         "popper.js": "^1.12",
         "vue": "^2.5.7",
         "vue-router": "^3.0.2"
@@ -24,7 +25,9 @@
         "lang.js": "^1.1.12",
         "leaflet": "^1.5.1",
         "leaflet-map": "^0.2.1",
+        "leaflet-routing-machine": "^3.2.12",
         "moment": "^2.24.0",
+        "ol": "^5.3.3",
         "uiv": "^0.32.2",
         "vue-bootstrap-datetimepicker": "^5.0.1",
         "vue-outside-events": "^1.1.3"

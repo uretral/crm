@@ -11,5 +11,7 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/js/logistic.routes.js', 'public/js');
+mix.js('resources/js/implement.map.js', 'public/js');
+// mix.js('resources/js/get.address.data.js', 'public/js');
+// mix.js('resources/js/logistic.routes.map.js', 'public/js');
     // .sass('resources/sass/app.scss', 'public/css');

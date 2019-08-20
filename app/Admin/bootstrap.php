@@ -32,7 +32,9 @@ use \App\Admin\Extensions\Form\Field\HasManyFlat;
 use App\Admin\Extensions\Form\Field\TableFlat;
 use App\Admin\Extensions\Form\Field\HiddenFlat;
 use App\Admin\Extensions\Form\Field\DadataAddress;
+use App\Admin\Extensions\Form\Field\DadataLatLon;
 use App\Admin\Extensions\Form\Field\SelectFlat;
+use App\Admin\Extensions\Form\Field\HtmlField;
 
 Encore\Admin\Form::forget(['map', 'editor']);
 
@@ -43,18 +45,23 @@ Form::extend('hasManyFlat', HasManyFlat::class);
 Form::extend('tableFlat', TableFlat::class);
 Form::extend('hiddenFlat', HiddenFlat::class);
 Form::extend('dadataAddress', DadataAddress::class);
+Form::extend('dadataLatLon', DadataLatLon::class);
 Form::extend('selectFlat',SelectFlat::class);
+Form::extend('htmlField',HtmlField::class);
 
 
 $vueRoute = [];
 $route = request()->getPathInfo();
-switch ($route):
-    case '/crm/lids/create':
-    case '/crm/lids/edit':
+switch (true):
+    case  stristr($route,"/crm/lids/"):
         $vueRoute[] = '/js/implement.map.js';
+//        $vueRoute[] = '/js/get.address.data.js';
         break;
-    case "/logistic/routes":
+    case $route == "/logistic/routes":
         $vueRoute[] = '/js/logistic.routes.js';
+        break;
+    case stristr($route,"/logistic/routes/"):
+        $vueRoute[] = '/js/logistic.routes.map.js';
         break;
 endswitch;
 

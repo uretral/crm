@@ -35532,6 +35532,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -35541,14 +35542,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     props: {},
     data: function data() {
         return {
-            date: '2019-05-07', // Moment().format('YYYY-MM-DD'),
+            date: __WEBPACK_IMPORTED_MODULE_0_moment___default()().format('YYYY-MM-DD'), //'2019-05-07',
             days: 3,
             region: {
                 city: 'Москва'
             },
             regions: '',
             res: '',
-            dateActive: '2019-05-07',
+            dateActive: __WEBPACK_IMPORTED_MODULE_0_moment___default()().format('YYYY-MM-DD'),
             // equipment
             modalEquipment: false,
             equipmentSetArray: [],
@@ -36973,7 +36974,9 @@ var render = function() {
           _vm._v(" "),
           _vm._l(_vm.res.multiSchedule, function(v, k) {
             return _c("div", { staticClass: "log-head-schedule" }, [
-              _c("span", [_vm._v(_vm._s(k))]),
+              _c("a", { attrs: { href: "/logistic/routes/" + k + "/edit" } }, [
+                _c("span", [_vm._v(_vm._s(k))])
+              ]),
               _vm._v(" "),
               k !== _vm.dateActive
                 ? _c(
@@ -37067,10 +37070,13 @@ var render = function() {
           _c(
             "div",
             { staticClass: "log-schedule" },
-            _vm._l(_vm.res.multiSchedule, function(mastersDay) {
+            _vm._l(_vm.res.multiSchedule, function(mastersDay, masterDate) {
               return _c(
                 "div",
-                { staticClass: "log-schedule-tr" },
+                {
+                  staticClass: "log-schedule-tr",
+                  class: { active: masterDate === _vm.dateActive }
+                },
                 _vm._l(mastersDay, function(oneMasterDay) {
                   return _c(
                     "div",
@@ -37088,10 +37094,15 @@ var render = function() {
                           _vm._l(oneMasterDay.volumes, function(volume) {
                             return Number(volume.start) === hour - 1
                               ? [
-                                  _c("span", {
+                                  _c("a", {
                                     staticClass: "drag",
                                     style: _vm.markBusy(volume.length),
-                                    attrs: { id: volume.id }
+                                    attrs: {
+                                      href:
+                                        "/crm/lids/" + volume.lid_id + "/edit",
+                                      id: volume.id,
+                                      target: "_blank"
+                                    }
                                   })
                                 ]
                               : _vm._e()

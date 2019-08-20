@@ -46,5 +46,9 @@ Route::post('/logistic/map/update_equipment','\App\Http\Controllers\Ajax\Logisti
 
 
 //Route::get('/test', '\App\Models\My\Test@tableTest');
-Route::get('/test', '\App\Models\My\Test@vue');
+//Route::get('/test', '\App\Models\My\Test@vue');
+Route::get('/test', function (){
+    dump(Carbon::now()->toDateTimeString());
+//    return view('test.yupnav');
+});
 

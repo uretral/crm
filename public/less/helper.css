@@ -161,6 +161,9 @@ button.close {
   background: #fff;
   box-sizing: border-box;
 }
+.mod.static {
+  position: unset;
+}
 .mod-close {
   width: 62px;
   height: 62px;
@@ -900,6 +903,9 @@ button.close {
   font-size: 18px;
   color: #fff;
 }
+.leaflet-routing-container {
+  display: none;
+}
 .logistic {
   width: 100%;
   height: 100%;
@@ -922,7 +928,7 @@ button.close {
 }
 .logistic-map {
   width: 100%;
-  height: 100%;
+  margin: 0 10px;
 }
 .logistic-masters {
   width: 700px;
@@ -1173,16 +1179,21 @@ button.close {
   overflow-y: hidden;
 }
 .log-schedule-tr {
-  width: 420px;
-  height: 100px;
+  width: 410px;
   flex-shrink: 0;
   flex-grow: 1;
+  padding: 0 10px;
+  box-sizing: unset;
+}
+.log-schedule-tr.active {
+  background: #d2d6de5e;
+  border: 1px solid rgba(154, 158, 166, 0.37);
 }
 .log-schedule-th {
-  width: 420px;
+  width: 410px;
 }
 .log-schedule-td {
-  width: 420px;
+  width: 410px;
   height: 30px;
   display: flex;
   align-items: center;
@@ -1232,5 +1243,17 @@ button.close {
   background: #e1e1e1;
   padding: 12px 0;
   margin-bottom: 12px;
+}
+.icon-master {
+  width: 24px!important;
+  height: 24px!important;
+  background: red;
+  border-radius: 50%;
+  display: flex!important;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
 }
 /*# sourceMappingURL=helper.css.map */

@@ -28,6 +28,7 @@ Route::group([
     $router->resource('helper/equipment', \Helper\EquipmentController::class); // Оборужование
     // Logistic
     $router->resource('logistic/routes', \Logistic\RouteController::class); // Логистика маршруты
+//    $router->resource('logistic/routes/map', \Logistic\RouteControllerMap::class); // Логистика маршруты
     // Store
     $router->resource('store/equipment', \Store\EquipmentController::class); // Логистика маршруты
 

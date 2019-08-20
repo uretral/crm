@@ -4,5 +4,5 @@ use Encore\Admin\Admin;
 
 
 return [
-    'admin' => new Admin
+    'admin' => new Admin,
 ];

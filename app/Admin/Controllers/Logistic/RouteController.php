@@ -19,4 +19,12 @@ class RouteController extends Controller
             ->body('<div id="logisticRoutes"><logistic-routes></logistic-routes></div>');
     }
 
+    public function edit($id, Content $content)
+    {
+        return $content
+            ->header('Edit')
+            ->description('description')
+            ->body('<div id="logisticRoutesMap"><logistic-routes-map date="'.$id.'"></logistic-routes-map></div>');
+    }
+
 }
