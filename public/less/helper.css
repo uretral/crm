@@ -906,10 +906,14 @@ button.close {
 .leaflet-routing-container {
   display: none;
 }
+.master-plan th {
+  white-space: nowrap;
+}
 .logistic {
   width: 100%;
   height: 100%;
   display: flex;
+  position: relative;
 }
 .logistic-lost {
   width: 200px;
@@ -926,12 +930,21 @@ button.close {
 .logistic-lost-item-list {
   padding: 5px;
 }
+.logistic-aside {
+  margin-top: -1px;
+  position: absolute;
+  z-index: 20000;
+  background: white;
+  height: 100%;
+  padding: 20px;
+}
 .logistic-map {
+  min-width: 860px;
   width: 100%;
   margin: 0 10px;
 }
 .logistic-masters {
-  width: 700px;
+  width: 580px;
   overflow-y: auto;
 }
 .logistic-masters-table {
@@ -987,20 +1000,43 @@ button.close {
   color: #fff;
   font-weight: bold;
 }
+/*.drag {
+    min-width: 17px;
+    height: 17px;
+    background: @native-blue;
+    position: absolute;
+    z-index: 200;
+    top: 0;
+    left: -1px;
+    opacity: .8;
+}*/
 .drag {
   min-width: 17px;
   height: 17px;
   background: #3c8dbc;
+  box-sizing: border-box;
   position: absolute;
   z-index: 200;
   top: 0;
   left: -1px;
   opacity: .8;
+  padding: 0 !important;
+  display: flex !important;
+  flex-direction: column;
+  justify-content: center;
+}
+.drag > i {
+  display: block;
+  height: 1px;
+  background: #bfbfbf;
+  margin: 2px 0;
+  position: relative;
+  z-index: 100;
 }
 .drag.active {
-  box-shadow: 0px 0px 7px 0px rgba(255, 0, 0, 0.79);
-  -webkit-box-shadow: 0px 0px 7px 0px rgba(255, 0, 0, 0.79);
-  -moz-box-shadow: 0px 0px 7px 0px rgba(255, 0, 0, 0.79);
+  box-shadow: 0 0 7px 0 rgba(255, 0, 0, 0.79);
+  -webkit-box-shadow: 0 0 7px 0 rgba(255, 0, 0, 0.79);
+  -moz-box-shadow: 0 0 7px 0 rgba(255, 0, 0, 0.79);
 }
 .drag-nest {
   position: relative;
@@ -1023,6 +1059,13 @@ button.close {
 .drag-over {
   border: 1px solid red;
 }
+.actions .separator {
+  display: inline-block;
+  margin-right: 20px;
+}
+.actions .separator b {
+  padding-right: 15px;
+}
 .new-order {
   display: block;
   margin: 0;
@@ -1037,28 +1080,6 @@ button.close {
   overflow: hidden;
   background: rgba(255, 155, 29, 0.6);
   cursor: pointer;
-}
-.drop-address {
-  position: relative;
-}
-.drop-address > ul {
-  position: absolute;
-  top: 34px;
-  left: 43px;
-  z-index: 200;
-  list-style: none;
-  background: white;
-  border: 1px solid #dbdbdb;
-  border-top: none;
-  border-bottom-left-radius: 5px;
-  border-bottom-right-radius: 5px;
-  width: calc(100% - 43px);
-}
-.drop-address > ul li {
-  padding-top: 4px;
-}
-.drop-address > ul li:last-of-type {
-  padding: 4px 0;
 }
 .ddd {
   padding: 0 10px;
@@ -1244,16 +1265,196 @@ button.close {
   padding: 12px 0;
   margin-bottom: 12px;
 }
-.icon-master {
-  width: 24px!important;
-  height: 24px!important;
-  background: red;
+.icon {
+  width: 24px !important;
+  height: 24px !important;
   border-radius: 50%;
-  display: flex!important;
-  justify-content: center;
-  align-items: center;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
   color: white;
   font-size: 12px;
   font-weight: bold;
+}
+.icon-master {
+  background: red;
+  width: 24px !important;
+  height: 24px !important;
+  border-radius: 50%;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  position: relative;
+}
+.icon-master > span {
+  position: absolute;
+  display: block;
+  width: 5px;
+  height: 5px;
+  right: -7px;
+  background: red;
+}
+.icon-master > span.contract {
+  top: 0;
+}
+.icon-master > span.account-act {
+  top: 10px;
+}
+.icon-master > span.act {
+  bottom: 0;
+}
+.icon-master.done {
+  background: green;
+}
+.icon-master.doing {
+  background: orange;
+}
+.icon-master.todo {
+  background: blue;
+}
+.icon-master.late {
+  background: red;
+}
+.icon-master.error {
+  background: brown;
+}
+.icon-current {
+  background: orange;
+  width: 24px !important;
+  height: 24px !important;
+  border-radius: 50%;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+}
+.icon-floating {
+  min-width: 24px !important;
+  min-height: 24px !important;
+  border-radius: unset;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+}
+.icon-floating > span {
+  display: block;
+  background: black;
+}
+.icon-floating > span.siblings {
+  width: 22px !important;
+  height: 22px !important;
+  border: 1px solid orange;
+}
+.icon-floating.active {
+  opacity: 1 !important;
+}
+.icon-floating.active span {
+  background: red;
+  color: #354052;
+}
+.acts_tbl tr {
+  border-bottom: 1px dotted #e5e5e5;
+}
+.acts_tbl tr:last-of-type {
+  border: none;
+}
+.acts_tbl td {
+  padding: 4px 10px 4px 0;
+}
+.acts_tbl td:first-of-type {
+  color: #3c8dbc;
+  font-weight: bold;
+}
+.current-acts span {
+  padding: 0 5px;
+}
+.display-map {
+  position: static !important;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+@media print {
+  /* Стиль для печати */
+  body {
+    visibility: hidden;
+    padding: 0;
+  }
+  /* Блок который нужно отобразить */
+  @page {
+    padding: 0;
+    margin: 1cm;
+    size: A4 landscape;
+  }
+  .print {
+    visibility: visible;
+    position: fixed;
+    width: 25cm;
+    top: 1cm;
+    left: 1cm;
+  }
+  .print .master-plan {
+    width: 100%;
+  }
+}
+.file {
+  position: relative;
+}
+.centered {
+  position: relative;
+}
+.file {
+  display: flex!important;
+  opacity: 1;
+  justify-content: center;
+  align-items: center;
+  background-color: #f39c12;
+  color: #fff;
+  border: 1px solid  #e08e0b;
+  padding: 6px 12px;
+  margin-bottom: 0;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.42857143;
+  white-space: nowrap;
+  border-radius: 4px;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 120px;
+  cursor: pointer;
+  z-index: 10;
+}
+.legend {
+  padding: 20px 5px;
+  position: relative;
+}
+.legend:after {
+  content: attr(rel);
+  display: inline-block;
+  position: absolute;
+  top: -11px;
+  left: 18px;
+  padding: 0 5px;
+  background: #ecf0f5;
+  color: #3c8dbc;
+}
+.form-inline.mse {
+  margin: 0 0 20px;
+}
+.form-group.mse label {
+  display: block;
+  padding-left: 5px;
+}
+.form-group.mse input {
+  display: block;
 }
 /*# sourceMappingURL=helper.css.map */

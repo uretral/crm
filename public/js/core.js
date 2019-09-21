@@ -25,6 +25,12 @@ $(document).on('changeDate',function(ev){
     event.initEvent('initModal', true, true);
     document.dispatchEvent(event);
 
+    var parent = $(window.target).parents('.has-many-act-form');
+    window.point_lat = $(parent).find('.lat').val();
+    window.point_lon = $(parent).find('.lon').val();
+    window.region = $(parent).find(".region").val();
+
+
     window.master = $(window.target).parents('tr').find('select.master');
     window.startTime = $(window.target).parents('tr').find('input.start_date');
     window.endTime = $(window.target).parents('tr').find('input.end_date');

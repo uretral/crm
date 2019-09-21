@@ -9,20 +9,27 @@ class Lid extends Model
     protected $table = 'lids';
     public function statuses()
     {
-        return $this->hasMany(LidStatus::class,'lid_id');
+        return $this->hasMany(LidStatus::class,'lid_id')->orderBy('created_at');
+    }
+    public function actions(){
+        return $this->hasMany(LidAction::class,'lid_id')->orderBy('action_date');
     }
     public function status()
     {
         return $this->hasOne(LidStatus::class,'lid_id');
     }
 
+
     public function customer()
     {
-        return $this->hasOne(Customer::class);
+        return $this->hasOne(Customer::class,'lid_id');
     }
 
     public function act(){
         return $this->hasMany(Act::class,'parent');
+    }
+    public function acts(){
+        return $this->hasMany(Act::class,'parent')->orderBy('id');
     }
 
     public function master()

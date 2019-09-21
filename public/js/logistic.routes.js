@@ -35545,7 +35545,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             date: __WEBPACK_IMPORTED_MODULE_0_moment___default()().format('YYYY-MM-DD'), //'2019-05-07',
             days: 3,
             region: {
-                city: 'Москва'
+                city: 'Москва',
+                region: 'Москва'
             },
             regions: '',
             res: '',
@@ -35574,7 +35575,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var dateActive = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
 
 
-            __WEBPACK_IMPORTED_MODULE_1_axios___default.a.get('/logistic/map/many?date=' + this.date + '&days=' + this.days + '&action=masters').then(function (response) {
+            __WEBPACK_IMPORTED_MODULE_1_axios___default.a.get('/logistic/map/many?date=' + this.date + '&days=' + this.days + '&region=' + this.region.region).then(function (response) {
                 _this.res = response.data;
                 _this.dateActive = dateActive ? dateActive : _this.date;
             }).catch(function (error) {
@@ -36920,7 +36921,7 @@ var render = function() {
                 [
                   _vm._v("Регион ("),
                   _c("b", { staticClass: "ddd" }, [
-                    _vm._v(_vm._s(_vm.region.city))
+                    _vm._v(_vm._s(_vm.region.region))
                   ]),
                   _vm._v(") "),
                   _c("span", { staticClass: "caret" })
@@ -36942,7 +36943,7 @@ var render = function() {
                           }
                         }
                       },
-                      [_vm._v(_vm._s(region.city))]
+                      [_vm._v(_vm._s(region.region))]
                     )
                   ])
                 }),
@@ -36974,9 +36975,19 @@ var render = function() {
           _vm._v(" "),
           _vm._l(_vm.res.multiSchedule, function(v, k) {
             return _c("div", { staticClass: "log-head-schedule" }, [
-              _c("a", { attrs: { href: "/logistic/routes/" + k + "/edit" } }, [
-                _c("span", [_vm._v(_vm._s(k))])
-              ]),
+              _c(
+                "a",
+                {
+                  attrs: {
+                    href:
+                      "/logistic/routes/" +
+                      k +
+                      "/edit?region=" +
+                      _vm.region.region
+                  }
+                },
+                [_c("span", [_vm._v(_vm._s(k))])]
+              ),
               _vm._v(" "),
               k !== _vm.dateActive
                 ? _c(
@@ -37061,7 +37072,7 @@ var render = function() {
             { staticClass: "log-masters" },
             _vm._l(_vm.res.masters, function(masterName, masterId) {
               return _c("div", { staticClass: "log-masters-td" }, [
-                _vm._v(_vm._s(masterName) + " (" + _vm._s(masterId) + ")")
+                _vm._v(_vm._s(masterName.name) + " (" + _vm._s(masterId) + ")")
               ])
             }),
             0

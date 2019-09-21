@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class LidStatus extends Model
 {
     protected $table = 'lid_statuses';
-    protected $fillable = ['lid_id','status','date'];
+    protected $fillable = ['lid_id','status','manager','salt','date'];
 
     public function lid()
     {

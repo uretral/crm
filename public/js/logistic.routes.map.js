@@ -36795,7 +36795,7 @@ exports = module.exports = __webpack_require__(21)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -37391,33 +37391,176 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: 'LogisticRoutesMap',
-    props: ['date'],
+    props: ['date', 'region'],
     data: function data() {
         return {
             res: '',
+            floating: '',
+            floatingPointID: '',
+            floatingActive: false,
+            acts: [],
+            arActsID: [],
+            wait: false, //  true
             open: false, //  true
-            city: 'Москва',
-            region: 'Москва',
-            newOrder: {
-                ready: false,
-                start: '',
-                startTime: '',
-                end: '',
-                endTime: '',
-                master: '',
-                step: false,
-                date: this.date
-            },
+            modal: false, //  true
+            warn: false, //  true
+            actionAct: {}, //  true
+            warnText: '', //  true
+            // city: 'Москва',
+            // region: 'Москва',
+            arNewOrders: {},
             showParagraph: false,
             paragraphID: '',
+            print: false,
+            aside: false,
+            printMasterSchedule: {},
             map: null,
             tileLayer: null,
+            // geoPoints: [],
             mapData: {
                 tileLayer: null,
                 showParagraph: false,
@@ -37444,7 +37587,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 })
             },
             markers: {},
-            colors: ['#002147', '#6E6EF9', '#FF7F00', '#0000FF', '#7FFF00', '#850101', '#000000', '#F88379', '#008000', '#808000', '#FF0000', '#00009C', '#FF00FF', '#FFFF00', '#7F00FF', '#FF007F']
+            markersPoints: {},
+            polyline: {},
+            routes: [],
+            stateColors: {
+                'done': 'green',
+                'doing': 'orange',
+                'todo': 'blue',
+                'late': 'red',
+                'error': 'brown'
+            }
         };
     },
 
@@ -37454,33 +37606,55 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             this.mapData.lat = '55.77321337302965';
             this.mapData.lon = '37.50043094158173';
-            __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get('/logistic/map/new?date=' + this.date + '&lat=' + this.mapData.lat + '&action=masters').then(function (response) {
+            __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get('/logistic/map/get_by_geo?date=' + this.date + '&region=' + this.region + '&action=masters').then(function (response) {
                 _this.res = response.data;
                 _this.initOSM();
             }).catch(function (error) {
                 console.log(error);
             });
             this.open = true;
+
+            // ' + this.date + '
+            __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get('/logistic/map/floating?date=' + this.date + '&region=' + this.region + '&action=masters').then(function (response) {
+                _this.floating = response.data;
+                _this.wait = !_this.wait;
+            }).catch(function (error) {
+                console.log('error', error);
+            });
         },
         initOSM: function initOSM() {
             this.initMap();
-            this.initLayers();
+            //this.initFloatingLayers();
             this.initRoutes();
+            this.initLayers();
         },
         onClickOutside: function onClickOutside(e, el) {
-            console.log('onClickOutside');
-            console.log('click heard outside element: ', el);
+            // console.log('onClickOutside');
+            // console.log('click heard outside element: ', el);
             // console.log('element clicked: '. e.target.te);
-            console.log('event: ', e);
+            // console.log('event: ', e);
         },
         openClose: function openClose() {
             return this.open ? 'opened' : 'closed';
         },
-
+        ordersToMasters: function ordersToMasters(acts) {
+            this.floatingActive = true;
+            this.modal = false;
+        },
 
         markBusy: function markBusy(len) {
             return 'width:' + len * 17 + 'px';
         },
+        whileLoop: function whileLoop(volume, hour) {
+            // // console.log(volume);
+            // if(volume.start === hour){
+            //     return true;
+            // } else {
+            //
+            // }
+            return true;
+        },
+
 
         // DRAG
         dragStart: function dragStart(orderID, orderLength) {
@@ -37488,6 +37662,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             event.dataTransfer.setData("Text", event.target.getAttribute('id'));
             event.dataTransfer.setData("Order", orderID);
             event.dataTransfer.setData("Length", orderLength);
+            event.dataTransfer.setData("Geo", event.target.getAttribute('rel'));
             event.dataTransfer.setDragImage(event.target, 0, 0);
             return true;
         },
@@ -37523,7 +37698,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                         master: master
                     };
 
-                    __WEBPACK_IMPORTED_MODULE_0_axios___default.a.post('/logistic/map/update', data).then(function (response) {
+                    __WEBPACK_IMPORTED_MODULE_0_axios___default.a.post('/logistic/map/update_implement', data).then(function (response) {
                         console.log(response.data);
                         return response.data;
                     }).catch(function (error) {
@@ -37532,7 +37707,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     this.mapTrigger = !this.mapTrigger;
                     event.target.appendChild(document.getElementById(id));
                     event.target.classList.remove('drag-over');
-
                     event.stopPropagation();
                     return false;
                 } else {
@@ -37544,12 +37718,50 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }
         },
 
+        // Guess
+        guess: function guess() {},
+
 
         // ORDERS
+        actsFulfilled: function actsFulfilled() {
+            var _this2 = this;
+
+            __WEBPACK_IMPORTED_MODULE_0_axios___default.a.post('/logistic/map/acts_fulfilled', { data: JSON.stringify(this.actionAct) }).then(function (response) {
+                if (response.data) {
+                    console.log('eee');
+                    _this2.map.remove();
+                    _this2.init();
+                }
+            }).catch(function (error) {
+                console.log(error);
+            });
+        },
         stopClick: function stopClick(oK) {
+            var act = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+
             this.paragraphID = oK;
             this.showParagraph = !this.showParagraph;
             event.stopPropagation();
+        },
+        clearPolylineStyle: function clearPolylineStyle() {
+            for (var line in this.polyline) {
+
+                this.polyline[line].setStyle({
+                    weight: 3
+                });
+            }
+        },
+        actClick: function actClick(id, master) {
+            this.markersPoints[id].openPopup();
+            this.actionAct = this.res.schedule[master].volumes[id].acts;
+            this.clearPolylineStyle();
+
+            this.polyline[id].setStyle({
+                weight: 8
+            });
+            event.stopPropagation();
+            // console.log();
+            // console.log(master,id);
         },
 
         makeOrder: function makeOrder(hour, master) {
@@ -37567,38 +37779,72 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 this.newOrder.step = true;
             }
         },
+        arMakeOrder: function arMakeOrder(hour, master) {
+            if (this.acts.length === 0) {
+                this.warnText = 'Сначала выберите акт';
+                this.warn = true;
+                return false;
+            }
 
-        newOrderMarkRemove: function newOrderMarkRemove() {
-            this.newOrder = {
-                start: '',
-                startTime: '',
-                end: '',
-                endTime: '',
-                master: '',
-                masterName: '',
-                step: false,
-                date: this.date
-
-            };
+            if (this.arNewOrders[master] && 'step' in this.arNewOrders[master]) {
+                this.arNewOrders[master].end = hour;
+                this.arNewOrders[master].endTime = this.date + ' ' + (Number(hour) + 1) + ':00:00';
+                var len = hour - this.arNewOrders[master].start + 1;
+                this.arNewOrders[master].len = len * 17 + 'px';
+                // document.querySelector('.new-order').style.width = len * 17 + 'px';
+            } else {
+                var Obj = {
+                    start: hour,
+                    startTime: this.date + ' ' + hour + ':00:00',
+                    endTime: this.date + ' ' + hour + ':00:00',
+                    master: master,
+                    masterName: this.res.schedule[master].name.name,
+                    step: true,
+                    date: this.date,
+                    end: '',
+                    arActs: this.arActsID,
+                    len: 17 + 'px'
+                };
+                this.$set(this.arNewOrders, master, Obj);
+            }
+        },
+        newOrderMarkRemove: function newOrderMarkRemove(masterID) {
+            this.$delete(this.arNewOrders, masterID);
             event.stopPropagation();
         },
 
         setMaster: function setMaster() {
+            var _this3 = this;
 
-            window.newImplement = {
-                'master': this.newOrder.master,
-                'startTime': this.newOrder.startTime,
-                'endTime': this.newOrder.endTime
-            };
+            __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get('/logistic/map/update_implements?masters=' + JSON.stringify(this.arNewOrders) + '&acts=' + JSON.stringify(this.arActsID)).then(function (response) {
+                console.log('update_implements', response.data);
+                if (response.data == 'saved') {
+                    // location.reload();
+                    _this3.map.remove();
+                    _this3.init();
+                    _this3.floatingActive = false;
+                }
+            }).catch(function (error) {
+                console.log(error);
+            });
 
-            window.addEventListener('click', appendImplement);
+            // window.addEventListener('click', appendImplement);
 
-            this.open = false;
+            this.open = true;
         },
+        deactivateActs: function deactivateActs() {
+            this.acts = [];
+            this.arActsID = [];
+            this.arNewOrders = {};
+            this.modal = false;
+            this.floatingActive = false;
+            $(document).find('.icon-floating').removeClass('active');
+        },
+
 
         // MAP
         layerChanged: function layerChanged(layerId, active) {
-            var _this2 = this;
+            var _this4 = this;
 
             var layer = this.layers.find(function (layer) {
                 return layer.id === layerId;
@@ -37606,111 +37852,158 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             layer.features.forEach(function (feature) {
                 if (active) {
-                    feature.leafletObject.addTo(_this2.map);
+                    feature.leafletObject.addTo(_this4.map);
                 } else {
-                    feature.leafletObject.removeFrom(_this2.map);
+                    feature.leafletObject.removeFrom(_this4.map);
                 }
             });
         },
         initLayers: function initLayers() {
-
-            this.markers[100000] = __WEBPACK_IMPORTED_MODULE_1__leafLet___default.a.marker([this.mapData.lat, this.mapData.lon], {
+            this.markersPoints['main'] = __WEBPACK_IMPORTED_MODULE_1__leafLet___default.a.marker([this.mapData.lat, this.mapData.lon], {
                 icon: this.mapData.mainIcon,
                 'opacity': 1
             }).bindPopup("<b>Центр</b>").addTo(this.map);
             // this.markers[100000]._icon.id = key;
-
-            var p = this.res.lid;
-            for (var key in p) {
-
-                var masterIcon = __WEBPACK_IMPORTED_MODULE_1__leafLet___default.a.divIcon({
-                    className: 'icon-master',
-                    html: p[key].master.join()
-                });
-                var person = p[key];
-                this.markers[key] = __WEBPACK_IMPORTED_MODULE_1__leafLet___default.a.marker([p[key].customer.geo_lat, p[key].customer.geo_lon], {
-                    icon: masterIcon,
-                    'opacity': 1,
-                    title: key
-                }).bindPopup("<b>" + p[key].customer.address + "</b>").addTo(this.map);
-                this.markers[key]._icon.id = key;
+            var markerMaster = {};
+            for (var master in this.res.schedule) {
+                for (var acts in this.res.schedule[master].volumes) {
+                    if (acts in markerMaster) {
+                        markerMaster[acts].push(this.res.schedule[master].volumes[acts]);
+                    } else {
+                        markerMaster[acts] = [this.res.schedule[master].volumes[acts]];
+                    }
+                }
             }
 
-            /*                this.layers.forEach((layer) => {
-                                const markerFeatures = layer.features.filter(feature => feature.type === 'marker');
-                                const polygonFeatures = layer.features.filter(feature => feature.type === 'polygon');
-                                 markerFeatures.forEach((feature) => {
-                                    feature.leafletObject = L.marker(feature.coords)
-                                        .bindPopup(feature.name);
-                                });
-                                 polygonFeatures.forEach((feature) => {
-                                    feature.leafletObject = L.polygon(feature.coords)
-                                        .bindPopup(feature.name);
-                                });
-                            });*/
+            // console.log(markerMaster);
+
+            for (var mark in markerMaster) {
+
+                console.log('mark', mark);
+
+                var contract_signed = void 0;
+                var contract_transferred = void 0; // Равиль
+                var contract_file = void 0;
+
+                var _master = [];
+                var adress = '';
+                for (var _acts in markerMaster[mark]) {
+                    _master.push(markerMaster[mark][_acts].master);
+                }
+
+                var html = '\n                <span class="contract"></span>\n                <span class="account-act"></span>\n                <span class="act"></span>\n                ';
+
+                var masterIcon = __WEBPACK_IMPORTED_MODULE_1__leafLet___default.a.divIcon({
+                    className: 'icon-master ' + markerMaster[mark][0].state,
+                    html: _master.join() + html
+                });
+                this.markersPoints[mark] = __WEBPACK_IMPORTED_MODULE_1__leafLet___default.a.marker(mark.split('-'), {
+                    icon: masterIcon,
+                    'opacity': 1,
+                    title: _master.join(),
+                    zIndexOffset: 1000000
+                }).bindPopup("<b>" + markerMaster[mark][0].address + "</b>").addTo(this.map);
+                this.markersPoints[mark]._icon.id = mark;
+            }
+        },
+        initFloatingLayers: function initFloatingLayers() {
+
+            var that = this;
+            for (var n in this.floating) {
+
+                var floating = this.floating[n];
+                var latLon = n.split('-');
+                var html = '';
+                var arID = [];
+                if (floating.length > 1) {
+                    for (var f in floating) {
+                        arID.push(floating[f].id);
+                        html += '<span class="siblings">' + floating[f].id + '</span>';
+                    }
+                } else {
+                    arID.push(floating[0].id);
+                    html = '<span>' + floating[0].id + '</span>';
+                }
+
+                var iconFloating = __WEBPACK_IMPORTED_MODULE_1__leafLet___default.a.divIcon({
+                    className: 'icon-floating',
+                    html: html
+                });
+                this.markers[n] = __WEBPACK_IMPORTED_MODULE_1__leafLet___default.a.marker(n.split('-'), {
+                    icon: iconFloating,
+                    'opacity': .2,
+                    title: arID
+                }).on('click', function (ev) {
+                    $(document).find('.icon-floating').removeClass('active');
+                    ev.target._icon.classList.add('active');
+                    that.$emit('floatingArrID', ev.target.options.title);
+                }).addTo(this.map);
+                // .bindPopup('<b>'+floating[0].address+'</b>')
+                this.markers[n]._icon.id = n;
+            }
+        },
+        markerClick: function markerClick(arID) {
+            var _this5 = this;
+
+            __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get('/logistic/map/get_acts?acts=' + arID.join()).then(function (request) {
+                _this5.acts = request.data;
+                _this5.arActsID = arID;
+                _this5.modal = true;
+            }).catch(function (error) {
+                console.log(error);
+            });
         },
         getRandomInt: function getRandomInt(min, max) {
             return Math.floor(Math.random() * (max - min)) + min;
         },
         initRoutes: function initRoutes() {
-            var _this3 = this;
-
-            // console.log(this.res.schedule);
-            // console.log(this.res.lid);
-
+            var _this6 = this;
 
             for (var master in this.res.schedule) {
-                if (this.res.schedule[master].volumes.length) {
+
+                if (Object.keys(this.res.schedule[master].volumes).length) {
                     (function () {
                         var start_lat = '55.77321337302965';
                         var start_lon = '37.50043094158173';
-                        var color = _this3.colors[master];
-                        for (var volume in _this3.res.schedule[master].volumes) {
 
-                            var vol = _this3.res.schedule[master].volumes[volume];
-                            var lid = _this3.res.lid[vol.lid_id];
+                        var color = _this6.res.masters[master].color;
 
-                            __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get('/dadata/osm?lat=' + start_lat + '&lon=' + start_lon + '&flat=' + lid.customer.geo_lat + '&flon=' + lid.customer.geo_lon).then(function (responce) {
-                                // console.log(responce.data);
+                        var _loop = function _loop(volume) {
+                            var arLatLon = volume.split('-');
+
+                            var vol = _this6.res.schedule[master].volumes[volume];
+                            var lid = _this6.res.lid[vol.lid_id];
+                            var vilID = volume;
+
+                            __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get('/dadata/osm?lat=' + start_lat + '&lon=' + start_lon + '&flat=' + arLatLon[0] + '&flon=' + arLatLon[1]).then(function (responce) {
                                 var coord = responce.data.coordinates;
+                                // let polyline = [];
 
                                 var u = [];
                                 for (var i in coord) {
                                     u[i] = [coord[i][1], coord[i][0]];
                                 }
+                                //vol.master
 
-                                console.log(color);
-                                var polyline = __WEBPACK_IMPORTED_MODULE_1__leafLet___default.a.polyline(u, { color: color }).addTo(_this3.map);
+                                _this6.polyline[vilID] = __WEBPACK_IMPORTED_MODULE_1__leafLet___default.a.polyline(u, {
+                                    color: color
+                                    // weight:1
+                                }).addTo(_this6.map);
+
                                 // this.map.fitBounds(polyline.getBounds());
                             }).catch(function (error) {
                                 console.log(error);
                             });
-                            start_lat = lid.customer.geo_lat;
-                            start_lon = lid.customer.geo_lon;
+                            start_lat = arLatLon[0];
+                            start_lon = arLatLon[1];
+                        };
 
-                            // console.log('vol',vol);
-                            // console.log('lid',lid);
+                        for (var volume in _this6.res.schedule[master].volumes) {
+                            _loop(volume);
                         }
                     })();
                 }
             }
-
-            /*
-                            L.Routing.control({
-                                waypoints: [
-                                    L.latLng(57.74, 11.94),
-                                    L.latLng(57.6792, 11.949),
-                                    L.latLng(57.74, 12.94),
-                                ]
-                            }).addTo(this.map);
-            
-            
-                            L.Routing.control({
-                                waypoints: [
-                                    L.latLng(57.74, 12.94),
-                                    L.latLng(57.6792, 12.949),
-                                ]
-                            }).addTo(this.map);*/
         },
         in_array: function in_array(value, array) {
             for (var i = 0; i < array.length; i++) {
@@ -37718,23 +38011,42 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }
             return false;
         },
-        personalOrders: function personalOrders(masterID) {
-            console.log(masterID);
-            var p = this.res.lid;
-            var arMaster = void 0;
-            for (var key in p) {
-                if (this.in_array(masterID, p[key].master)) {
-                    $('#' + key).css('opacity', 1);
+        checkIt: function checkIt(a) {
+            if (a === undefined) return '';else if (a === null) return '';else return a;
+        },
+        changeOpacity: function changeOpacity(masterID, clear) {
+            for (var master in this.res.masters) {
+                if (clear) {
+                    $('#master_' + master).css('opacity', 1);
                 } else {
-                    $('#' + key).css('opacity', .1);
+                    master === masterID ? $('#master_' + master).css('opacity', 1) : $('#master_' + master).css('opacity', .4);
                 }
             }
         },
-        personalOrdersHide: function personalOrdersHide() {
-            var p = this.res.lid;
-            for (var key in p) {
-                $('#' + key).css('opacity', 1);
+        personalOrders: function personalOrders(masterID) {
+            this.clearPolylineStyle();
+            for (var order in this.res.schedule[masterID].volumes) {
+                this.polyline[order].setStyle({
+                    weight: 10
+                });
             }
+            this.changeOpacity(masterID, false);
+            this.printMasterSchedule = this.res.schedule[masterID];
+            this.print = true;
+        },
+
+        // printSchedule(){
+        //     t
+        //
+        //
+        // },
+        personalOrdersHide: function personalOrdersHide(masterID) {
+            // let p = this.res.lid;
+            // for(let key in p){
+            //     $('#'+key).css('opacity',1)
+            // }
+            this.changeOpacity(masterID, true);
+            this.clearPolylineStyle();
         },
         initMap: function initMap() {
             this.map = __WEBPACK_IMPORTED_MODULE_1__leafLet___default.a.map('map').setView([this.mapData.lat, this.mapData.lon], 10);
@@ -37748,32 +38060,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }
     },
     watch: {
-        open: function open(val, oldVal) {
-            if (oldVal) {
-                this.newOrder.start = '';
-                this.newOrder.startTime = '';
-                this.newOrder.end = '';
-                this.newOrder.endTime = '';
-                this.newOrder.master = '';
-                this.newOrder.step = false;
-                this.newOrder.date = this.date;
-                __WEBPACK_IMPORTED_MODULE_2_jquery___default()('body').css('overflow-y', 'initial');
-            } else {
-                __WEBPACK_IMPORTED_MODULE_2_jquery___default()('body').css('overflow-y', 'hidden');
-            }
+        wait: function wait() {
+            this.initFloatingLayers();
         }
     },
 
     created: function created() {
-        this.init();
+        var _this7 = this;
 
-        // this.res.lid.forEach((lid) => {
-        //
-        //     L.marker([lid.customer.geo_lat, lid.customer.geo_lon]).addTo(this.map);
-        //     // feature.leafletObject = L.marker(feature.coords)
-        //     //     .bindPopup(feature.name);
-        //
-        // });
+        this.init();
+        this.$on('floatingArrID', function (ev) {
+            _this7.markerClick(ev);
+        });
     }
 });
 
@@ -51992,200 +52290,648 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("div", { staticClass: "mod static" }, [
-      _c("div", { staticClass: "mod-header" }, [
-        _c("span", [_vm._v(_vm._s(_vm.date))]),
-        _vm._v(" "),
-        _vm.newOrder.step
-          ? _c(
-              "a",
-              {
-                staticClass: "btn btn-success btn-sm",
-                attrs: { href: "javascript:;" },
-                on: { click: _vm.setMaster }
-              },
-              [_c("span", [_vm._v("Назначить")])]
-            )
-          : _vm._e()
-      ]),
+  return _c(
+    "div",
+    [
+      _c(
+        "modal",
+        {
+          attrs: { title: "Внимание", "auto-focus": "", "dismiss-btn": false },
+          model: {
+            value: _vm.warn,
+            callback: function($$v) {
+              _vm.warn = $$v
+            },
+            expression: "warn"
+          }
+        },
+        [_c("p", { domProps: { innerHTML: _vm._s(_vm.warnText) } })]
+      ),
       _vm._v(" "),
-      _c("div", { staticClass: "mod-body" }, [
-        _c("div", { staticClass: "logistic" }, [
-          _vm._m(0),
-          _vm._v(" "),
-          _c("div", {
-            ref: "mapElement",
-            staticClass: "logistic-map map",
-            attrs: { id: "map" }
-          }),
-          _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "logistic-masters" },
-            _vm._l(_vm.res.schedule, function(master, masterID) {
-              return _c("div", { staticClass: "logistic-masters-table" }, [
-                _c(
-                  "a",
-                  {
-                    attrs: { href: "javascript:" },
-                    on: {
-                      click: function($event) {
-                        return _vm.personalOrders(masterID)
-                      },
-                      dblclick: function($event) {
-                        return _vm.personalOrdersHide(masterID)
-                      }
-                    }
-                  },
-                  [
-                    _c("span", [
-                      _vm._v(
-                        _vm._s(master.name) + " (" + _vm._s(masterID) + ")"
-                      )
-                    ])
-                  ]
-                ),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "logistic-masters-cells" },
-                  _vm._l(_vm.res.hours, function(hour) {
+      _c(
+        "modal",
+        {
+          attrs: { title: "Акты", "auto-focus": "", "dismiss-btn": false },
+          model: {
+            value: _vm.modal,
+            callback: function($$v) {
+              _vm.modal = $$v
+            },
+            expression: "modal"
+          }
+        },
+        [
+          _c("table", { staticClass: "acts_tbl" }, [
+            _c("tbody", [
+              _c(
+                "tr",
+                [
+                  _c("td", [_vm._v("Договор")]),
+                  _vm._v(" "),
+                  _vm._l(_vm.acts, function(act) {
                     return _c(
-                      "label",
-                      {
-                        staticClass: "cell drag-nest",
-                        attrs: { id: masterID + "_" + hour },
-                        on: {
-                          dragenter: function($event) {
-                            return _vm.dragEnter()
-                          },
-                          drop: function($event) {
-                            return _vm.dragDrop(masterID, hour)
-                          },
-                          dragover: function($event) {
-                            return _vm.dragOver()
-                          },
-                          dragleave: function($event) {
-                            return _vm.dragLeave()
-                          },
-                          click: function($event) {
-                            return _vm.makeOrder(hour, masterID)
-                          }
-                        }
-                      },
+                      "td",
                       [
-                        _vm._v(
-                          "\n\n                                    " +
-                            _vm._s(hour) +
-                            "\n\n\n                                    "
-                        ),
-                        master.volumes.length
-                          ? [
-                              _vm._l(master.volumes, function(volume) {
-                                return volume.start == hour
-                                  ? [
-                                      _c("span", {
-                                        staticClass: "drag",
-                                        style: _vm.markBusy(volume.length),
-                                        attrs: {
-                                          id: volume.id,
-                                          draggable: "true"
-                                        },
-                                        on: {
-                                          dragover: function($event) {
-                                            return _vm.dragCancel()
-                                          },
-                                          dragstart: function($event) {
-                                            return _vm.dragStart(
-                                              volume.id,
-                                              volume.length
-                                            )
-                                          },
-                                          drop: false,
-                                          click: function($event) {
-                                            return _vm.stopClick(masterID)
-                                          }
-                                        }
-                                      })
-                                    ]
-                                  : _vm._e()
-                              })
-                            ]
-                          : _vm._e(),
-                        _vm._v(" "),
-                        _vm.newOrder.master === masterID &&
-                        _vm.newOrder.start === hour
-                          ? [
-                              _c("em", {
-                                staticClass: "new-order",
-                                on: {
-                                  click: function($event) {
-                                    return _vm.stopClick()
-                                  },
-                                  dblclick: function($event) {
-                                    return _vm.newOrderMarkRemove()
-                                  }
-                                }
-                              })
-                            ]
-                          : _vm._e()
+                        act.lid
+                          ? [_vm._v(_vm._s(act.lid.contract))]
+                          : [_vm._v("не заполнен")]
                       ],
                       2
                     )
+                  })
+                ],
+                2
+              ),
+              _vm._v(" "),
+              _c(
+                "tr",
+                [
+                  _c("td", [_vm._v("№ акта")]),
+                  _vm._v(" "),
+                  _vm._l(_vm.acts, function(act) {
+                    return _c(
+                      "td",
+                      [
+                        act.act_nr
+                          ? [_vm._v(_vm._s(act.act_nr))]
+                          : [_vm._v("не заполнен")]
+                      ],
+                      2
+                    )
+                  })
+                ],
+                2
+              ),
+              _vm._v(" "),
+              _c(
+                "tr",
+                [
+                  _c("td", [_vm._v("Адрес")]),
+                  _vm._v(" "),
+                  _vm._l(_vm.acts, function(act) {
+                    return _c(
+                      "td",
+                      [
+                        act.address
+                          ? [_vm._v(_vm._s(act.address))]
+                          : [_vm._v("не заполнен")]
+                      ],
+                      2
+                    )
+                  })
+                ],
+                2
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c(
+            "div",
+            { attrs: { slot: "footer" }, slot: "footer" },
+            [
+              _c("btn", { on: { click: _vm.deactivateActs } }, [
+                _vm._v("Отмена")
+              ]),
+              _vm._v(" "),
+              _c(
+                "btn",
+                {
+                  attrs: { type: "warning" },
+                  on: {
+                    click: function($event) {
+                      return _vm.ordersToMasters(_vm.acts)
+                    }
+                  }
+                },
+                [_vm._v("Назначить мастера")]
+              )
+            ],
+            1
+          )
+        ]
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "mod static" }, [
+        _c("div", { staticClass: "mod-header" }, [
+          _c("span", [_vm._v(_vm._s(_vm.date))]),
+          _vm._v(" "),
+          _vm.floatingActive
+            ? _c("div", { staticClass: "current-acts" }, [
+                Object.keys(_vm.arNewOrders).length
+                  ? _c(
+                      "a",
+                      {
+                        staticClass: "btn btn-success btn-sm",
+                        attrs: { href: "javascript:" },
+                        on: { click: _vm.setMaster }
+                      },
+                      [_c("span", [_vm._v("Назначить")])]
+                    )
+                  : _vm._e(),
+                _vm._v(" "),
+                _c(
+                  "a",
+                  {
+                    staticClass: "btn btn-warning btn-sm",
+                    attrs: { href: "javascript:" },
+                    on: { click: _vm.deactivateActs }
+                  },
+                  [_c("span", [_vm._v("Деактивировать")])]
+                ),
+                _vm._v(" "),
+                _c(
+                  "a",
+                  { attrs: { href: "javascript:" } },
+                  _vm._l(_vm.acts, function(act) {
+                    return act.lid
+                      ? _c("span", [_vm._v(_vm._s(act.lid.contract))])
+                      : _vm._e()
                   }),
                   0
                 )
               ])
+            : _vm._e(),
+          _vm._v(" "),
+          Object.keys(_vm.actionAct).length
+            ? _c("div", { staticClass: "actions" }, [
+                _c(
+                  "div",
+                  { staticClass: "separator" },
+                  [
+                    _c("b", [_vm._v("Просмотреть акт(ы): ")]),
+                    _vm._v(" "),
+                    _vm._l(_vm.actionAct, function(act, actID) {
+                      return _c(
+                        "a",
+                        {
+                          staticClass: "btn btn-default",
+                          attrs: {
+                            target: "_blank",
+                            href: "/crm_entity/acts/" + actID + "/edit"
+                          }
+                        },
+                        [_vm._v(_vm._s(actID))]
+                      )
+                    })
+                  ],
+                  2
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "separator" }, [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "btn btn-block",
+                      attrs: { href: "javascript:" },
+                      on: {
+                        click: function($event) {
+                          return _vm.actsFulfilled()
+                        }
+                      }
+                    },
+                    [_c("span", [_vm._v("Закрыть акты (выполнено)")])]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "separator" }, [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "btn btn-warning",
+                      attrs: { href: "javascript:" },
+                      on: {
+                        click: function($event) {
+                          _vm.actionAct = {}
+                        }
+                      }
+                    },
+                    [_vm._v(" Отмена ")]
+                  )
+                ])
+              ])
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.print
+            ? _c("div", [
+                _c("div", { staticClass: "separator" }, [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "btn btn-block",
+                      attrs: { href: "javascript:" },
+                      on: {
+                        click: function($event) {
+                          _vm.aside = !_vm.aside
+                        }
+                      }
+                    },
+                    [_c("span", [_vm._v("Расписание")])]
+                  )
+                ])
+              ])
+            : _vm._e()
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "mod-body" }, [
+          _c("div", { staticClass: "logistic" }, [
+            _vm.aside
+              ? _c("div", { staticClass: "logistic-aside" }, [
+                  _c("a", { attrs: { href: "javascript:" } }),
+                  _vm._v(" "),
+                  Object.keys(_vm.printMasterSchedule).length
+                    ? _c("div", { staticClass: "print" }, [
+                        _c("table", { staticClass: "master-plan table " }, [
+                          _c("thead", [
+                            _c("tr", [
+                              _c("th", [
+                                _vm._v(
+                                  _vm._s(_vm.printMasterSchedule.name.name)
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c("th", { attrs: { colspan: "5" } }, [
+                                _vm._v(_vm._s(_vm.date))
+                              ])
+                            ]),
+                            _vm._v(" "),
+                            _vm._m(0)
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "tbody",
+                            [
+                              _c("div", { staticClass: "hidden" }, [
+                                _vm._v(_vm._s((_vm.nbr = 1)))
+                              ]),
+                              _vm._v(" "),
+                              _vm._l(_vm.printMasterSchedule.volumes, function(
+                                point
+                              ) {
+                                return _c("tr", [
+                                  _c("td", [_vm._v(" " + _vm._s(_vm.nbr++))]),
+                                  _vm._v(" "),
+                                  _c("td", [
+                                    _vm._v(
+                                      "\n                                        адрес: " +
+                                        _vm._s(point.address) +
+                                        " "
+                                    ),
+                                    _c("br"),
+                                    _vm._v(
+                                      "\n                                        имя: " +
+                                        _vm._s(point.customer.name) +
+                                        " "
+                                    ),
+                                    _c("br"),
+                                    _vm._v(
+                                      "\n                                        тел: " +
+                                        _vm._s(point.customer.phone) +
+                                        " "
+                                    ),
+                                    _c("br"),
+                                    _vm._v(
+                                      "\n                                        д-р №: " +
+                                        _vm._s(point.lid.contract) +
+                                        " "
+                                    ),
+                                    _c("br"),
+                                    _vm._v(
+                                      "\n                                        Оплата " +
+                                        _vm._s(
+                                          point.lid.customer_payment
+                                            ? "Нал"
+                                            : "Безнал"
+                                        ) +
+                                        "\n\n                                    "
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c(
+                                    "td",
+                                    [
+                                      _vm._l(point.volume, function(vol) {
+                                        return [
+                                          vol.pest
+                                            ? [
+                                                _vm._v(
+                                                  "\n                                                " +
+                                                    _vm._s(
+                                                      _vm.res.helpers.pests[
+                                                        vol.pest
+                                                      ]["name"]
+                                                    ) +
+                                                    "\n                                            "
+                                                )
+                                              ]
+                                            : _vm._e(),
+                                          _vm._v(" "),
+                                          vol.square
+                                            ? [
+                                                _vm._v(
+                                                  "\n                                                / " +
+                                                    _vm._s(vol.square) +
+                                                    "\n                                            "
+                                                )
+                                              ]
+                                            : _vm._e(),
+                                          _vm._v(" "),
+                                          vol.entity
+                                            ? [
+                                                _vm._v(
+                                                  "\n                                                / " +
+                                                    _vm._s(
+                                                      _vm.res.helpers.square[
+                                                        vol.entity
+                                                      ]["name"]
+                                                    ) +
+                                                    " "
+                                                ),
+                                                _c("br")
+                                              ]
+                                            : _vm._e()
+                                        ]
+                                      })
+                                    ],
+                                    2
+                                  ),
+                                  _vm._v(" "),
+                                  _c("td", [
+                                    _vm._v(
+                                      "\n                                        c: " +
+                                        _vm._s(point.start) +
+                                        " - до: " +
+                                        _vm._s(point.end) +
+                                        "\n\n                                    "
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c(
+                                    "td",
+                                    [
+                                      _vm._l(point.volume, function(meth) {
+                                        return meth.method
+                                          ? [
+                                              _vm._v(
+                                                "\n                                             " +
+                                                  _vm._s(
+                                                    _vm.res.helpers.methods[
+                                                      meth.method
+                                                    ]["name"]
+                                                  ) +
+                                                  " "
+                                              ),
+                                              _c("br")
+                                            ]
+                                          : _vm._e()
+                                      })
+                                    ],
+                                    2
+                                  ),
+                                  _vm._v(" "),
+                                  _c("td"),
+                                  _vm._v(" "),
+                                  _c("td")
+                                ])
+                              })
+                            ],
+                            2
+                          )
+                        ])
+                      ])
+                    : _vm._e()
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _c("div", {
+              ref: "mapElement",
+              staticClass: "logistic-map map",
+              staticStyle: { height: "737px" },
+              attrs: { id: "map" }
             }),
-            0
-          )
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "logistic-masters" },
+              _vm._l(_vm.res.schedule, function(master, masterID) {
+                return _c(
+                  "div",
+                  {
+                    staticClass: "logistic-masters-table",
+                    attrs: { id: "master_" + masterID }
+                  },
+                  [
+                    _c(
+                      "a",
+                      {
+                        attrs: { href: "javascript:" },
+                        on: {
+                          click: function($event) {
+                            return _vm.personalOrders(masterID)
+                          },
+                          dblclick: function($event) {
+                            return _vm.personalOrdersHide(masterID)
+                          }
+                        }
+                      },
+                      [
+                        _c(
+                          "span",
+                          [
+                            _vm._v(
+                              _vm._s(master.name.name) +
+                                " (" +
+                                _vm._s(masterID) +
+                                ") ::  \n                                                        "
+                            ),
+                            Object.keys(_vm.res.schedule[masterID].equipment)
+                              .length
+                              ? _vm._l(
+                                  _vm.res.schedule[masterID].equipment,
+                                  function(equipment, equipmentID) {
+                                    return _c("i", [
+                                      _vm._v(
+                                        _vm._s(
+                                          _vm.res.equipmentList[equipmentID]
+                                        )
+                                      )
+                                    ])
+                                  }
+                                )
+                              : _vm._e()
+                          ],
+                          2
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "logistic-masters-cells" },
+                      _vm._l(_vm.res.hours, function(hour) {
+                        return _c(
+                          "label",
+                          {
+                            staticClass: "cell drag-nest",
+                            attrs: { id: masterID + "_" + hour },
+                            on: {
+                              dragenter: function($event) {
+                                return _vm.dragEnter()
+                              },
+                              drop: function($event) {
+                                return _vm.dragDrop(masterID, hour)
+                              },
+                              dragover: function($event) {
+                                return _vm.dragOver()
+                              },
+                              dragleave: function($event) {
+                                return _vm.dragLeave()
+                              },
+                              click: function($event) {
+                                return _vm.arMakeOrder(hour, masterID)
+                              }
+                            }
+                          },
+                          [
+                            _vm._v(
+                              "\n\n                                    " +
+                                _vm._s(hour) +
+                                "\n\n\n                                    "
+                            ),
+                            Object.keys(master.volumes).length
+                              ? [
+                                  _vm._l(master.volumes, function(
+                                    volume,
+                                    geoKey
+                                  ) {
+                                    return volume.start === hour
+                                      ? [
+                                          _c(
+                                            "span",
+                                            {
+                                              staticClass: "drag",
+                                              style: _vm.markBusy(
+                                                volume.length
+                                              ),
+                                              attrs: {
+                                                id: volume.ids.join(":"),
+                                                draggable: "true",
+                                                rel: geoKey
+                                              },
+                                              on: {
+                                                dragover: function($event) {
+                                                  return _vm.dragCancel()
+                                                },
+                                                dragstart: function($event) {
+                                                  _vm.dragStart(
+                                                    volume.ids.join(":"),
+                                                    volume.length
+                                                  )
+                                                },
+                                                drop: false,
+                                                dblclick: function($event) {
+                                                  return _vm.actClick(
+                                                    geoKey,
+                                                    masterID
+                                                  )
+                                                },
+                                                click: function($event) {
+                                                  return _vm.stopClick(
+                                                    masterID,
+                                                    true
+                                                  )
+                                                }
+                                              }
+                                            },
+                                            _vm._l(volume.acts, function(acts) {
+                                              return _c("i", {
+                                                on: {
+                                                  drop: false,
+                                                  dragover: function($event) {
+                                                    return _vm.dragCancel()
+                                                  },
+                                                  click: function($event) {
+                                                    return _vm.stopClick(
+                                                      masterID
+                                                    )
+                                                  }
+                                                }
+                                              })
+                                            }),
+                                            0
+                                          )
+                                        ]
+                                      : _vm._e()
+                                  })
+                                ]
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.floatingActive &&
+                            _vm.arNewOrders[masterID] &&
+                            _vm.arNewOrders[masterID].start === hour
+                              ? [
+                                  _c("em", {
+                                    staticClass: "new-order",
+                                    style: {
+                                      width: _vm.arNewOrders[masterID].len
+                                    },
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.stopClick()
+                                      },
+                                      dblclick: function($event) {
+                                        return _vm.newOrderMarkRemove(masterID)
+                                      }
+                                    }
+                                  })
+                                ]
+                              : _vm._e()
+                          ],
+                          2
+                        )
+                      }),
+                      0
+                    )
+                  ]
+                )
+              }),
+              0
+            )
+          ])
         ])
       ])
-    ])
-  ])
+    ],
+    1
+  )
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "logistic-lost" }, [
-      _c("div", { staticClass: "logistic-lost-item" }, [
-        _c("h4", [_vm._v("Без адреса")]),
-        _vm._v(" "),
-        _c("div", { staticClass: "logistic-lost-item-list" }, [
-          _c(
-            "a",
-            { staticClass: "badge warn", attrs: { href: "javascript:;" } },
-            [_c("b", [_vm._v("34567")])]
-          ),
-          _vm._v(" "),
-          _c(
-            "a",
-            { staticClass: "badge warn", attrs: { href: "javascript:;" } },
-            [_c("b", [_vm._v("34567")])]
-          )
-        ])
+    return _c("tr", [
+      _c("th", [_vm._v("№ "), _c("br"), _vm._v(" п/п")]),
+      _vm._v(" "),
+      _c("th", [
+        _vm._v("Адрес обьекта "),
+        _c("br"),
+        _vm._v(" Контактные данные "),
+        _c("br"),
+        _vm._v(" Договор/оплата")
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "logistic-lost-item" }, [
-        _c("h4", [_vm._v("Без мастера")]),
-        _vm._v(" "),
-        _c("div", { staticClass: "logistic-lost-item-list" }, [
-          _c(
-            "a",
-            { staticClass: "badge warn", attrs: { href: "javascript:;" } },
-            [_c("b", [_vm._v("34567")])]
-          ),
-          _vm._v(" "),
-          _c(
-            "a",
-            { staticClass: "badge warn", attrs: { href: "javascript:;" } },
-            [_c("b", [_vm._v("34567")])]
-          )
-        ])
-      ])
+      _c("th", [
+        _vm._v("Описание обьекта "),
+        _c("br"),
+        _vm._v(" (Тип площадь)")
+      ]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Время")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Виды работ")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Дез средства")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Примечание")])
     ])
   }
 ]

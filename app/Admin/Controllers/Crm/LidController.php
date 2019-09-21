@@ -12,7 +12,9 @@ use App\Models\Crm\Lid;
 use App\Http\Controllers\Controller;
 use App\Models\Crm\LidStatus;
 use App\Models\Helper\Action;
+use App\Models\Helper\Company;
 use App\Models\Helper\Method;
+use App\Models\Helper\PaymentRule;
 use App\Models\Helper\Pest;
 use App\Models\Helper\Region;
 use App\Models\Helper\Servicing;
@@ -162,14 +164,40 @@ class LidController extends Controller
     {
         $grid = new Grid(new Lid);
 //        $grid->disableCreateButton();
-        $grid->expandFilter();
+//        $grid->expandFilter();
+        $grid->filter(function ($filter){
+            $filter->expand();
+            $filter->like('contract', '№ Договора');
+            $filter->where(function ($query){
+                $query->whereHas('customer', function ($query) {
+                    $query->where('phone', 'like', "%{$this->input}%");
+                });
+            },'Телефон')->mobile(['mask' => '+7 (999) 999 99 99']);
 
-        $grid->id('ID')->sortable();
+            $filter->where(function ($query){
+                $query->whereHas('customer', function ($query) {
+                    $query->where('organization', 'like', "%{$this->input}%");
+                });
+            },'Организация');
+
+            $filter->where(function ($query){
+                $query->whereHas('status', function ($query) {
+                    $query->where('status', $this->input);
+                });
+            },'Статус')->select(Status::all()->pluck('name','id'));
+
+            $filter->equal('action','Действие')->select(Action::all()->pluck('name','id'));
+
+
+        });
+
+
+//        $grid->id('ID')->sortable();
         $grid->date_start('Дата обращения')->sortable();
         $grid->contract('Номер договора')->sortable();
-        $grid->servicing('Тип обслуживания')->display(function ($servicing){
-            return Servicing::find($servicing)->name;
-        })->sortable();
+//        $grid->servicing('Тип обслуживания')->display(function ($servicing){
+//            return Servicing::find($servicing)->name;
+//        })->sortable();
         $grid->status('Статус')->display(function ($status){
             if($status['status']){
                 return $status['date'].' (' .Status::find($status['status'])->name. ')';
@@ -178,13 +206,30 @@ class LidController extends Controller
             }
 
         });
-//        $grid->status('Дата статус')->display(function ($status){
-//            return ;
-//        });
-        $grid->action('Действие')->display(function ($action){
-            return Action::find($action)->name;
-        })->sortable();
+        $grid->action('Действие')->using(Action::all()->pluck('name','id')->toArray())->sortable();
+//        if(request()->get('wue') == 1) {
+            $grid->id('Организация')->display(function ($id){
+                $customer = Customer::where('lid_id',$id)->first();
+                $organization = '';
+                if(!is_null($customer)){
+                    $organization = $customer->organization;
+                }
+
+                $acts = Act::where('parent',$id)->get();
+
+//                $customer->organization? $organization = $customer->organization: $organization = '';
+//                if()
+
+//                dump($acts->count());
+                return  $organization.' &nbsp; Акты (' .$acts->count(). ')';
+            });
+//        }
+
+
+//        $grid->action('Организация')->using(Customer::all()->pluck('organization','lid_id')->toArray())->sortable();
+
         $grid->action_date('Дата и время действия')->sortable();
+
         return $grid;
     }
 
@@ -242,13 +287,18 @@ class LidController extends Controller
 
 
 
-            $form->htmlField('manager_starter','Мэнеджер начавший лид')
-                ->display(AdminUser::where('id',$this->modelData->manager_starter)->first()->name);
+            if($this->modelData->manager_starter){
+                $form->htmlField('manager_starter','Мэнеджер начавший лид')
+                    ->display(AdminUser::where('id',$this->modelData->manager_starter)->first()->name);
+            }
+
     // Дата обращения:
             $form->datetime('date_start', 'Дата обращения:');
 
     // Статус лида:
     // с (дата):
+
+            $form->select('site','Сайт')->options(Company::all()->pluck('name','id'));
 
             $form->select('status.status', ' Статус лида:')->options(Status::all()->pluck('name', 'id'))->default(4);
             $form->datetime('status.date', 'с (дата):')->default(Carbon::now()->toDateTimeString());
@@ -262,7 +312,7 @@ class LidController extends Controller
 
     //Тип обслуживания: Действие:
 
-            $form->text('contract', 'Номер договора:');
+
             $form->select('servicing', 'Тип обслуживания:')->options(Servicing::all()->pluck('name', 'id'))->default(1);
             $form->select('action', 'Действие:')->options(Action::all()->pluck('name', 'id'))->required();
             $form->datetime('action_date', 'Дата и время действия:');
@@ -276,6 +326,7 @@ class LidController extends Controller
                 'off' => ['value' => 0, 'text' => 'Физизический', 'color' => 'success'],
             ];
             $form->switch('customer.status', 'Статус клиента:')->states($states);
+
             $form->text('customer.name', 'Имя');
             $form->text('customer.organization', 'Организация');
             $form->mobile('customer.phone', 'Телефон')->options(['mask' => '+7 (999) 999 99 99']);
@@ -285,8 +336,8 @@ class LidController extends Controller
             $form->text('customer.destination', 'Расстояние');
             $form->hidden('customer.city');
             $form->hidden('customer.region');
-            $form->text('customer.geo_lat','Широта')->required();
-            $form->text('customer.geo_lon','Долгота')->required();
+            $form->text('customer.geo_lat','Широта');
+            $form->text('customer.geo_lon','Долгота');
 //            $form->hidden('center_lat');
 //            $form->hidden('center_lon');
         });
@@ -300,24 +351,31 @@ class LidController extends Controller
             $form->hasManyFlat('act', 'Акт', function (Form\NestedForm $form) {
 
                 $finished = [
-                    'on' => ['value' => 1, 'text' => 'Закрыт', 'color' => 'success'],
-                    'off' => ['value' => 0, 'text' => 'Открыт', 'color' => 'danger'],
+                    'on' => ['value' => 1, 'text' => 'Да', 'color' => 'success'],
+                    'off' => ['value' => 0, 'text' => 'Нет', 'color' => 'danger'],
                 ];
 
+
                 $form->text('act_nr','Номер акта');
+                $form->copyAct('id','Копировать Акт');
                 $form->switch('floating','Плавающий?');
                 $form->date('floating_date_from','Срок с...');
                 $form->date('floating_date_to','Срок до...');
-                $form->switch('finished','Состояние')->states($finished);
                 $form->dadataLatLon('address', 'Адрес');
                 $form->text('lat', 'Широта');
                 $form->text('lon', 'Долгота');
                 $form->select('region', 'Регион')->options(Region::all()->pluck('region','region'));
+                $form->switch('finished','Работы завершены?')->states($finished);
+                $form->switch('booking_act_transferred','Бухгалтерский акт передан?')->states($finished);
+                $form->switch('booking_act_signed','Бухгалтерский акт подписан?')->states($finished);
+                $form->file('booking_act_file','Бухгалтерский акт скан');
+                $form->switch('implement_act_signed','Исполнительский акт подписан?')->states($finished);
+                $form->file('implement_act_file','Исполнительский акт скан');
 
                 $form->tableFlat('volume','Обьем(ы)', function ($table) {
                     $table->select('pest','Предмет работ:')->options(Pest::all()->pluck('name','id'))->load('method', '/api/getter/methods');
                     $table->select('method','Метод:')->options(Method::all()->pluck('name','id'));
-                    $table->number('square','Площадь:')->default(0);
+                    $table->text('square','Площадь:')->pattern('^[0-9]*[.]?[0-9]+$');
                     $table->select('entity','Единица площади:')->options(Square::all()->pluck('name','id'));
                     $table->text('price_standard','Цена гост');
                     $table->text('price_fact','Цена факт.');
@@ -329,8 +387,17 @@ class LidController extends Controller
                     $table->datetime('start_date','Начало работ');
                     $table->datetime('end_date','Окончание Работ');
                 })->parent('act');
-
             });
+        });
+
+        $form->tab('Документы',function (Form $form){
+            $form->text('contract', 'Номер договора:');
+            $form->switch('contract_transferred', 'Договор передан:');
+            $form->switch('contract_signed', 'Договор подписан:');
+            $form->file('contract_file', 'Файл договора:');
+            $form->switch('customer_payment','Безнал?');
+            $form->select('payment_rule','Порядок рачсетов?')->options(PaymentRule::all()->pluck('name','id'));
+            $form->text('payment_condition','Условия постоплаты (в днях)');
         });
 
         $form->hasMany('volumes','Обьем(ы)', function (Form\NestedForm $form) {
@@ -352,11 +419,17 @@ class LidController extends Controller
             $form->text('parent');
             $form->text('id');
         });
+
+
         $form->submitted(function (Form $form){
             $form->ignore('center_lat');
             $form->ignore('center_lon');
         });
         $form->saving(function (Form $form) {
+
+            if($form->act){
+
+
 
 
 
@@ -402,66 +475,10 @@ class LidController extends Controller
                 foreach ($relations as $relationName =>$relationValue) {
                     $form->$relationName = $relationValue;
                 }
-//            dump('$this->edit',$this->edit);
-//            dump('$newAct',$newAct);
-//            dump('$relations',$relations);
-//            dump($form);
-//            exit();
-                /*
-                $form->volumes  = [
-      24 => [
-        "id" => "24",
-        "parent" => "16",
-        "lid_id" => $form->model()->id,
-        "pest" => "7",
-        "method" => "1",
-        "square" => "0",
-        "entity" => "2",
-        "price_standard" => "99999900",
-        "price_fact" => "999900",
-        "_remove_" => "0",
-      ],
-      25 => [
-          "id" => "25",
-          "parent" => "16",
-          "lid_id" => $form->model()->id,
-          "pest" => "7",
-          "method" => "1",
-          "square" => "0",
-          "entity" => "2",
-          "price_standard" => "888800",
-          "price_fact" => "888800",
-          "_remove_" => "0",
-      ]
-                ];*/
-
-
-
-//            ($form->customer_status == 'on') ? $contract = $this->contract(true) : $contract = $this->contract();
-//            $form->contract = value($contract);
-
+            }
         });
 
-/*        $form->saving(function (Form $form){
-            $t = false;
-            exit();
-            $t = call_user_func_array([new Test,'tableTest'],[$form->act,$form->model()->id]);
-            if($t) {
-                $newAct = [];
-                foreach ($form->act as $actKey => $actVal) {
 
-                    foreach ($actVal as $k =>$v) if(!is_array($v)){
-                        $newAct[$actKey][$k] = $v;
-
-                    }
-                }
-                $form->act = $newAct;
-            } else {
-                dump($form);
-                exit();
-            }
-
-        });*/
 
 
 

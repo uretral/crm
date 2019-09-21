@@ -25,9 +25,9 @@
             </dropdown>
 
             <dropdown ref="dropdown">
-                <btn type="primary" class="dropdown-toggle">Регион (<b class="ddd">{{region.city}}</b>) <span class="caret"></span></btn>
+                <btn type="primary" class="dropdown-toggle">Регион (<b class="ddd">{{region.region}}</b>) <span class="caret"></span></btn>
                 <template slot="dropdown">
-                    <li v-for="region in res.regions"><a role="button" @click="setRegion(region)">{{region.city}}</a></li>
+                    <li v-for="region in res.regions"><a role="button" @click="setRegion(region)">{{region.region}}</a></li>
                 </template>
             </dropdown>
         </div>
@@ -40,7 +40,7 @@
                 <span>Мастера</span>
             </div>
             <div class="log-head-schedule" v-for="(v,k) in res.multiSchedule" >
-                <a v-bind:href="'/logistic/routes/'+k+'/edit'"><span>{{k}}</span></a>
+                <a v-bind:href="'/logistic/routes/'+k+'/edit?region='+ region.region"><span>{{k}}</span></a>
                 <a href="javascript:" v-if="k !== dateActive" @click="dateActive = k">Снаряжение</a>
             </div>
         </div>
@@ -60,7 +60,7 @@
                     </div>
                 </div>
                 <div class="log-masters">
-                    <div class="log-masters-td" v-for="(masterName,masterId) in res.masters">{{masterName}} ({{masterId}})</div>
+                    <div class="log-masters-td" v-for="(masterName,masterId) in res.masters">{{masterName.name}} ({{masterId}})</div>
                 </div>
                 <div class="log-schedule" >
 <!--Days-->
@@ -123,7 +123,8 @@
                 date:  Moment().format('YYYY-MM-DD'), //'2019-05-07',
                 days: 3,
                 region: {
-                    city: 'Москва'
+                    city: 'Москва',
+                    region: 'Москва'
                 },
                 regions: '',
                 res: '',
@@ -148,7 +149,7 @@
         methods: {
             init: function (dateActive = false) {
 
-                Axios.get('/logistic/map/many?date=' + this.date + '&days=' + this.days + '&action=masters')
+                Axios.get('/logistic/map/many?date=' + this.date + '&days=' + this.days + '&region=' + this.region.region)
                     .then(response => {
                         this.res = response.data;
                         this.dateActive = dateActive?dateActive:this.date;

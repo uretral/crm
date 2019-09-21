@@ -13326,7 +13326,7 @@ exports = module.exports = __webpack_require__(19)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -13936,8 +13936,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             date: '',
             res: '',
             open: false, //  true
-            city: document.getElementsByName('customer[city]'),
-            region: document.getElementsByName('customer[region]'),
+            city: '',
+            region: '',
             newOrder: {
                 ready: false,
                 start: '',
@@ -13959,9 +13959,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 zoom: 10,
                 lat: '',
                 lon: '',
-                // lon: document.getElementsByName('center_lon')[0].value,
-
-                // lat: document.getElementsByName('center_lat')[0].value,
+                pointLat: '',
+                pointLon: '',
+                pointAddress: '',
                 // url: 'https://cartodb-basemaps-{s}.global.ssl.fastly.net/rastertiles/voyager/{z}/{x}/{y}.png',
                 url: 'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
                 attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
@@ -13977,11 +13977,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         init: function init(e, el) {
             var _this = this;
 
+            var parent = $(window.target).parents('.has-many-act-form');
+            this.mapData.pointAddress = $(parent).find('.address').val();
+            this.mapData.pointLat = $(parent).find('.lat').val();
+            this.mapData.pointLon = $(parent).find('.lon').val();
+            this.region = $(parent).find(".region").val();
             this.date = window.buttonDate; //window.buttonDate '2019-05-27'  + 'lat=' + this.lat
-            this.mapData.lat = document.getElementsByName('center_lat')[0].value;
-            this.mapData.lon = document.getElementsByName('center_lon')[0].value;
 
-            __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get('/logistic/map/new?date=' + this.date + '&lat=' + this.mapData.lat + '&action=masters').then(function (response) {
+            __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get('/logistic/map/new?date=' + this.date + '&region=' + this.region + '&action=masters').then(function (response) {
                 _this.res = response.data;
                 _this.initOSM();
             }).catch(function (error) {
@@ -13994,12 +13997,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.initMap();
             this.initLayers();
         },
-        onClickOutside: function onClickOutside(e, el) {
-            console.log('onClickOutside');
-            console.log('click heard outside element: ', el);
-            // console.log('element clicked: '. e.target.te);
-            console.log('event: ', e);
-        },
+        onClickOutside: function onClickOutside(e, el) {},
         openClose: function openClose() {
             return this.open ? 'opened' : 'closed';
         },
@@ -14051,7 +14049,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     };
 
                     __WEBPACK_IMPORTED_MODULE_0_axios___default.a.post('/logistic/map/update', data).then(function (response) {
-                        console.log(response.data);
                         return response.data;
                     }).catch(function (error) {
                         return error;
@@ -14140,6 +14137,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             });
         },
         initLayers: function initLayers() {
+            var currentPointIcon = __WEBPACK_IMPORTED_MODULE_1__leafLet___default.a.divIcon({
+                className: 'icon-current'
+            });
+            console.log(this.mapData.pointLat, this.mapData.pointLon);
+            this.markers['100000'] = __WEBPACK_IMPORTED_MODULE_1__leafLet___default.a.marker([this.mapData.pointLat, this.mapData.pointLon], {
+                'opacity': 1,
+                icon: currentPointIcon
+            }).bindPopup("<b>" + this.mapData.pointAddress + "</b>").addTo(this.map);
+            this.markers['100000']._icon.id = 100000;
+
             var p = this.res.lid;
             for (var key in p) {
                 var person = p[key];
@@ -14171,7 +14178,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             return false;
         },
         personalOrders: function personalOrders(masterID) {
-            console.log(masterID);
             var p = this.res.lid;
             var arMaster = void 0;
             for (var key in p) {
@@ -14189,7 +14195,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }
         },
         initMap: function initMap() {
-            this.map = __WEBPACK_IMPORTED_MODULE_1__leafLet___default.a.map('map').setView([this.mapData.lat, this.mapData.lon], 10);
+            this.map = __WEBPACK_IMPORTED_MODULE_1__leafLet___default.a.map('map').setView([this.res.region.center_lat, this.res.region.center_lon], 10);
             // this.map.layers = [grayscale, cities];
             this.tileLayer = __WEBPACK_IMPORTED_MODULE_1__leafLet___default.a.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fastly.net/rastertiles/voyager/{z}/{x}/{y}.png', {
                 maxZoom: 18,
@@ -28561,7 +28567,10 @@ var render = function() {
                       [
                         _c("span", [
                           _vm._v(
-                            _vm._s(master.name) + " (" + _vm._s(masterID) + ")"
+                            _vm._s(master.name.name) +
+                              " (" +
+                              _vm._s(masterID) +
+                              ")"
                           )
                         ])
                       ]

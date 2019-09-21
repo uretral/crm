@@ -24,7 +24,7 @@ class RouteController extends Controller
         return $content
             ->header('Edit')
             ->description('description')
-            ->body('<div id="logisticRoutesMap"><logistic-routes-map date="'.$id.'"></logistic-routes-map></div>');
+            ->body('<div id="logisticRoutesMap"><logistic-routes-map date="'.$id.'" region="' .request()->get('region'). '"></logistic-routes-map></div>');
     }
 
 }

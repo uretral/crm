@@ -35,6 +35,7 @@ use App\Admin\Extensions\Form\Field\DadataAddress;
 use App\Admin\Extensions\Form\Field\DadataLatLon;
 use App\Admin\Extensions\Form\Field\SelectFlat;
 use App\Admin\Extensions\Form\Field\HtmlField;
+use App\Admin\Extensions\Form\Field\ActCopy;
 
 Encore\Admin\Form::forget(['map', 'editor']);
 
@@ -48,6 +49,7 @@ Form::extend('dadataAddress', DadataAddress::class);
 Form::extend('dadataLatLon', DadataLatLon::class);
 Form::extend('selectFlat',SelectFlat::class);
 Form::extend('htmlField',HtmlField::class);
+Form::extend('copyAct',ActCopy::class);
 
 
 $vueRoute = [];
@@ -62,6 +64,9 @@ switch (true):
         break;
     case stristr($route,"/logistic/routes/"):
         $vueRoute[] = '/js/logistic.routes.map.js';
+        break;
+    case strstr($route,"/vue/lid"):
+        $vueRoute[] = '/js/lid.js';
         break;
 endswitch;
 

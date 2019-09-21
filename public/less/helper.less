@@ -262,9 +262,10 @@ button.close {
     flex-direction: column;
     background: @white;
     box-sizing: border-box;
-&.static {
-    position: unset;
-}
+
+    &.static {
+        position: unset;
+    }
 
     &-close {
         width: 62px;
@@ -1202,11 +1203,19 @@ button.close {
 .leaflet-routing-container {
     display: none;
 }
+
+.master-plan {
+    th {
+        white-space: nowrap;
+    }
+}
+
 .logistic {
     width: 100%;
     height: 100%;
     //min-height: 500px;
     display: flex;
+    position: relative;
 
     &-lost {
         width: 200px;
@@ -1230,14 +1239,24 @@ button.close {
 
     }
 
+    &-aside {
+        margin-top: -1px;
+        position: absolute;
+        z-index: 20000;
+        background: white;
+        height: 100%;
+        padding: 20px;
+    }
+
     &-map {
+        min-width: 860px;
         width: 100%;
         margin: 0 10px;
         //min-height: 100%;
     }
 
     &-masters {
-        width: 700px;
+        width: 580px;
         overflow-y: auto;
 
         &-table {
@@ -1311,7 +1330,7 @@ button.close {
     font-weight: bold;
 }
 
-.drag {
+/*.drag {
     min-width: 17px;
     height: 17px;
     background: @native-blue;
@@ -1320,12 +1339,36 @@ button.close {
     top: 0;
     left: -1px;
     opacity: .8;
+}*/
+.drag {
+    min-width: 17px;
+    height: 17px;
+    background: #3c8dbc;
+    box-sizing: border-box;
+    position: absolute;
+    z-index: 200;
+    top: 0;
+    left: -1px;
+    opacity: .8;
+    padding: 0 !important;
+    display: flex !important;
+    flex-direction: column;
+    justify-content: center;
+    //align-items: center;
+    > i {
+        display: block;
+        height: 1px;
+        background: #bfbfbf;
+        margin: 2px 0;
+        position: relative;
+        z-index: 100;
+    }
 }
 
 .drag.active {
-    box-shadow: 0px 0px 7px 0px rgba(255, 0, 0, 0.79);
-    -webkit-box-shadow: 0px 0px 7px 0px rgba(255, 0, 0, 0.79);
-    -moz-box-shadow: 0px 0px 7px 0px rgba(255, 0, 0, 0.79);
+    box-shadow: 0 0 7px 0 rgba(255, 0, 0, 0.79);
+    -webkit-box-shadow: 0 0 7px 0 rgba(255, 0, 0, 0.79);
+    -moz-box-shadow: 0 0 7px 0 rgba(255, 0, 0, 0.79);
 }
 
 .drag-nest {
@@ -1354,6 +1397,16 @@ button.close {
 
 }
 
+.actions {
+    .separator {
+        display: inline-block;
+        margin-right: 20px;
+
+        b {
+            padding-right: 15px;
+        }
+    }
+}
 
 .new-order {
     display: block;
@@ -1373,33 +1426,7 @@ button.close {
 }
 
 
-.drop-address {
-    position: relative;
 
-    > ul {
-        position: absolute;
-        top: 34px;
-        left: 43px;
-        z-index: 200;
-        list-style: none;
-        background: white;
-        border: 1px solid #dbdbdb;
-        border-top: none;
-        border-bottom-left-radius: 5px;
-        border-bottom-right-radius: 5px;
-        width: calc(100% - 43px);
-
-        li {
-            padding-top: 4px;
-
-            &:last-of-type {
-                padding: 4px 0;
-            }
-
-
-        }
-    }
-}
 
 .ddd {
     padding: 0 10px;
@@ -1559,10 +1586,11 @@ button.close {
             flex-shrink: 0;
             flex-grow: 1;
             padding: 0 10px;
-box-sizing: unset;
+            box-sizing: unset;
+
             &.active {
                 background: #d2d6de5e;
-border: 1px solid rgba(154, 158, 166, 0.37);
+                border: 1px solid rgba(154, 158, 166, 0.37);
 
             }
 
@@ -1582,7 +1610,6 @@ border: 1px solid rgba(154, 158, 166, 0.37);
             background: @white;
             margin: 2px 0;
             //opacity: .6;
-
 
 
             &:nth-of-type(odd) {
@@ -1644,16 +1671,240 @@ border: 1px solid rgba(154, 158, 166, 0.37);
     margin-bottom: 12px
 }
 
-.icon-master {
-width: 24px!important;
-height: 24px!important;
-background: red;
-border-radius: 50%;
-    display: flex!important;
-    justify-content: center;
-    align-items: center;
+.icon {
+    width: 24px !important;
+    height: 24px !important;
+    border-radius: 50%;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
     color: white;
     font-size: 12px;
     font-weight: bold;
 
+    &-master {
+        background: red;
+        width: 24px !important;
+        height: 24px !important;
+        border-radius: 50%;
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        color: white;
+        font-size: 12px;
+        font-weight: bold;
+        position: relative;
+
+        > span {
+            position: absolute;
+            display: block;
+            width: 5px;
+            height: 5px;
+            right: -7px;
+            background: red;
+
+            &.contract {
+                top: 0;
+            }
+
+            &.account-act {
+                top: 10px;
+            }
+
+            &.act {
+                bottom: 0;
+            }
+        }
+
+        &.done {
+            background: green;
+        }
+
+        &.doing {
+            background: orange;
+        }
+
+        &.todo {
+            background: blue;
+        }
+
+        &.late {
+            background: red;
+        }
+
+        &.error {
+            background: brown;
+        }
+    }
+
+    &-current {
+        background: orange;
+        width: 24px !important;
+        height: 24px !important;
+        border-radius: 50%;
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        color: white;
+        font-size: 12px;
+        font-weight: bold;
+    }
+
+    &-floating {
+
+        min-width: 24px !important;
+        min-height: 24px !important;
+        border-radius: unset;
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        color: white;
+        font-size: 12px;
+        font-weight: bold;
+
+        > span {
+            display: block;
+            background: black;
+
+            &.siblings {
+                width: 22px !important;
+                height: 22px !important;
+                border: 1px solid orange;
+            }
+
+        }
+
+        &.active {
+            opacity: 1 !important;
+
+            span {
+                background: red;
+                color: @black;
+            }
+        }
+    }
+}
+
+.acts_tbl {
+    tr {
+        border-bottom: 1px dotted #e5e5e5;
+
+        &:last-of-type {
+            border: none;
+        }
+    }
+
+    td {
+        padding: 4px 10px 4px 0;
+
+        &:first-of-type {
+            color: @native-blue;
+            font-weight: bold;
+        }
+    }
+}
+
+.current-acts {
+    span {
+        padding: 0 5px;
+    }
+}
+
+.display {
+    &-map {
+        position: static !important;
+        height: 100vh;
+        width: 100vw;
+        overflow: hidden;
+    }
+}
+
+@media print {
+    /* Стиль для печати */
+    body {
+        visibility: hidden;
+        padding: 0;
+    }
+
+    /* Блок который нужно отобразить */
+    @page {
+        //margin: 1cm 1cm 1cm 1cm;
+        padding: 0;
+        margin: 1cm;
+        size: A4 landscape;
+
+
+    }
+
+    .print {
+        visibility: visible;
+
+        position: fixed;
+        width: 25cm;
+        //height: 18cm;
+        top: 1cm;
+        left: 1cm;
+
+        .master-plan {
+            width: 100%;
+        }
+
+    }
+}
+.file {
+    position: relative;
+}
+.centered {
+    position: relative;
+}
+.file {
+    display: flex!important;
+    opacity: 1;
+    justify-content: center;
+    align-items: center;
+    background-color: #f39c12;
+    color: #fff;
+    border: 1px solid  #e08e0b;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    white-space: nowrap;
+    border-radius: 4px;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 120px;
+    cursor: pointer;
+    z-index: 10;
+}
+.legend {
+
+    //border: 1px solid @native-blue;
+    padding: 20px 5px;
+    position: relative;
+    &:after {
+        content: attr(rel);
+        display: inline-block;
+        position: absolute;
+        top: -11px;
+        left: 18px;
+        padding: 0 5px;
+        background: #ecf0f5;
+        color: @native-blue;
+    }
+}
+.form-inline.mse {
+    margin: 0 0 20px;
+}
+.form-group.mse {
+    //margin-right: 10px;
+    label {
+        display: block;
+        padding-left: 5px;
+    }
+    input {
+        display: block;
+    }
 }

@@ -11,6 +11,9 @@ class Act extends Model
     public function acts(){
         return $this->belongsTo(Lid::class,'parent');
     }
+    public function lid(){
+        return $this->belongsTo(Lid::class,'parent');
+    }
 
     public function volume()
     {

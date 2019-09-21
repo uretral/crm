@@ -9,7 +9,7 @@
 <div id="has-many-{{$column}}" class="has-many-{{$column}}">
 
     <div class="has-many-{{$column}}-forms">
-        @dump($forms)
+
         @foreach($forms as $pk => $form)
 
 

@@ -51,7 +51,6 @@
                 }
             }).success(function (data) {
                 window.addr = JSON.parse(data).suggestions;
-                console.log(window.addr);
                 if (window.addr) {
                     for (var i = 0, len = window.addr.length; i < len; i++) {
                         list += `<li><a rel="` + i + `" href="javascript:;">` + window.addr[i].unrestricted_value + `</a></li>`;
@@ -67,10 +66,8 @@
                        lonInput = name.replace(new RegExp("address",'g'),"lon");
                         latInput = name.replace(new RegExp("address",'g'),"lat");
                         regionInput = name.replace(new RegExp("address",'g'),"region");
-                        console.log(lonInput,latInput,regionInput);
-
-                        $('[name="'+lonInput+'"]').val(dadataAddress.data.geo_lat);
-                        $('[name="'+latInput+'"]').val(dadataAddress.data.geo_lon);
+                        $('[name="'+latInput+'"]').val(dadataAddress.data.geo_lat);
+                        $('[name="'+lonInput+'"]').val(dadataAddress.data.geo_lon);
                         $('[name="'+regionInput+'"]').val(dadataAddress.data.region).trigger('change');
                         alert('Геоданные установлены')
                     }

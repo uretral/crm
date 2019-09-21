@@ -6,6 +6,7 @@ use App\Models\Crm\Act;
 use App\Http\Controllers\Controller;
 use App\Models\Helper\Method;
 use App\Models\Helper\Pest;
+use App\Models\Helper\Region;
 use App\Models\Helper\Square;
 use Encore\Admin\Controllers\HasResourceActions;
 use Encore\Admin\Form;
@@ -116,6 +117,19 @@ class ActController extends Controller
     public function form()
     {
         $form = new Form(new Act);
+        $finished = [
+            'on' => ['value' => 1, 'text' => 'Закрыт', 'color' => 'success'],
+            'off' => ['value' => 0, 'text' => 'Открыт', 'color' => 'danger'],
+        ];
+        $form->text('act_nr','Номер акта');
+        $form->switch('floating','Плавающий?');
+        $form->date('floating_date_from','Срок с...');
+        $form->date('floating_date_to','Срок до...');
+        $form->switch('finished','Состояние')->states($finished);
+        $form->dadataLatLon('address', 'Адрес');
+        $form->text('lat', 'Широта');
+        $form->text('lon', 'Долгота');
+        $form->select('region', 'Регион')->options(Region::all()->pluck('region','region'));
 
         $form->hasMany('volume','Обемы', function ($form){
             $form->select('pest','Предмет работ:')->options(Pest::all()->pluck('name','id'))->load('method', '/api/getter/methods');

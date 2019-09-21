@@ -82,8 +82,10 @@ class UserController extends Controller
         $grid = new Grid(new $userModel());
 
         $grid->id('ID')->sortable();
+        $grid->active('Активность')->switch();
         $grid->username(trans('admin.username'));
         $grid->name(trans('admin.name'));
+        $grid->color('цвет')->editable();
         $grid->roles(trans('admin.roles'))->pluck('name')->label();
         $grid->city('Город')->editable('select',Region::all()->pluck('city','code'));
         $grid->created_at(trans('admin.created_at'));
@@ -118,6 +120,7 @@ class UserController extends Controller
         $show = new Show($userModel::findOrFail($id));
 
         $show->id('ID');
+        $show->active('Активность');
         $show->username(trans('admin.username'));
         $show->name(trans('admin.name'));
         $show->roles(trans('admin.roles'))->as(function ($roles) {
@@ -155,7 +158,9 @@ class UserController extends Controller
         }
 
         $form->text('username', trans('admin.username'))->rules($userNameRules);
+        $form->switch('active','Активность');
         $form->text('name', trans('admin.name'))->rules('required');
+        $form->color('color','цвет');
         $form->select('city', 'Город')->options(Region::all()->pluck('city','code'));
         $form->image('avatar', trans('admin.avatar'));
         $form->password('password', trans('admin.password'))->rules('required|confirmed');

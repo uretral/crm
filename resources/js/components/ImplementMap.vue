@@ -1,62 +1,43 @@
 <template>
 	<div>
-
-		<input type="hidden"  v-model="date" v-event-outside.jquery="{ name: 'initModal', handler: init }"/>
-
-		<div class="mod" v-if="open">
+		<div class="mod" v-if="open && date">
 
 			<div class="mod-header">
-				<span>{{res.date}}</span>
+				<span>{{date}}</span>
 				<a v-if="newOrder.step" class="btn btn-success btn-sm" href="javascript:;" @click="setMaster">
                     <span>Назначить</span>
                 </a>
-				<input type="checkbox" id="mod-close" v-model="open"/>
-				<label for="mod-close" class="mod-close"><span>&times;</span></label>
+
+                <label @click="$emit('closeMap')" class="mod-close"><span>&times;</span></label>
 			</div>
 			<div class="mod-body">
 				<div class="logistic">
-					<div class="logistic-lost">
-						<div class="logistic-lost-item">
-							<h4>Без адреса</h4>
-							<div class="logistic-lost-item-list">
-								<a class="badge warn" href="javascript:;">
-									<b>34567</b>
-								</a>
-								<a class="badge warn" href="javascript:;">
-									<b>34567</b>
-								</a>
-							</div>
-						</div>
-						<div class="logistic-lost-item">
-							<h4>Без мастера</h4>
-							<div class="logistic-lost-item-list">
-								<a class="badge warn" href="javascript:;">
-									<b>34567</b>
-								</a>
-								<a class="badge warn" href="javascript:;">
-									<b>34567</b>
-								</a>
-							</div>
-						</div>
+                  <!--	<div class="logistic-lost">
+                          <div class="logistic-lost-item">
+                                  <h4>Без адреса</h4>
+                                  <div class="logistic-lost-item-list">
+                                      <a class="badge warn" href="javascript:;">
+                                          <b>34567</b>
+                                      </a>
+                                 <a class="badge warn" href="javascript:;">
+                                          <b>34567</b>
+                                      </a>
+                                  </div>
+                              </div>
 
+                              <div class="logistic-lost-item">
+                                  <h4>Без мастера</h4>
+                                  <div class="logistic-lost-item-list">
+                                      <a class="badge warn" href="javascript:;">
+                                          <b>34567</b>
+                                      </a>
+                                      <a class="badge warn" href="javascript:;">
+                                          <b>34567</b>
+                                      </a>
+                                  </div>
+                              </div>
 
-<!--                        <div
-                            class="form-check"
-                            v-for="layer in layers"
-                            :key="layer.id"
-                        >
-                            <label class="form-check-label">
-                                <input
-                                    class="form-check-input"
-                                    type="checkbox"
-                                    v-model="layer.active"
-                                    @change="layerChanged(layer.id, layer.active)"
-                                />
-                                {{ layer.name }}
-                            </label>
-                        </div>-->
-
-					</div>
+                       </div>-->
 
 
 
@@ -69,7 +50,7 @@
 							<a href="javascript:"
                                @click="personalOrders(masterID)"
                                @dblclick="personalOrdersHide(masterID)"
-                            ><span>{{master.name}} ({{masterID}})</span></a>
+                            ><span>{{master.name.name}} ({{masterID}})</span></a>
 							<div class="logistic-masters-cells" >
 <!--simple hours-->
 								<label
@@ -133,14 +114,12 @@
     import jQ from 'jquery';
     export default {
         name: 'ImplementMap',
-        // props: ['date'],
+        props: ['date','region','lat','lon','open'],
         data: function () {
             return {
-                date: '',
+                // date: '',
                 res: '',
-                open: false, //  true
-                city: document.getElementsByName('customer[city]'),
-                region: document.getElementsByName('customer[region]'),
+                city: '',
                 newOrder: {
                     ready: false,
                     start: '',
@@ -162,9 +141,9 @@
                     zoom: 10,
                     lat: '',
                     lon: '',
-                    // lon: document.getElementsByName('center_lon')[0].value,
-
-                    // lat: document.getElementsByName('center_lat')[0].value,
+                    pointLat: '',
+                    pointLon: '',
+                    pointAddress: '',
                     // url: 'https://cartodb-basemaps-{s}.global.ssl.fastly.net/rastertiles/voyager/{z}/{x}/{y}.png',
                     url:'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
                     attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
@@ -178,36 +157,24 @@
 
         methods: {
             init: function (e, el) {
-                this.date = window.buttonDate; //window.buttonDate '2019-05-27'  + 'lat=' + this.lat
-                this.mapData.lat = document.getElementsByName('center_lat')[0].value;
-                this.mapData.lon = document.getElementsByName('center_lon')[0].value;
+                if(this.date){
+                    Axios.get('/logistic/map/new?date=' + this.date + '&region=' + this.region + '&action=masters')
+                        .then(response => {
+                            this.res = response.data;
+                            this.initOSM(response.data);
+                        })
+                        .catch(function (error) {
+                            console.log(error);
+                        });
+                }
 
-
-                Axios.get('/logistic/map/new?date=' + this.date + '&lat=' + this.mapData.lat + '&action=masters')
-                    .then(response => {
-                        this.res = response.data;
-                        this.initOSM();
-                    })
-                    .catch(function (error) {
-                        console.log(error);
-                    });
-
-                this.open = true;
             },
 	        initOSM(){
                 this.initMap();
                 this.initLayers();
 	        },
             onClickOutside(e, el) {
-                console.log('onClickOutside');
-                console.log('click heard outside element: ', el);
-                // console.log('element clicked: '. e.target.te);
-                console.log('event: ', e);
             },
-            openClose() {
-                return this.open ? 'opened' : 'closed';
-            },
-
             markBusy: function (len) {
                 return 'width:' + (len * 17) + 'px';
             },
@@ -259,7 +226,6 @@
 
                         Axios.post('/logistic/map/update', data)
                             .then(response => {
-                                console.log(response.data);
                                 return response.data;
                             })
                             .catch(error => {
@@ -289,16 +255,20 @@
                 this.showParagraph = !this.showParagraph;
                 event.stopPropagation();
             },
+            convertHour(hour){
+                hour < 10 ? hour = '0'+hour : hour;
+                return hour;
+            },
             makeOrder: function (hour, master) {
                 if (this.newOrder.step) {
                     this.newOrder.end = hour;
-                    this.newOrder.endTime = this.date + ' ' + hour + ':00:00';
-                    let len = hour - this.newOrder.start + 1;
+                    this.newOrder.endTime = this.date + 'T' + this.convertHour(hour) + ':00';
+                    let len = Number(hour) - this.newOrder.start + 1;
                     document.querySelector('.new-order').style.width = len * 17 + 'px';
                 } else {
                     this.newOrder.start = hour;
-                    this.newOrder.startTime = this.date + ' ' + hour + ':00:00';
-                    this.newOrder.endTime = this.date + ' ' + hour + ':00:00';
+                    this.newOrder.startTime = this.date + 'T' + this.convertHour(hour) + ':00';
+                    this.newOrder.endTime = this.date + 'T' + this.convertHour(hour) + ':00';
                     this.newOrder.master = master;
                     this.newOrder.masterName = this.res.schedule[master].name;
                     this.newOrder.step = true;
@@ -322,17 +292,7 @@
 
 
             setMaster:function () {
-
-                window.newImplement = ({
-                    'master':this.newOrder.master,
-                    'startTime':this.newOrder.startTime,
-                    'endTime':this.newOrder.endTime,
-                });
-
-
-                window.addEventListener('click', appendImplement);
-
-                this.open = false;
+                this.$emit('newOrder',this.newOrder);
             },
 
 	        // MAP
@@ -348,6 +308,15 @@
                 });
             },
             initLayers() {
+                let currentPointIcon = L.divIcon({
+                    className:'icon-current',
+                });
+                this.markers['100000'] = L.marker([this.mapData.pointLat,this.mapData.pointLon],{
+                    'opacity': 1,
+                    icon: currentPointIcon
+                }).bindPopup("<b>"+this.mapData.pointAddress+"</b>").addTo(this.map);
+                this.markers['100000']._icon.id = 100000;
+
                 let p = this.res.lid;
                 for(let key in p) {
                     var person = p[key];
@@ -382,7 +351,6 @@
                 return false;
             },
             personalOrders(masterID){
-                console.log(masterID);
                 let p = this.res.lid;
                 let arMaster;
                 for(let key in p) {
@@ -400,7 +368,7 @@
                 }
             },
             initMap() {
-                this.map = L.map('map').setView([ this.mapData.lat,  this.mapData.lon], 10);
+                this.map = L.map('map').setView([ this.lat,  this.lon], 10);
                 // this.map.layers = [grayscale, cities];
                 this.tileLayer = L.tileLayer(
                     'https://cartodb-basemaps-{s}.global.ssl.fastly.net/rastertiles/voyager/{z}/{x}/{y}.png',
@@ -416,7 +384,8 @@
             }
         },
         watch: {
-            open :  function ( val ,  oldVal )  {
+            date :  function ( val ,  oldVal )  {
+                this.init();
                 if (oldVal){
                     this.newOrder.start  = '';
                     this.newOrder.startTime  = '';
@@ -433,6 +402,7 @@
         },
 
         created() {
+
 
 
 

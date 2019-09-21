@@ -23,5 +23,7 @@ class VerifyCsrfToken extends Middleware
         '/logistic/map/update',
         '/logistic/map/many',
         '/logistic/map/get_equipment',
+        '/ajax/lid/update_field'
+//        '/display/logistic_map',
     ];
 }

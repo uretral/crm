@@ -65,6 +65,8 @@
             <excludedPath path="/public/storage" />
             <excludedPath path="/public/web.config" />
             <excludedPath path="/.env" />
+            <excludedPath path="/storage/debugbar" />
+            <excludedPath path="/storage/logs" />
           </excludedPaths>
         </serverdata>
       </paths>
