@@ -5,6 +5,7 @@ namespace App\Admin\Controllers\Vue;
 
 use App\Admin\Extensions\Form\NestedFormFlat;
 use App\Models\Admin\AdminUser;
+use App\Models\Calc\MethodPrice;
 use App\Models\Crm\Act;
 use App\Models\Crm\Customer;
 use App\Models\Crm\Implement;
@@ -15,6 +16,7 @@ use App\Models\Crm\LidStatus;
 use App\Models\Crm\Volume;
 use App\Models\Helper\Action;
 use App\Models\Helper\Company;
+use App\Models\Helper\Constant;
 use App\Models\Helper\Drug;
 use App\Models\Helper\Equipment;
 use App\Models\Helper\Method;
@@ -132,6 +134,8 @@ class LidController extends Controller
         $helpers['statuses'] = Status::all()->keyBy('id')->toArray();
         $helpers['tools'] = Tools::all()->keyBy('id')->toArray();
         $helpers['payment_rules'] = PaymentRule::all()->keyBy('id')->toArray();
+        $helpers['constants'] = Constant::all()->keyBy('id')->toArray();
+        $helpers['methods_prices'] = MethodPrice::all()->groupBy('pest')->toArray();
         return $helpers;
     }
 
@@ -177,14 +181,36 @@ class LidController extends Controller
      */
     public function edit($id, Content $content)
     {
-        $lid =  json_encode(Lid::with(['statuses','customer','actions','acts'])->where('id',$id)->first()->toArray());
+
+        $l = Lid::with(['statuses','actions','acts'])->where('id',$id)->first()->toArray();
+        $lid =  json_encode($l);
         $acts =  json_encode(Act::with(['volume','implement'])->where('parent',$id)->get()->keyBy('id')->toArray());
         $user = json_encode(config('const.admin')->user()->toArray());
         $helpers = json_encode($this->helpers(),JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES);
         $statuses = json_encode(LidStatus::where('lid_id',$id)->orderBy('id')->get()->keyBy('id')->toArray());
         $regions = json_encode(Region::all()->keyBy('region')->toArray());
 
-//        dump($acts);
+        if($l['customer']){
+            $customer = Customer::where('id',$l['customer'])->first()->toArray();
+        } else {
+            $customer = [
+                'name' => '',
+                'icon' => '',
+                'status' => 0,
+                'organization' => '',
+                'phone' => '',
+                'phone_ext' => '',
+                'address' => '',
+                'addresses' => '',
+                'email' => '',
+                'emails' => '',
+                'destination' => '',
+                'city' => '',
+                'region' => '',
+                'lat' => '',
+                'lon' => ''
+            ];
+        }
         return $content
             ->header('Edit')
             ->description('description')
@@ -195,6 +221,7 @@ class LidController extends Controller
                                         v-bind:helpers='" .$helpers. "'
                                         v-bind:statuses='" .$statuses. "'
                                         v-bind:regions='" .$regions. "'
+                                        v-bind:customer='" .json_encode($customer). "'
                                     ></lid></div>");
     }
 
@@ -530,9 +557,12 @@ class LidController extends Controller
         $form->manager = config('const.admin')->user()->id;
         $form->manager_starter = config('const.admin')->user()->id;
 
+
+
         $form->save();
         $lastID = DB::getPdo()->lastInsertId();
-        return redirect('/crm/lids/'.$lastID.'/edit');
+
+        return redirect('/vue/lid/'.$lastID.'/edit');
 
 /*
 
@@ -562,9 +592,19 @@ class LidController extends Controller
 
     public function updateField(){
         $request = request()->all();
+        if($request['value'] == 'true'){
+            $request['value'] = 1;
+        } elseif ($request['value'] == 'false') {
+            $request['value'] = 0;
+        } elseif ($request['value'] == 'null') {
+            $request['value'] = null;
+        }
         switch ($request['model']):
             case 'lid':
-                return  Lid::where('id',(int)$request['id'])->update([$request['field'] => $request['value']]);
+
+
+                $update = Lid::where('id',(int)$request['id'])->update([$request['field'] => $request['value']]);
+                return $update;
                 break;
             case 'action':
                 $update = Lid::where('id',(int)$request['id'])->update([$request['field'] => $request['value']]);
@@ -583,22 +623,32 @@ class LidController extends Controller
                 return $res;
                 break;
             case 'customer':
-                $find = Customer::where('salt',$request['salt'])->first();
+
+//                $find = Customer::where('id',$request['child_id'])->first();
+                $find = Lid::where('id',$request['id'])->first()->customer;
+
+
+
+
                 if(is_null($find)) {
                     $arr = [
                         'lid_id' => $request['id'],
-                        'manager' => $request['manager'],
-                        'salt' => $request['salt'],
                         $request['field'] => $request['value'],
                     ];
-                    $res = LidAction::create($arr)->id;
+                    $newCustomer = Customer::create($arr)->id;
+
+                    $res = Lid::where('id',$request['id'])->update(['customer' => $newCustomer]);
+
+
+
                 } else {
-                    $res = LidAction::where('id',$find->id)->update([$request['field'] => $request['value']]);
+                    $res = Customer::where('id',$find)->update([$request['field'] => $request['value']]);
                 }
-                return 'act';
+                return $res;
                 break;
             case 'act':
                 return Act::where('id',(int)$request['child_id'])->update([$request['field'] => $request['value']]);
+
                 break;
             case 'imp':
                 return 'implement';
@@ -684,6 +734,183 @@ class LidController extends Controller
                 return Implement::where('id',request()->get('id'))->update([request()->get('field') => request()->get('value')]);
                 break;
         }
+
+    }
+
+    public function actPerDate(){
+        $arr = json_decode(request()->get('arr'));
+//        dump($arr);
+        $withVol = [];
+
+        foreach ($arr as $i){
+            foreach ($i->periods as $pd){
+                $pd->vol = $i->volumes;
+                $withVol[] = $pd;
+            }
+        }
+        $tDates = [];
+
+        foreach ($withVol as $period){
+            $tDates[$period->floating_date_from . '::' .$period->floating_date_to. '::' .$period->prefer_time_from. '::' .$period->prefer_time_to][] = $period->vol;
+        }
+//        dump($tDates);
+        $pre = [];
+        foreach ($tDates as $key => $tDate){
+            foreach ($tDate as $arV0l){
+
+                foreach ($arV0l as $r){
+
+                    $pre[$key][] = $r;
+                }
+            }
+        }
+
+        $last = [];
+        foreach ($pre as $k => $y){
+
+            $last[$k] = array_unique($y, SORT_REGULAR) ;
+
+        }
+        ksort($last);
+        $res = [];
+        foreach ($last as $dateKey => $sub){
+            foreach ($sub as $method){
+                if(array_key_exists($dateKey,$res) && array_key_exists($method->pest,$res[$dateKey])){
+                    $method->method = array_unique(array_merge($method->method,$res[$dateKey][$method->pest]->method));
+                    $method->price_fact = (int)$method->price_fact + (int)$res[$dateKey][$method->pest]->price_fact;
+                }
+                $res[$dateKey][$method->pest] = $method;
+            }
+        }
+
+
+        return json_encode($res);
+    }
+
+    public function saveFloatActsSAVE(){
+        $arr = json_decode(request()->get('acts'));
+
+
+        $test =[];
+        foreach ($arr as $actArr){
+            $volumesArr = [];
+            $volumesArrN = [];
+            foreach ($actArr->volumes as $k => $v){
+                $a = [];
+                if(key_exists($v->pest,$volumesArr)){
+//                    dump($v->pest);
+/*                    $volumesArrN[$v->pest] = [
+                        'entity' => $volumesArrN[$v->pest]['entity'],
+                        'kpi' => $volumesArrN[$v->pest]['kpi'],
+                        'lid_id' => $volumesArrN['lid_id'],
+                        'method' => array_merge($volumesArrN[$v->pest]['method'],$v['method']),
+                        'note' => $volumesArrN[$v->pest]['note'],
+                        'parent' => $volumesArrN[$v->pest]['parent'],
+                        'pest' => $volumesArrN[$v->pest]['pest'],
+                        'price_fact' => (int)$volumesArrN[$v->pest]['price_fact'] + (int)$v['price_fact'],
+                        'price_standard' => $volumesArrN[$v->pest]['price_standard'],
+                        'square' => $volumesArrN[$v->pest]['square'],
+                    ];*/
+                    $volumesArr[$v->pest]->method = array_unique(array_merge($volumesArr[$v->pest]->method,$v->method));
+                    $volumesArr[$v->pest]->price_fact = (int)$volumesArr[$v->pest]->price_fact + (int)$v->price_fact;
+
+                } else {
+                    $volumesArr[$v->pest] = $v;
+                }
+//                $volumesArrN[$v->pest][] = $v;
+            }
+            unset($actArr->volumes);
+
+//            dump($volumesArr,$volumesArrN,$actArr,'----------');
+//            exit();
+
+            $act = Act::create((array)$actArr)->id;
+            $test[] = $act;
+            foreach ($volumesArr as $vol){
+                $vol->parent = $act;
+                $vol->method = implode(',',$vol->method);
+
+                $volume = Volume::create((array)$vol)->id;
+                $test[] = $volume;
+            }
+        }
+
+        return array_product($test)/10000000000000000;
+
+
+    }
+
+    public function saveFloatActs(){
+        $arr = json_decode(request()->get('acts'));
+
+
+
+        $test =[];
+        foreach ($arr as $actArr){
+            $volumesArr = [];
+            foreach ($actArr->volumes as $k => $v){
+                $volumesArr[] = $v;
+            }
+            unset($actArr->volumes);
+
+            $act = Act::create((array)$actArr)->id;
+            $test[] = $act;
+            foreach ($volumesArr as $vol){
+                $md = [];
+                foreach ($vol->method as $m){
+                    $md[] = $m;
+                }
+                $vol->parent = $act;
+
+
+                $vol->method = implode(',',$md);
+
+                $volume = Volume::create((array)$vol)->id;
+                $test[] = $volume;
+            }
+        }
+
+        return array_product($test)/10000000000000000;
+
+
+    }
+
+    public function getActs(){
+        $acts = Act::where('parent',request()->get('lid'))->get()->toArray();
+        return json_encode($acts);
+    }
+    public function deleteAct(){
+        $volumes = Volume::where('parent',request()->get('id'))->delete();
+        $implements = Implement::where('parent',request()->get('id'))->delete();
+        $act = Act::where('id',request()->get('id'))->delete();
+
+        $volumesTest = Volume::where('parent',request()->get('id'))->get()->toArray();
+        $implementsTest = Implement::where('parent',request()->get('id'))->get()->toArray();
+        $actTest = Act::where('id',request()->get('id'))->get()->toArray();
+
+        dump(count($volumesTest),count($implementsTest),count($actTest));
+
+
+        $res = count($volumesTest)+count($implementsTest)+count($actTest);
+
+
+
+        return (int)$res;
+
+    }
+
+    public function customerSearch(){
+        $customer = Customer::where(request()->get('field'),request()->get('value'))->get()->toArray();
+        return json_encode(request()->get('field'));
+    }
+    public function addEmptyAct(){
+        $newAct = new Act;
+        $newAct->act_nr = (int)request()->get('cnt') + 1;
+        $newAct->parent = (int)request()->get('lid');
+        $newAct->save();
+
+         $act = Act::where('parent', request()->get('lid'))->orderBy('id', 'DESC')->get()->toArray();
+         return json_encode($act);
 
     }
 

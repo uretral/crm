@@ -34929,7 +34929,7 @@ var content = __webpack_require__(147);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(149)("394da76f", content, false, {});
+var update = __webpack_require__(149)("18acc4e2", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -35420,6 +35420,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_moment__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_axios__ = __webpack_require__(155);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_axios__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -37088,44 +37097,56 @@ var render = function() {
                   staticClass: "log-schedule-tr",
                   class: { active: masterDate === _vm.dateActive }
                 },
-                _vm._l(mastersDay, function(oneMasterDay) {
-                  return _c(
-                    "div",
-                    { staticClass: "log-schedule-td" },
-                    _vm._l(24, function(hour) {
-                      return _c(
-                        "label",
-                        { staticClass: "cell drag-nest" },
+                [
+                  _vm._l(mastersDay, function(oneMasterDay) {
+                    return [
+                      _c(
+                        "div",
+                        { staticClass: "log-schedule-td" },
                         [
-                          _vm._v(
-                            "\n                                    " +
-                              _vm._s(hour - 1) +
-                              "\n                                    "
-                          ),
-                          _vm._l(oneMasterDay.volumes, function(volume) {
-                            return Number(volume.start) === hour - 1
-                              ? [
-                                  _c("a", {
-                                    staticClass: "drag",
-                                    style: _vm.markBusy(volume.length),
-                                    attrs: {
-                                      href:
-                                        "/crm/lids/" + volume.lid_id + "/edit",
-                                      id: volume.id,
-                                      target: "_blank"
-                                    }
-                                  })
-                                ]
-                              : _vm._e()
+                          _vm._l(24, function(hour) {
+                            return _c(
+                              "label",
+                              { staticClass: "cell drag-nest" },
+                              [
+                                _vm._v(
+                                  "\n                                    " +
+                                    _vm._s(hour - 1) +
+                                    "\n                                    "
+                                ),
+                                _vm._l(oneMasterDay.volumes, function(volume) {
+                                  return Number(volume.start) === hour - 1
+                                    ? [
+                                        _c("a", {
+                                          staticClass: "drag",
+                                          style: _vm.markBusy(volume.length),
+                                          attrs: {
+                                            href:
+                                              "/crm/lids/" +
+                                              volume.lid_id +
+                                              "/edit",
+                                            id: volume.id,
+                                            target: "_blank"
+                                          }
+                                        })
+                                      ]
+                                    : _vm._e()
+                                })
+                              ],
+                              2
+                            )
+                          }),
+                          _vm._v(" "),
+                          _c("span", {
+                            staticStyle: { left: "30px", width: "16px" }
                           })
                         ],
                         2
                       )
-                    }),
-                    0
-                  )
-                }),
-                0
+                    ]
+                  })
+                ],
+                2
               )
             }),
             0

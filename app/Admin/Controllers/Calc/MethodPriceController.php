@@ -1,16 +1,19 @@
 <?php
 
-namespace App\Admin\Controllers\Helper;
+namespace App\Admin\Controllers\Calc;
 
-use App\Models\Helper\Method;
+use App\Models\Calc\MethodPrice;
 use App\Http\Controllers\Controller;
+use App\Models\Helper\Method;
+use App\Models\Helper\Pest;
+use App\Models\Store\Chemical;
 use Encore\Admin\Controllers\HasResourceActions;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Layout\Content;
 use Encore\Admin\Show;
 
-class MethodController extends Controller
+class MethodPriceController extends Controller
 {
     use HasResourceActions;
 
@@ -79,11 +82,13 @@ class MethodController extends Controller
      */
     protected function grid()
     {
-        $grid = new Grid(new Method);
+        $grid = new Grid(new MethodPrice);
 
         $grid->id('ID');
-        $grid->name('Действие')->sortable()->editable();
-        $grid->sort('Сортировка')->sortable()->editable();
+        $grid->entity('Сущность')->select(Pest::all()->pluck('name','id'));
+        $grid->method('Сущность')->select(Method::all()->pluck('name','id'));
+        $grid->chemical('Сущность')->select(Chemical::all()->pluck('name','id'));
+        $grid->square_1('Сущность')->select(Chemical::all()->pluck('name','id'));
 
         return $grid;
     }
@@ -96,7 +101,7 @@ class MethodController extends Controller
      */
     protected function detail($id)
     {
-        $show = new Show(Method::findOrFail($id));
+        $show = new Show(MethodPrice::findOrFail($id));
 
         $show->id('ID');
         $show->created_at('Created at');
@@ -112,12 +117,10 @@ class MethodController extends Controller
      */
     protected function form()
     {
-        $form = new Form(new Method);
+        $form = new Form(new MethodPrice);
 
         $form->display('id');
-        $form->text('name');
-//        $form->number('sort')->default(10);
-
+        $form->select('entity','Сущность')->options(Pest::all()->pluck('name','id'));
         return $form;
     }
 }

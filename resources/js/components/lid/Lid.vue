@@ -13,7 +13,9 @@
             :open="modal.newLids"
             :helpers="helpers"
             :lid="lidData"
+            :actsCount="lidData.acts.length"
             @closeNewActs="modal.newLids=false"
+            @updateActs="updateActs"
         ></new-acts>
         <modal v-model="modal.statusHistory" title="История статусов" :footer="false" :dismiss-btn="false">
             <table class="table">
@@ -25,11 +27,14 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr v-for="status in lid.statuses">
-                    <td>{{helpers.user[status.manager].name }}</td>
-                    <td>{{helpers.statuses[status.status].name}}</td>
-                    <td>{{status.date}}</td>
-                </tr>
+                <template v-if="lid.statuses.length">
+                    <tr v-for="status in lid.statuses">
+                        <td>{{helpers.user[status.manager].name }}</td>
+                        <td>{{helpers.statuses[status.status].name}}</td>
+                        <td>{{status.date}}</td>
+                    </tr>
+                </template>
+
                 </tbody>
             </table>
         </modal>
@@ -61,30 +66,30 @@
         <div class="form-inline mse">
 
     <!--Договор-->
-            <div class="form-group mse" :class="checkField(lid.contract)">
+            <div class="form-group mse">
                 <label for="site">Договор:</label>
                 <input type="text" v-model="lid.contract" class="form-control" id="contract" disabled placeholder="Договор">
             </div>
     <!--Сайт-->
-            <div class="form-group mse" :class="checkField(lid.site)">
+            <div class="form-group mse">
                 <label for="site">Сайт:</label>
                 <select v-model="lid.site"  @change="save('lid','site',lid.site)" class="form-control" id="site">
                     <option v-for="company in helpers.companies" :value="company.id">{{company.name}}</option>
                 </select>
             </div>
     <!--Мэнеджер стартер-->
-            <div class="form-group mse" :class="checkField(lid.manager_starter)">
+            <div class="form-group mse">
                 <label for="manager_starter">Мэнеджер стартер:</label>
 <!--                <span>{{}}</span>-->
                 <input type="text" v-model="helpers.user[lid.manager_starter].name" class="form-control" id="manager_starter" disabled placeholder="Мэнеджер начавший лид">
             </div>
     <!--Дата обращения -->
-            <div class="form-group mse" :class="checkField(lid.date_start)">
+            <div class="form-group mse">
                  <label for="date_start">Дата обращения:</label>
                 <input type="text" v-model="lid.date_start" class="form-control" id="date_start" disabled placeholder="Дата обращения">
             </div>
     <!--Тип обслуживания-->
-            <div class="form-group mse" :class="checkField(lid.servicing)">
+            <div class="form-group mse" >
                 <label for="servicing">Тип обслуживания:</label>
                 <select v-model="lid.servicing"  @change="save('lid','servicing',lid.servicing)" class="form-control" id="servicing">
                     <option v-for="servicing in helpers.servicing" :value="servicing.id">{{servicing.name}}</option>
@@ -92,19 +97,19 @@
             </div>
     <!--Будильник-->
             <fieldset class="attention" rel="Будильник">
-            <div class="form-group mse" :class="checkField(lid.action)">
+            <div class="form-group mse" >
                  <label for="action">Действие: <a href="javascript:" @click="modal.actionHistory = true">История</a></label>
                 <select v-model="log.action"  @focusout="save('action','action',log.action)" class="form-control" id="action">
                     <option v-for="action in helpers.actions" :value="action.id">{{action.name}}</option>
                 </select>
             </div>
-            <div class="form-group mse" :class="checkField(lid.action_date)">
+            <div class="form-group mse" >
                  <label>Дата и время действия:</label>
                 <input type="datetime-local"  v-model="log.actionDate" @focusout="save('action','action_date',log.actionDate)" class="form-control">
             </div>
-            <div class="form-group mse" :class="checkField(lid.action_note)">
+            <div class="form-group mse" >
                  <label for="action_note">Примечание: </label>
-                <input type="text" v-model="log.actionNote" @focusout="save('action','action_note',log.actionNote)" class="form-control" id="action_note" style="width: 400px">
+                <input type="text" v-model="log.actionNote" @focusout="save('action','action_note',log.actionNote)" class="form-control" id="action_note" style="width: 390px">
             </div>
             </fieldset>
         </div>
@@ -132,58 +137,72 @@
                     <div class="empty_input"></div>
                 </div>
             </fieldset>
+
             <fieldset rel="Клиент">
                 <div class="form-group mse">
                      <label>Статус клиента:</label>
-                    <dropdown ref="customerStatus" >
-                        <btn>{{log.clientStatus[lidData.customer.status]}}</btn>
-                        <btn class="dropdown-toggle"><span class="caret"></span></btn>
-                        <template slot="dropdown">
-                            <li><a @click="lid.customer.status = 0, save('customer','status',0)" role="button">Физический</a></li>
-                            <li><a @click="lid.customer.status = 1, save('customer','status',1)" role="button">Юридический</a></li>
-                        </template>
-                    </dropdown>
+                    <select v-model="customerData.status" @click="save('customer','status',customerData.status,customerData.id)" class="form-control" >
+                        <option :value="0">Физический</option>
+                        <option :value="1">Юридический</option>
+                    </select>
                 </div>
-                <div class="form-group mse" v-if="lid.customer.organization">
-                    <label>Организация: <a href="javascript:">Поиск</a></label>
-                    <input type="text" v-model="lid.customer.organization" class="form-control" id="customer.organization" style="width: 350px;">
+                <div class="form-group mse" v-if="customerData.status">
+                    <label>Организация: <a href="javascript:" @click="customerSearch('organization')">Поиск</a></label>
+                    <input type="text" v-model="customerData.organization" class="form-control" id="customer.organization" style="width: 350px;"  @focusout="save('customer','organization',customerData.organization,customerData.id)" >
                 </div>
                 <div class="form-group mse">
                     <label>Имя:</label>
-                    <input type="text" v-model="lid.customer.name" class="form-control" id="customer.name" style="width: 200px;">
+                    <input type="text" v-model="customerData.name" class="form-control" id="customer.name" style="width: 200px;" @focusout="save('customer','name',customerData.name,customerData.id)">
                 </div>
                 <div class="form-group mse">
-                    <label>Телефон:</label>
-                    <masked-input mask="\+\7 (111) 111 11 11" class="form-control" @input="rawVal = arguments[1]" v-model="lid.customer.phone" />
+                    <label>Телефон: <a href="javascript:" @click="customerSearch('phone')">Поиск</a></label>
+                    <input type="text" class="form-control tel" v-model="customerData.phone">
                 </div>
                 <div class="form-group mse">
-                    <label>Телефон доп.:</label>
-                    <masked-input mask="\+\7 (111) 111 11 11" class="form-control" @input="rawVal = arguments[1]" v-model="lid.customer.phone_ext" />
+                    <label>Телефон доп.:<a href="javascript:" @click="customerSearch('phone_ext')">Поиск</a></label>
+                    <input type="text" class="form-control tel" v-model="customerData.phone_ext">
                 </div>
                 <div class="form-group mse">
-                    <label>Email:</label>
-                    <input type="text" v-model="lid.customer.email" class="form-control" id="customer.email">
+                    <label>Email:<a href="javascript:" @click="customerSearch('email')">Поиск</a></label>
+                    <input type="text" v-model="customerData.email" class="form-control" id="customer.email" @focusout="save('customer','email',customerData.email,customerData.id)">
                 </div>
     <!--ADDRESS-->
                 <br/>
 
-                <div class="form-group mse">
+                <dadata-address
+                    :mse="true"
+                    :main_btn="false"
+
+                    :main="{
+                                        address:customerData.address,
+                                        lat:customerData.lat,
+                                        lon:customerData.lon,
+                                        destination:customerData.destination,
+                                        region:customerData.region,
+                                        }"
+                    :regions="helpers.regions"
+                    @setAddress="setMainAddress"
+                    @saveAddressEntity="saveMainAddressEntity"
+                    @mainAddress="mainMainAddress"
+                />
+
+<!--                <div class="form-group mse">
                     <label>Адрес:</label>
-                    <input type="text" v-model="lid.customer.address" class="form-control" id="customer.address" style="width: 717px;">
+                    <input type="text" v-model="customerData.address" class="form-control" id="customer.address" style="width: 717px;">
                 </div>
                 <div class="form-group mse">
                     <label>Расстояние:</label>
-                    <input type="text" v-model="lid.customer.destination" class="form-control" id="customer.destination">
+                    <input type="text" v-model="customerData.destination" class="form-control" id="customer.destination">
                 </div>
 
                 <div class="form-group mse">
                     <label>Широта:</label>
-                    <input type="text" v-model="lid.customer.geo_lat" class="form-control" id="customer.geo_lat">
+                    <input type="text" v-model="customerData.lat" class="form-control" id="customer.lat">
                 </div>
                 <div class="form-group mse">
                     <label>Долгота:</label>
-                    <input type="text" v-model="lid.customer.geo_lon" class="form-control" id="customer.geo_lon">
-                </div>
+                    <input type="text" v-model="customerData.lon" class="form-control" id="customer.lon">
+                </div>-->
             </fieldset>
 
         </div>
@@ -191,36 +210,51 @@
         <div class="form-inline legend mse" rel="Документы по договору">
             <div class="form-group mse">
                 <label>Договор подписан:</label>
-                <input id="lid.contract_signed" v-model="lid.contract_signed" type="checkbox"/>
+                <input id="lid.contract_signed" v-model="lidData.contract_signed" type="checkbox" @change="save('lid','contract_signed',lidData.contract_signed)"/>
                 <label for="lid.contract_signed" class="check-label"></label>
             </div>
             <div class="form-group mse">
                 <label>Договор передан:</label>
-                <input id="lid.contract_transferred" v-model="lid.contract_transferred" type="checkbox"/>
+                <input id="lid.contract_transferred" v-model="lidData.contract_transferred" type="checkbox"  @change="save('lid','contract_transferred',lidData.contract_transferred)"/>
                 <label for="lid.contract_transferred" class="check-label"></label>
             </div>
             <div class="form-group mse">
                 <label>Безнал?:</label>
-                <input id="lid.customer_payment" v-model="lid.customer_payment" type="checkbox"/>
+                <input id="lid.customer_payment" v-model="lidData.customer_payment" type="checkbox"  @change="save('lid','customer_payment',lidData.customer_payment)"/>
                 <label for="lid.customer_payment" class="check-label"></label>
             </div>
             <div class="form-group mse">
                 <label for="action">Порядок рачсетов:</label>
-                <select v-model="lid.payment_rule"  class="form-control" id="lid.payment_rule">
+                <select v-model="lidData.payment_rule"  class="form-control" id="lid.payment_rule" @change="save('lid','payment_rule',lidData.payment_rule)">
                     <option v-for="payment_rule in helpers.payment_rules" :value="payment_rule.id">{{payment_rule.name}}</option>
                 </select>
             </div>
             <div class="form-group mse">
                 <label>Условия постоплаты:</label>
-                <input type="text" v-model="lid.payment_condition" class="form-control" id="lid.payment_condition">
+                <input type="text" v-model="lidData.payment_condition" class="form-control" id="lid.payment_condition" @focusout="save('lid','payment_condition',lidData.payment_condition)">
             </div>
             <div class="form-group mse">
-                <label>Файл договора:</label>
+                <label>Файл договора:
+                    <a href="javascript:" @click="deleteFile('lidData','contract_file')" v-if="lidData.contract_file">X</a>
+                </label>
                 <div class="centered">
-                    <label class="file" for="InputFile">ФАЙЛ</label>
-                    <input type="file" id="InputFile" @change="uploadFile()">
+                    <template v-if="lidData.contract_file">
+                        <btn target="_blank" :href="'/storage/docs/'+lidData.contract_file">Просмотреть</btn>
+                    </template>
+                    <template v-else>
+                        <label class="file" for="InputFile">ФАЙЛ</label>
+                        <input type="file" id="InputFile" v-on:change="uploadFile('lid','contract_file',lidData.contract_file)">
+                    </template>
                 </div>
+
             </div>
+            <div class="form-group mse">
+                 <label for="site">Конструктор актов:</label>
+                <a href="javascript:" class="btn btn-warning" @click="addNewLids()">Добавить несколько актов</a>
+            </div>
+        </div>
+        <div class="form-inline legend mse" rel="Комментарий">
+            <textarea class="lid_comment" v-model="lidData.comment" @focusout="save('lid','comment',lidData.comment)"></textarea>
         </div>
 
         <div class="form-inline legend mse" rel="Акты">
@@ -238,33 +272,11 @@
                     <th>Бух. акт скан</th>
                     <th>Исп. акт подписан?</th>
                     <th>Исп. акт скан</th>
-                    <th><a href="javascript:" class="btn btn-warning" @click="addNewLids()">Добавить</a></th>
+                    <th><btn type="primary" @click="addEmptyAct()">Добавить акт</btn></th>
                 </tr>
                 </thead>
 
                 <tbody>
-
-<!--                <tr class="act-content " style="display:unset;">
-
-                    <td colspan="12">
-                        <fieldset rel="Настройки">
-                            <label>Договор подписан:</label>
-                            <input id="act.contract_signed" type="checkbox"/>
-                            <label for="act.contract_signed" class="check-label"></label>
-                        </fieldset>
-                        <fieldset rel="Настройки">
-                            <label>Договор подписан:</label>
-                            <input id="act.contract_signed" type="checkbox"/>
-                            <label for="act.contract_signed" class="check-label"></label>
-                        </fieldset>
-                        <fieldset rel="Настройки">
-                            <label>Договор подписан:</label>
-                            <input id="act.contract_signed" type="checkbox"/>
-                            <label for="act.contract_signed" class="check-label"></label>
-                        </fieldset>
-
-                    </td>
-                </tr>-->
 
                 <template v-for="(act,key) in this.lidData.acts">
                     <!--Opened-->
@@ -282,7 +294,10 @@
                     <td ><!--Плавающий?-->
                         <template v-if="act.active">
                             <cite>Плавающий?</cite>
-                            <input v-model="lidData.acts[key].floating" type="checkbox" :id="'floating_'+key"/>
+                            <input
+                                v-model="lidData.acts[key].floating" type="checkbox" :id="'floating_'+key"
+                                @change="save('act','floating',lidData.acts[key].floating,lidData.acts[key].id)"
+                            />
                             <label class="true-false fa" :for="'floating_'+key"></label>
                         </template>
                         <template v-else>
@@ -290,11 +305,14 @@
                             <i v-else class="not fa"></i>
                         </template>
                     </td>
-                    <td class="no-wrap att">
+                    <td class="no-wrap">
                         <template v-if="act.active">
                             <cite>Срок с</cite>
                             <template v-if="lidData.acts[key].floating">
-                                <input type="date" v-model="lidData.acts[key].floating_date_from"/>
+                                <input type="date"
+                                       v-model="lidData.acts[key].floating_date_from"
+                                       @focusout="save('act','floating_date_from',lidData.acts[key].floating_date_from,lidData.acts[key].id)"
+                                />
                             </template>
                             <template v-else>
                                 <input type="date" disabled v-model="lidData.acts[key].floating_date_from"/>
@@ -305,11 +323,14 @@
                             {{act.floating_date_from}}
                         </template>
                     </td>
-                    <td class="no-wrap att">
+                    <td class="no-wrap">
                         <template v-if="act.active">
                             <cite>Срок до</cite>
                             <template v-if="lidData.acts[key].floating">
-                                <input type="date" v-model="lidData.acts[key].floating_date_to"/>
+                                <input type="date"
+                                       v-model="lidData.acts[key].floating_date_to"
+                                       @focusout="save('act','floating_date_to',lidData.acts[key].floating_date_to,lidData.acts[key].id)"
+                                />
                             </template>
                             <template v-else>
                                 <input type="date" disabled v-model="lidData.acts[key].floating_date_to"/>
@@ -322,7 +343,10 @@
                     <td><!--Работы завершены?-->
                         <template v-if="act.active">
                             <cite>Работы завершены?</cite>
-                            <input v-model="lidData.acts[key].finished" type="checkbox" :id="'finished_'+key"/>
+                            <input v-model="lidData.acts[key].finished" type="checkbox"
+                                   :id="'finished_'+key"
+                                   @change="save('act','finished',lidData.acts[key].finished,lidData.acts[key].id)"
+                            />
                             <label class="true-false fa" :for="'finished_'+key"></label>
                         </template>
                         <template v-else>
@@ -331,18 +355,14 @@
                         </template>
 
                     </td>
-                    <td class="address">
-<!--                    <template v-if="act.active">
-                        <cite>Адрес</cite>
-                        <input type="text" v-model="lidData.acts[key].address" style="width: 454px"/>
-                    </template>
-                    <template v-else>{{act.address}}</template>-->
-                        {{act.address}}
-                    </td>
+                    <td class="address">{{act.address}}</td>
                     <td><!--Бух. акт передан?-->
                         <template v-if="act.active">
                             <cite>Бух. акт передан?</cite>
-                            <input v-model="lidData.acts[key].booking_act_transferred" type="checkbox" :id="'booking_act_transferred_'+key"/>
+                            <input
+                                v-model="lidData.acts[key].booking_act_transferred" type="checkbox"
+                                :id="'booking_act_transferred_'+key"
+                                @change="save('act','booking_act_transferred',lidData.acts[key].booking_act_transferred,lidData.acts[key].id)"/>
                             <label class="true-false fa" :for="'booking_act_transferred_'+key"></label>
                         </template>
                         <template v-else>
@@ -354,7 +374,9 @@
                     <td><!--Бух. акт подписан?-->
                         <template v-if="act.active">
                             <cite>Бух. акт подписан?</cite>
-                            <input v-model="lidData.acts[key].booking_act_signed" type="checkbox" :id="'booking_act_signed_'+key"/>
+                            <input v-model="lidData.acts[key].booking_act_signed" type="checkbox"
+                                   :id="'booking_act_signed_'+key"
+                                   @change="save('act','booking_act_signed',lidData.acts[key].booking_act_signed,lidData.acts[key].id)"/>
                             <label class="true-false fa" :for="'booking_act_signed_'+key"></label>
                         </template>
                         <template v-else>
@@ -365,9 +387,16 @@
                     </td>
                     <td><!--Бух. акт скан-->
                         <template v-if="act.active">
-                            <cite>Бух. акт скан</cite>
-                            <i v-if="act.booking_act_file" class="yes fa"></i>
-                            <i v-else class="not fa"></i>
+                            <cite>Бух. акт скан: <a class="x white" @click="deleteFile('act','booking_act_file',key)">X</a> </cite>
+
+                            <template v-if="lidData.acts[key].booking_act_file">
+                                <a class="file sm btn-default" target="_blank" :href="'/storage/docs/'+lidData.acts[key].booking_act_file">Просмотреть</a>
+                            </template>
+                            <template v-else>
+                                <label class="file sm" :for="'booking_act_file_'+key">ФАЙЛ</label>
+                                <input type="file" :id="'booking_act_file_'+key" v-on:change="uploadFile('act','booking_act_file','',act.id,key)">
+                            </template>
+
                         </template>
                         <template v-else>
                             <i v-if="act.booking_act_file" class="yes fa"></i>
@@ -377,7 +406,10 @@
                     <td><!--Исп. акт подписан?-->
                         <template v-if="act.active">
                             <cite>Исп. акт подписан?</cite>
-                            <input v-model="lidData.acts[key].implement_act_signed" type="checkbox" :id="'implement_act_signed_'+key"/>
+                            <input v-model="lidData.acts[key].implement_act_signed" type="checkbox"
+                                   :id="'implement_act_signed_'+key"
+                                   @change="save('act','implement_act_signed',lidData.acts[key].implement_act_signed,lidData.acts[key].id)"
+                            />
                             <label class="true-false fa" :for="'implement_act_signed_'+key"></label>
                         </template>
                         <template v-else>
@@ -388,9 +420,18 @@
                     </td>
                     <td><!--Исп. акт скан-->
                         <template v-if="act.active">
-                            <cite>Исп. акт скан</cite>
-                            <i v-if="act.implement_act_file" class="yes fa"></i>
-                            <i v-else class="not fa"></i>
+                            <cite>Исп. акт скан <a class="x white" @click="deleteFile('act','implement_act_file',key)">X</a></cite>
+
+                            <template v-if="lidData.acts[key].implement_act_file">
+                                <a class="file sm btn-default" target="_blank" :href="'/storage/docs/'+lidData.acts[key].implement_act_file">Просмотреть</a>
+                            </template>
+                            <template v-else>
+                                <label class="file sm" :for="'implement_act_file_'+key">ФАЙЛ</label>
+                                <input type="file" :id="'implement_act_file_'+key" v-on:change="uploadFile('act','implement_act_file','',act.id,key)">
+                            </template>
+
+<!--                            <label class="file sm" :for="'implement_act_file_'+key">ФАЙЛ</label>-->
+<!--                            <input type="file" :id="'implement_act_file_'+key" v-on:change="uploadFile('act','implement_act_file','',act.id,key)">-->
                         </template>
                         <template v-else>
                             <i v-if="act.implement_act_file" class="yes fa"></i>
@@ -412,12 +453,35 @@
                     <td colspan="12">
                         <div class="form-inline legend mse" rel="">
                             <fieldset rel="Geo" class="full-center">
+
+<!--                                <dadata-address
+                                    :mse="false"
+                                    :main="true"
+                                    :id="key"
+
+                                    :main="{
+                                        address:customerData.address,
+                                        lat:customerData.lat,
+                                        lon:customerData.lon,
+                                        destination:customerData.destination,
+                                        region:customerData.region,
+                                        }"
+                                    :regions="helpers.regions"
+                                    @setAddress="setActAddress"
+                                    @saveAddressEntity="saveActAddressEntity"
+                                    @mainAddress="mainActAddress"
+                                />-->
+
+
+
+
+
                                 <div class="form-group">
                                      <a href="javascript:" @click="setAddress(key)" class="btn btn-default">Основной адрес</a>
                                 </div>
                                 <div class="form-group drop-address">
                                     <label>Адрес:</label>
-                                    <input id="act.address" type="text" v-model="lidData.acts[key].address" class="form-control" style="width: 650px" @keyup="dadataAddress()"/>
+                                    <input  type="text" v-model="lidData.acts[key].address" class="form-control" style="width: 650px" @keyup="dadataAddress()"/>
                                     <ul style="width: 650px;right: 0;left:unset;">
                                         <li v-for="dadata in suggestions.text"><a @click="dadataAddressClick(dadata,key)" href="javascript:">{{dadata.unrestricted_value}}</a></li>
                                     </ul>
@@ -439,50 +503,67 @@
                                     <input id="act.region" type="text" v-model="lidData.acts[key].region" class="form-control"/>
                                 </div>
                             </fieldset>
+
+
                             <fieldset rel="Обьёмы" class="full-center">
                                 <table class="volumes">
 
                                     <thead>
                                     <tr>
                                         <th>Предмет работ:</th>
-                                        <th>Метод:</th>
                                         <th>Площадь:</th>
                                         <th>Единица площади:</th>
+                                        <th>Методы:</th>
                                         <th>Цена гост</th>
                                         <th>Цена факт</th>
                                         <th>
-                                            <a class="add btn btn-success btn-sm pull-right" @click="addVolume(act.id)">
-                                                <i class="fa fa-save"></i>&nbsp;Добавить
-                                            </a>
+                                            <btn type="success pull-right" @click="addVolume(act.id)" >+</btn>
                                         </th>
                                     </tr>
                                     </thead>
-
+<!--
+Обработка от плесени = мех очистка(9) / хим обработка
+-->
                                     <tbody v-if="actRelations[act.id]">
-                                    <tr v-for="(volume,key) in actRelations[act.id].volumes">
+                                    <tr class="volume-row" v-for="(volume,key) in actRelations[act.id].volumes">
                                         <td>
                                             <select v-model="volume.pest" class="form-control" @focusout="addActRelation('volume',volume.id,'pest',volume.pest)">
                                                 <option v-for="pest in helpers.pests" :value="pest.id">{{pest.name}}</option>
                                             </select>
                                         </td>
-                                        <td>
-                                            <select v-model="volume.method" class="form-control" @focusout="addActRelation('volume',volume.id,'method',volume.method)">
-                                                <option v-for="method in helpers.methods" :value="method.id">{{method.name}}</option>
-                                            </select>
-                                        </td>
+
                                         <td>
                                             <input type="number" v-model="volume.square" class="form-control" @focusout="addActRelation('volume',volume.id,'square',volume.square)"/>
                                         </td>
                                         <td>
                                             <select v-model="volume.entity" class="form-control" @focusout="addActRelation('volume',volume.id,'entity',volume.entity)">
-
                                                 <option v-for="square in helpers.square" :value="square.id">{{square.name}}</option>
                                             </select>
+                                        </td>
+                                        <td  v-if="volume.pest && volume.square && volume.entity">
+<!--                                            <div >-->
+                                                <template v-for="pest in helpers.pests[volume.pest].methods">
+
+                                                    <input type="checkbox"
+                                                           :id="volume.id+'_pest_'+pest"
+                                                           :name="'methods_'+volume.id"
+                                                           v-model="volume.method"
+                                                           :checked="volume.method.indexOf(+pest)>-1"
+                                                           :value="pest"
+                                                           @change="addActRelation('volume',volume.id,'method',volume.method,act.id)"
+                                                    >
+                                                    <label class="methods_chb" :for="volume.id+'_pest_'+pest">{{helpers.methods[pest].name}}</label>
+                                                </template>
+<!--                                            </div>-->
+
+<!--                                            <select v-model="volume.method" class="form-control" @focusout="addActRelation('volume',volume.id,'method',volume.method)">
+                                                <option v-for="method in helpers.methods" :value="method.id">{{method.name}}</option>
+                                            </select>-->
                                         </td>
                                         <td><input type="number" v-model="volume.price_standard" class="form-control" @focusout="addActRelation('volume',volume.id,'price_standard',volume.price_standard)"/></td>
                                         <td><input type="number" v-model="volume.price_fact" class="form-control" @focusout="addActRelation('volume',volume.id,'price_fact',volume.price_fact)"/></td>
                                         <td>
-                                            <a class="remove btn btn-warning btn-sm pull-right" @click="deleteVolume(act.id,volume.id,key)"><i class="fa fa-trash">&nbsp;</i>Удалить</a>
+                                            <btn type="warning pull-right" @click="deleteVolume(act.id,volume.id,key)">-</btn>
                                         </td>
                                     </tr>
                                     </tbody>
@@ -506,9 +587,7 @@
                                         <th>Начало работ</th>
                                         <th>Окончание Работ</th>
                                         <th>
-                                            <a class="add btn btn-success btn-sm pull-right" @click="addImplement(act.id)">
-                                                <i class="fa fa-save"></i>&nbsp;Добавить
-                                            </a>
+                                            <btn type="success" @click="addImplement(act.id)">+</btn>
                                         </th>
                                     </tr>
                                     </thead>
@@ -532,12 +611,39 @@
                                         </td>
 
                                         <td>
-                                            <a class="remove btn btn-warning btn-sm pull-right" @click="deleteImplement(act.id,implement.id,key)"><i class="fa fa-trash">&nbsp;</i>Удалить</a>
+                                            <btn type="warning" @click="deleteImplement(act.id,implement.id,key)">-</btn>
                                         </td>
                                     </tr>
                                     </tbody>
                                 </table>
 
+                            </fieldset>
+                            <fieldset rel="Удаление акта" class="full-center">
+                                <btn type="danger" @click="deleteAct(key)">Удалить акт</btn>
+                               <!-- <table style="width: 100%;">
+
+                                    <thead>
+                                    <tr>
+                                        <th>Затраты по химии</th>
+                                        <th>Затраты по транспорту</th>
+                                        <th>Затраты по труду</th>
+                                        <th>Итого</th>
+                                        <th>Удалить акт</th>
+                                    </tr>
+                                    </thead>
+
+
+                                    <tbody>
+                                    <tr>
+                                        <td>фывфыв</td>
+                                        <td>{{act.cost_transport}}</td>
+                                        <td>фывфВыв</td>
+                                        <td>фывфВыв</td>
+                                        <td></td>
+                                    </tr>
+                                    </tbody>
+
+                                </table>-->
                             </fieldset>
                         </div>
 
@@ -571,13 +677,16 @@
     import MaskedInput from 'vue-masked-input'
     import ImplementMap from "../ImplementMap";
     import NewActs from "./NewActs";
+    import DadataAddress from "../Dadata/DadataAddress";
+    import Inputmask from 'inputmask';
 
     export default {
         name:'Lid',
-        props:['lid','acts','user','helpers','statuses','regions'],
+        props:['lid','acts','user','helpers','statuses','regions','customer'],
         data: function() {
             return {
                 lidData: this.lid,
+                customerData: this.customer,
                 actRelations: {},
                 log: {
                     'status': '',
@@ -607,20 +716,33 @@
                     statusHistory:false,
                     actionHistory:false,
                     destination:false,
-                    newLids:true
+                    newLids:false
                 }
             }
         },
-        watch: {},
+        watch: {
+            'customerData.phone_ext'(n,o){
+                if(n.match(/\+7 \(\d{3}\) \d{3} \d{2} \d{2}/) && o.match(/\+7 \(\d{3}\) \d{3} \d{2} \d_/)){
+                    this.save('customer','phone_ext',n.replace(/[^0-9+]/g, ''),this.customerData.id)
+                }},
+            'customerData.phone'(n,o){
+                console.log(n);
+                if(n.match(/\+7 \(\d{3}\) \d{3} \d{2} \d{2}/) && o.match(/\+7 \(\d{3}\) \d{3} \d{2} \d_/)){
+                    this.save('customer','phone',n.replace(/[^0-9+]/g, ''),this.customerData.id)
+
+                }}, // +7 (798) 522 21 79
+        },
         components: {
-            MaskedInput,ImplementMap,L,NewActs
+            MaskedInput,ImplementMap,L,NewActs,DadataAddress,Inputmask
         },
         methods: {
+            co(gg){console.log(gg);},
            async save(model,field,value,id = false){
                 if(value !== '') {
                     try {
                         let response = await Axios.get('/ajax/lid/update_field?id='+this.lid.id+'&model='+model+'&field='+field+'&value='+value+'&manager='+this.user.id+'&salt='+this.salt+'&child_id='+id);
                         response.data > 0 ? this.success(field,'save') : this.danger(field,'save');
+                        console.log(response.data);
                         return response.data;
                     } catch(error) {
                         console.log(error);
@@ -638,8 +760,9 @@
                         this.danger(model,'logSave');
                     })
             },
-            async addActRelation(model,id,field,value){
-                console.log(model,id,field,value);
+            async addActRelation(model,id,field,value,act = null){
+                // console.log(model,id,field,value,act);
+                this.calculateRemedy(act);
                 try {
                     let response = await Axios.get('/ajax/lid/add_act_relation?model='+model+'&id='+id+'&field='+field+'&value='+value);
                     response.data > 0 ? this.success(field,'addActRelation') : this.danger(field,'addActRelation');
@@ -648,7 +771,44 @@
                     this.danger(field,'addActRelation');
                 }
             },
+            calculateRemedy(id){
+                let actData,actKey;
+                for (let a in this.lidData.acts)if(this.lidData.acts[a].id === id){
+                    actData = this.lidData.acts[a];
+                    actKey = a;
+                }
+                console.log('actKey',actKey);
+
+                if(actData.destination) {
+                    this.lidData.acts[actKey].cost_transport = (Number(actData.destination) * Number(this.helpers.constants[2].value)).toFixed(0);
+                }
+
+                let act = this.actRelations[id];
+                for(let volume of act.volumes){
+                    console.log(act.volumes);
+
+                    for(let meth of volume.method) {
+                        console.log(meth);
+                    }
+
+                }
+
+                console.log(id);
+            },
+            calculateTransport(){},
+            calculateLabor(){},
             /*---*/
+            async addEmptyAct(){
+                try {
+                    let response = await Axios.get('/ajax/lid/add_empty_act?lid='+this.lidData.id+'&cnt='+this.lidData.acts.length);
+
+                    console.log(response.data);
+                    this.$set(this.lidData,'acts',response.data);
+
+                } catch (error) {
+                    console.log(error);
+                }
+            },
             async dadataAddress(){
               try {
                   let response = await Axios.get('/dadata/curl?a='+event.target.value);
@@ -666,16 +826,17 @@
             },
             success (field, finc) {
                 this.$notify({
-                    duration: 10000,
+                    duration: 1000,
                     placement: 'bottom-right',
                     type: 'success',
                     title: 'Сохранено!',
                     content: field +' + '+finc
                 })
             },
+
             danger (field, finc) {
                 this.$notify({
-                    duration: 10000,
+                    duration: 1000,
                     placement: 'bottom-right',
                     type: 'danger',
                     title: 'Возникла ошибка',
@@ -685,18 +846,57 @@
             rand(){
                 return Math.floor(Math.random() * (900000 - 100000 + 1)) + 100000;
             },
-            uploadFile(){
+            uploadFile(model,field,value,id=false,key=false) {
                 let file = event.target.files[0] || event.dataTransfer.files[0];
                 let formData = new FormData();
-                console.log(file);
-/*                formData.append('image', file);
-                Axios.post('upload/', formData)
+                formData.append('file', file);
+                Axios.post('/attach', formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                })
                     .then(response => {
-                        console.log(response)
+                        console.log(response.data);
+                        if(response.data.uploaded){
+                            if(model === 'act'){
+                                this.$set(this.lidData.acts[key],field,response.data.fileName);
+                            } else {
+                                this.$set(this.lidData,'contract_file',response.data.fileName);
+                            }
+
+                            this.save(model,field,response.data.fileName,id);
+                        }
                     }, error => {
                         console.log(error)
-                    })*/
+                    })
             },
+
+            deleteFile(model,field,key = false){
+                this.$confirm({title: 'Подтверждение', content: 'Удалить файл?'})
+                    .then(() => {
+                        let resp;
+                        if(model === 'act'){
+                             resp = this.save('act',field,null,this.lidData.acts[key].id);
+                            if(resp){
+                                this.$set(this.lidData.acts[key],field,null);
+                            }
+                        } else  {
+                            resp = this.save('lid',field,null);
+                            if(resp){
+                                this.$set(this.$data[model],field,null);
+                            }
+                        }
+
+                        this.$notify({
+                            type: 'success',
+                            content: 'Удалено'
+                        });
+                    })
+                    .catch(() => {
+                        this.$notify('Отменено')
+                    })
+            },
+
             // Manipulations
 /*            openAct(id){
                 $('#body_'+id).slideToggle();
@@ -819,47 +1019,52 @@
             },
             async setAddress(actKey){
                 let id =  this.lidData.acts[actKey].id;
-                if(await this.save('act','address',this.lidData.customer.address,id) > 0){
-                     this.lidData.acts[actKey].address = this.lidData.customer.address;
+                if(await this.save('act','address',this.customerData.address,id) > 0){
+                     this.lidData.acts[actKey].address = this.customerData.address;
                 }
 
-                if(await this.save('act','lat',this.lidData.customer.geo_lat,id)){
-                     this.lidData.acts[actKey].lat = this.lidData.customer.geo_lat;
+                if(await this.save('act','lat',this.customerData.lat,id)){
+                     this.lidData.acts[actKey].lat = this.customerData.lat;
                 }
 
-                if(await this.save('act','lon',this.lidData.customer.geo_lon,id)){
-                     this.lidData.acts[actKey].lon = this.lidData.customer.geo_lon;
+                if(await this.save('act','lon',this.customerData.lon,id)){
+                     this.lidData.acts[actKey].lon = this.customerData.lon;
                 }
 
-                if(await this.save('act','destination',this.lidData.customer.destination,id)){
-                     this.lidData.acts[actKey].destination = this.lidData.customer.destination;
+                if(await this.save('act','destination',this.customerData.destination,id)){
+                     this.lidData.acts[actKey].destination = this.customerData.destination;
                 }
 
-                if(await this.save('act','region',this.lidData.customer.region,id)){
-                     this.lidData.acts[actKey].region = this.lidData.customer.region;
+                if(await this.save('act','region',this.customerData.region,id)){
+                     this.lidData.acts[actKey].region = this.customerData.region;
                 }
 
             },
             /*---*/
            async dadataAddressClick(dadata,key){
+               console.log(dadata);
                 this.suggestions.text = '';
                 this.lidData.acts[key].address = dadata.unrestricted_value;
                 if(dadata.data.geo_lat && dadata.data.geo_lon){
 
                     let id =  this.lidData.acts[key].id;
                     if( this.save('act','address',dadata.unrestricted_value,id) > 0){
+                        // this.$set(this.lidData.acts[key],'address',dadata.data.address);
                         this.lidData.acts[key].address = dadata.data.address;
                     }
 
                     if( this.save('act','lat',dadata.data.geo_lat,id) > 0){
+                        // this.$set(this.lidData.acts[key],'lat',dadata.data.geo_lat);
                         this.lidData.acts[key].lat = dadata.data.geo_lat;
                     }
 
                     if( this.save('act','lon',dadata.data.geo_lon,id) > 0){
+                        // this.$set(this.lidData.acts[key],'lon',dadata.data.geo_lon);
                         this.lidData.acts[key].lon = dadata.data.geo_lon;
                     }
 
                     if( this.save('act','region',dadata.data.region,id) > 0){
+                        // this.$set(this.lidData.acts[key],'region',dadata.data.region);
                         this.lidData.acts[key].region = dadata.data.region;
                     }
 
@@ -867,7 +1072,9 @@
                     await this.OSMLayers(dadata.data.geo_lat,dadata.data.geo_lon,region.center_lat,region.center_lon);
 
 
+
                     if(this.save('act','destination',this.suggestions.destination,id)){
+                        // this.$set(this.lidData.acts[key],'destination',dadata.data.destination);
                         this.lidData.acts[key].destination = this.suggestions.destination;
                     }
                 }
@@ -898,6 +1105,105 @@
             addNewLids(){
                 this.modal.newLids = true;
             },
+            async updateActs(){
+                try {
+                    let response = await Axios.get('/ajax/lid/get_acts?lid='+this.lidData.id);
+                    this.$set(this.lidData,'acts',response.data);
+                } catch (error) {
+                    console.log(error);
+                }
+
+                this.modal.newLids = false;
+
+            },
+            deleteAct(key){
+                console.log(key);
+                this.$confirm({title: 'Подтверждение', content: 'Удалить?'})
+                    .then(() => {
+                        let response = Axios.get('/ajax/lid/delete_act?id='+this.lidData.acts[key].id);
+
+                        this.lidData.acts.splice(key,1);
+                        this.$notify({
+                            type: 'success',
+                            content: 'Удалено'
+                        });
+                    })
+                    .catch(() => {
+                        this.$notify('Отменено')
+                    })
+
+
+
+            },
+            async customerSearch(ent){
+
+ /*               try {
+                    let response = await Axios.get('/ajax/lid/customer_search?field='+ent+'&value='+)
+
+                } catch (error) {
+                    console.log(error);
+                }*/
+
+            },
+
+
+
+
+
+            // setAddress(obj){},
+            // saveAddressEntity(ent){},
+            // mainAddress(obj){},
+
+           async setMainAddress(obj){
+               await this.$set(this.customerData, 'address', obj.address);
+               await this.save('customer', 'address', this.customerData.address, this.customerData.id);
+
+               await this.$set(this.customerData, 'destination', obj.destination);
+               await this.save('customer', 'destination', this.customerData.destination, this.customerData.id);
+
+               await this.$set(this.customerData, 'lat', obj.lat);
+               await this.save('customer', 'lat', this.customerData.lat, this.customerData.id);
+
+               await this.$set(this.customerData, 'lon', obj.lon);
+               await this.save('customer', 'lon', this.customerData.lon, this.customerData.id);
+
+               await this.$set(this.customerData, 'region', obj.region);
+               await this.save('customer', 'region', this.customerData.region, this.customerData.id);
+            },
+            saveMainAddressEntity(ent){
+                this.$set(this.customerData,ent.entity,ent.value);
+                this.save('customer', ent.entity, this.customerData[ent.entity], this.customerData.id);
+            },
+            mainMainAddress(obj){},
+
+            // async setActAddress(obj,actKey){
+            //
+            //     let actID = this.lidData.acts[actKey].id;
+            //
+            //     await this.save('act', 'address', obj.address, actID);
+            //     await this.$set(this.lidData.acts[actKey], 'address', obj.address);
+            //
+            //     await this.save('act', 'destination', obj.destination, actID);
+            //     await this.$set(this.customerData, 'destination', obj.destination);
+            //
+            //     await this.save('act', 'lat', obj.lat, actID);
+            //     await this.$set(this.customerData, 'lat', obj.lat);
+            //
+            //     await this.save('act', 'lon', obj.lon, actID);
+            //     await this.$set(this.customerData, 'lon', obj.lon);
+            //
+            //     await this.save('act', 'region', obj.region, actID);
+            //     await this.$set(this.customerData, 'region', obj.region);
+            //
+            // },
+            // saveActAddressEntity(ent,actKey){
+            //     console.log(ent,actKey);
+            // },
+            // mainActAddress(obj,actKey){},
+
+
+
+
 
 
 
@@ -908,7 +1214,8 @@
         mounted() {
             // this.init();
             this.salt = this.rand();
-            // this.lid.customer.status = this.$refs.dropdown.$el;
+            var im = new Inputmask("+7 (999) 999 99 99");
+            im.mask('.tel');
         }
     };
 </script>
@@ -1233,5 +1540,47 @@
         text-align: left;
     }
     .volumes tbody {}
+
+    .lid_comment {
+        width: 100%;
+        min-height: 100px;
+        padding: 5px 15px;
+
+    }
+    input[type="checkbox"] + .methods_chb {
+        cursor: pointer;
+        display: inline-flex;
+        margin-right: 15px;
+        padding: 0 10px;
+        height: 20px;
+        justify-content: center;
+        align-items: center;
+        border-radius: 4px;
+        border: 1px solid #ccc;
+    }
+    input[type="checkbox"]:checked + .methods_chb {
+        border: 1px solid #3c8dbc;
+        background: #3c8dbc;
+        color: #fff;
+        opacity: 1;
+    }
+    .volume-row {
+        position: relative;
+        /*border-bottom: 1px solid #3c8dbc;*/
+    }
+    .volume-row  > td {
+        padding-top: 20px;
+        padding-bottom: 20px;
+
+
+    }
+    .methods-nest {
+        position: absolute!important;
+        /*top: 0px;*/
+        left: 0px;
+        padding-top: 19px!important;
+
+
+    }
 </style>
 <!-- рудницкая тетрадь для контрольных работ -->

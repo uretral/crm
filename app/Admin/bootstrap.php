@@ -54,6 +54,7 @@ Form::extend('copyAct',ActCopy::class);
 
 $vueRoute = [];
 $route = request()->getPathInfo();
+$vueRoute[] = '/js/pusher.js';
 switch (true):
     case  stristr($route,"/crm/lids/"):
         $vueRoute[] = '/js/implement.map.js';
@@ -67,6 +68,9 @@ switch (true):
         break;
     case strstr($route,"/vue/lid"):
         $vueRoute[] = '/js/lid.js';
+        break;
+    case strstr($route,"/helper/pests/"):
+        $vueRoute[] = '/js/calc.pest.js';
         break;
 endswitch;
 
@@ -83,4 +87,8 @@ Admin::navbar(function (\Encore\Admin\Widgets\Navbar $navbar) {
 });
 
 Admin::js($vueRoute);
+
+
+
+
 

@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Admin\Controllers\Helper;
+namespace App\Admin\Controllers\Store;
 
-use App\Models\Helper\Method;
+use App\Models\Store\Chemical;
 use App\Http\Controllers\Controller;
 use Encore\Admin\Controllers\HasResourceActions;
 use Encore\Admin\Form;
@@ -10,7 +10,7 @@ use Encore\Admin\Grid;
 use Encore\Admin\Layout\Content;
 use Encore\Admin\Show;
 
-class MethodController extends Controller
+class ChemicalController extends Controller
 {
     use HasResourceActions;
 
@@ -79,11 +79,13 @@ class MethodController extends Controller
      */
     protected function grid()
     {
-        $grid = new Grid(new Method);
+        $grid = new Grid(new Chemical);
 
         $grid->id('ID');
-        $grid->name('Действие')->sortable()->editable();
-        $grid->sort('Сортировка')->sortable()->editable();
+        $grid->name('Название')->editable();
+        $grid->expenses('Расход на 1л')->editable();
+        $grid->price_net('Закупочная стоимость препарата (1л/кг)')->editable();
+        $grid->expenses_meter('расход на М² (мл/гр)')->editable();
 
         return $grid;
     }
@@ -96,7 +98,7 @@ class MethodController extends Controller
      */
     protected function detail($id)
     {
-        $show = new Show(Method::findOrFail($id));
+        $show = new Show(Chemical::findOrFail($id));
 
         $show->id('ID');
         $show->created_at('Created at');
@@ -112,11 +114,14 @@ class MethodController extends Controller
      */
     protected function form()
     {
-        $form = new Form(new Method);
+        $form = new Form(new Chemical);
 
         $form->display('id');
-        $form->text('name');
-//        $form->number('sort')->default(10);
+        $form->text('name','Препарат');
+        $form->text('expenses','Расход на 1л');
+        $form->text('price_net','Закупочная стоимость препарата (1л/кг)');
+        $form->text('expenses_meter','расход на М² (мл/гр)');
+//        $form->text('price_extra','price_extra');
 
         return $form;
     }

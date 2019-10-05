@@ -27,6 +27,7 @@ class Links
       <span class="label label-danger">9</span>
     </a>
 </li>
+<li id="pusher"><pusher></pusher></li>
 
 HTML;
     }

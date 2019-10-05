@@ -85,6 +85,7 @@ class UserController extends Controller
         $grid->active('Активность')->switch();
         $grid->username(trans('admin.username'));
         $grid->name(trans('admin.name'));
+        $grid->phone('Телефон')->editable();
         $grid->color('цвет')->editable();
         $grid->roles(trans('admin.roles'))->pluck('name')->label();
         $grid->city('Город')->editable('select',Region::all()->pluck('city','code'));
@@ -158,6 +159,7 @@ class UserController extends Controller
         }
 
         $form->text('username', trans('admin.username'))->rules($userNameRules);
+        $form->mobile('phone', 'Телефон')->options(['mask' => '8 (999) 999 99 99']);
         $form->switch('active','Активность');
         $form->text('name', trans('admin.name'))->rules('required');
         $form->color('color','цвет');

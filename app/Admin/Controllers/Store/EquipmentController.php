@@ -82,9 +82,10 @@ class EquipmentController extends Controller
         $grid = new Grid(new Equipment);
 
         $grid->id('ID');
-        $grid->name('Код оборудования')->display(function ($name){
-            return \App\Models\Helper\Equipment::find($name)->code;
-        });
+/*        $grid->name('Код оборудования')->display(function ($name){
+            dump($name);
+//            return \App\Models\Helper\Equipment::find($name)->first()->code;
+        });*/
         $grid->inv_nr('Инвентарный номер')->editable();
         $grid->start_date('Постановка в работу с');
         $grid->operable('Рабочий')->switch();
@@ -117,6 +118,8 @@ class EquipmentController extends Controller
     protected function form()
     {
         $form = new Form(new Equipment);
+
+
 
         $form->id('id');
         $form->select('name','Код оборудования')->options(\App\Models\Helper\Equipment::all()->pluck('code','id'));

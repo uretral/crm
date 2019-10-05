@@ -66,24 +66,33 @@
 <!--Days-->
                     <div v-for="(mastersDay,masterDate) in res.multiSchedule" v-bind:class="{active : masterDate === dateActive }" class="log-schedule-tr">
 
-                        <div v-for="oneMasterDay in mastersDay"  class="log-schedule-td">
+                        <template v-for="oneMasterDay in mastersDay">
+                            <div  class="log-schedule-td">
 
 
                                 <label v-for="hour in 24"  class="cell drag-nest" >
                                     {{hour-1}}
                                     <template v-for="volume in oneMasterDay.volumes" v-if="Number(volume.start) === hour-1">
 
-											<a v-bind:href="'/crm/lids/'+volume.lid_id+'/edit'"
-                                                v-bind:id="volume.id"
-                                                v-bind:style="markBusy(volume.length)"
-                                                class="drag"
-                                               target="_blank"
-                                            ></a>
+                                        <a v-bind:href="'/crm/lids/'+volume.lid_id+'/edit'"
+                                           v-bind:id="volume.id"
+                                           v-bind:style="markBusy(volume.length)"
+                                           class="drag"
+                                           target="_blank"
+                                        ></a>
                                     </template>
 
                                 </label>
 
-                        </div>
+                                <span style="left:30px; width: 16px;"></span>
+
+                            </div>
+<!--                            <div class="log-penalty">-->
+<!--                                -->
+<!--                            </div>-->
+                        </template>
+
+
                     </div>
 
                 </div>

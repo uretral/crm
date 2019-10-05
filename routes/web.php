@@ -14,10 +14,17 @@
 Artisan::call('view:clear');
 
 
+use App\Models\Crm\Customer;
+use App\Models\Crm\Lid;
 use Carbon\Carbon;
 use Encore\Admin\Auth\Database\Administrator;
 
+
+
 //dump(Carbon::make('2019-08-31')->add(1, 'day')->toDateString());
+
+Route::any('/attach', 'ImageController@attach');
+
 //MAIN LOGISTIC MAP
 Route::get('/display/logistic_map','\App\Http\Controllers\Display\Info@logisticMap');
 
@@ -66,15 +73,123 @@ Route::get('/ajax/lid/delete_volume','\App\Admin\Controllers\Vue\LidController@d
 Route::get('/ajax/lid/add_implement','\App\Admin\Controllers\Vue\LidController@addImplement');
 Route::get('/ajax/lid/delete_implement','\App\Admin\Controllers\Vue\LidController@deleteImplement');
 Route::get('/ajax/lid/add_act_relation','\App\Admin\Controllers\Vue\LidController@addActRelation');
+Route::get('/ajax/lid/act_per_date','\App\Admin\Controllers\Vue\LidController@actPerDate');
+Route::get('/ajax/lid/save_float_acts','\App\Admin\Controllers\Vue\LidController@saveFloatActs');
+Route::get('/ajax/lid/get_acts','\App\Admin\Controllers\Vue\LidController@getActs');
+Route::get('/ajax/lid/delete_act','\App\Admin\Controllers\Vue\LidController@deleteAct');
+Route::get('/ajax/lid/customer_search','\App\Admin\Controllers\Vue\LidController@customerSearch');
+Route::get('/ajax/lid/add_empty_act','\App\Admin\Controllers\Vue\LidController@addEmptyAct');
+
+// Methods prices
+Route::get('/ajax/price/init_table','\App\Admin\Controllers\Helper\PestController@initTable');
+Route::get('/ajax/price/save_field','\App\Admin\Controllers\Helper\PestController@saveField');
+Route::get('/ajax/price/add_remedy','\App\Admin\Controllers\Helper\PestController@addRemedy');
+Route::get('/ajax/price/remove_remedy','\App\Admin\Controllers\Helper\PestController@removeRemedy');
+
 
 //Route::get('/test', '\App\Models\My\Test@tableTest');
 //Route::get('/test', '\App\Models\My\Test@vue');
-Route::get('/test', function (){
-//    dump(Carbon::now()->toDateTimeString());
-//    return view('test.yupnav');
-    $m = Administrator::whereHas('roles', function ($q) {
-        $q->where('role_id', 3)->where('active',1); // role_start_dateid
-    })->get();//->pluck('name', 'id');
-    dump($m);
-});
+Route::get('/test', function () {
+
+    $pest = \App\Models\Helper\Pest::all();
+    $delArr = [4,6,14,15,16];
+/*    foreach ($pest as $p){
+        $dif = array_diff($p->methods,$delArr);
+//        dump($p->methods);
+
+//        dump(array_diff($p->methods,$delArr),'-----');
+
+        $f = \App\Models\Helper\Pest::where('id',$p->id)->update(['methods'=>implode(',',$dif)]);
+        dump($f);
+
+
+
+
+
+    }*/
+
+
+
+/*
+    $vols = \App\Models\Crm\Volume::all();
+//    dump($acts);
+
+    $cnt = $vols->count();
+    foreach ($vols as $k => $vol) if($vol->id === 1070){
+
+        $items = [];
+
+        $id = $vol->method;
+        switch ($id){
+            case 4:
+                // Комплекс  = 1,3
+                $items = [1,3];
+                break;
+            case 6:
+                // Обработка от плесени 9,10
+                $items = [9,10];
+                break;
+            case 14:
+                // Горячий + барьер  3,27
+                $items = [3,27];
+                break;
+            case 15:
+                // 	Комплекс + барьер 1,3,27
+                $items = [1,3,27];
+                break;
+            case 16:
+                // Дезинсекция, дератизация  18,19
+                $items = [18,19];
+                break;
+            case 28:
+                //покос триммером+уборка  28,36
+                $items = [28,36];
+                break;
+            case 29:
+                // покос трактором +уборка 29,36
+                $items = [29,36];
+                break;
+            case null:
+                continue;
+                break;
+            default :
+                $items = [$id];
+//                if($id == 11){
+//                    dump($act);
+//                }
+                break;
+
+        }
+
+        // parent -> act_id
+        // lid_id -> lid_id
+
+
+/*        foreach ($items as $item){
+            $method = new \App\Models\Crm\ActMethod;
+            $method->act_id = $vol->parent;
+            $method->lid_id = $vol->lid_id;
+            $method->vol_id = $vol->id;
+            $method->method = $item;
+            $method->save();
+
+
+
+        }*/
+
+
+
+//
+
+
+
+//    }
+
+
+
+//    dump($cnt);*/
+
+}
+
+);
 

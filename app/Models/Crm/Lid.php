@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Lid extends Model
 {
     protected $table = 'lids';
+    protected $guarded = [];
     public function statuses()
     {
         return $this->hasMany(LidStatus::class,'lid_id')->orderBy('created_at');

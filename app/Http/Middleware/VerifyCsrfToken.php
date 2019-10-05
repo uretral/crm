@@ -19,6 +19,7 @@ class VerifyCsrfToken extends Middleware
      * @var array
      */
     protected $except = [
+        '/attach',
         '/logistic/map/new',
         '/logistic/map/update',
         '/logistic/map/many',

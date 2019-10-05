@@ -2,7 +2,7 @@
 
 namespace App\Admin\Controllers\Helper;
 
-use App\Models\Helper\Method;
+use App\Models\Helper\Constant;
 use App\Http\Controllers\Controller;
 use Encore\Admin\Controllers\HasResourceActions;
 use Encore\Admin\Form;
@@ -10,7 +10,7 @@ use Encore\Admin\Grid;
 use Encore\Admin\Layout\Content;
 use Encore\Admin\Show;
 
-class MethodController extends Controller
+class ConstantController extends Controller
 {
     use HasResourceActions;
 
@@ -79,11 +79,11 @@ class MethodController extends Controller
      */
     protected function grid()
     {
-        $grid = new Grid(new Method);
+        $grid = new Grid(new Constant);
 
         $grid->id('ID');
-        $grid->name('Действие')->sortable()->editable();
-        $grid->sort('Сортировка')->sortable()->editable();
+        $grid->name('Константа');
+        $grid->value('Значение');
 
         return $grid;
     }
@@ -96,11 +96,9 @@ class MethodController extends Controller
      */
     protected function detail($id)
     {
-        $show = new Show(Method::findOrFail($id));
+        $show = new Show(Constant::findOrFail($id));
 
         $show->id('ID');
-        $show->created_at('Created at');
-        $show->updated_at('Updated at');
 
         return $show;
     }
@@ -112,11 +110,11 @@ class MethodController extends Controller
      */
     protected function form()
     {
-        $form = new Form(new Method);
+        $form = new Form(new Constant);
 
-        $form->display('id');
-        $form->text('name');
-//        $form->number('sort')->default(10);
+        $form->display('ID');
+        $form->text('name','Константа');
+        $form->text('value','Значение');
 
         return $form;
     }

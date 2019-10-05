@@ -1,8 +1,8 @@
 <template>
-    <div>
-        <div class="form-group" :class="mseClass()">
+    <div style="display:inline-block;">
+        <div class="form-group" :class="mseClass()" v-if="main_btn">
             <label>&nbsp;</label>
-            <a href="javascript:" @click="setMainAddressData()"  class="btn btn-default">Основной:</a></div>
+            <a href="javascript:" @click="setMainAddressDataEntity()"  class="btn btn-default">Основной:</a></div>
 
         <div class="form-group" :class="mseClass()">
             <label>Дадата:</label>
@@ -50,15 +50,16 @@
     import L from 'leaflet';
     export default {
         name: 'DadataAddress',
-        props: ['mse','mainAddressData','regions'],
+        props: ['main','mse','regions','id','main_btn'],
         data() {
             return {
+                tmp: this.main,
                 result: {
-                    address:'',
-                    lat:'',
-                    lon:'',
-                    destination:'',
-                    region:'',
+                    address:this.main.address,
+                    lat:this.main.lat,
+                    lon:this.main.lon,
+                    destination:this.main.destination,
+                    region:this.main.region,
                 },
                 suggestions:[],
                 modal:false,
@@ -72,17 +73,27 @@
             mseClass(){
                 return this.mse ? 'mse':'';
             },
-            setMainAddressData(){
-                this.result = this.mainAddressData;
-                this.$emit('mainAddress',this.result)
+            setMainAddressDataEntity(){
+                console.log(this.tmp);
+                this.$set(this.result,'address',this.main.address);
+                this.$set(this.result,'lat',this.main.lat);
+                this.$set(this.result,'lon',this.main.lon);
+                this.$set(this.result,'destination',this.main.destination);
+                this.$set(this.result,'region',this.main.region);
+                // this.result = this.main;
+                this.$emit('mainAddress',this.result,this.id)
             },
             save(entity){
                 this.$emit('saveAddressEntity',{
                     entity:entity,
                     value:this.result[entity]
-                })
-
+                },this.id)
             },
+/*            async getLidAddress(){
+              try {
+                  let response = await Axios.get()
+              }
+            },*/
             async dadataAddress(){
                 if(this.dadata){
                     // this.result = {};
@@ -146,11 +157,13 @@
                 if(o){
                     this.map = null;
                     $('.mapHolder').html('').append('<div id="dMap" style="height: 500px;"></div>');
-                    this.$emit('address',this.result);
+                    this.$emit('setAddress',this.result,this.id);
                 }
 
 
             }
+        },
+        mounted() {
         }
 
     };

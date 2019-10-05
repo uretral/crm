@@ -2,15 +2,16 @@
 
 namespace App\Admin\Controllers\Helper;
 
-use App\Models\Helper\Method;
+use App\Models\Helper\Rules;
 use App\Http\Controllers\Controller;
+use Encore\Admin\Auth\Database\Role;
 use Encore\Admin\Controllers\HasResourceActions;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Layout\Content;
 use Encore\Admin\Show;
 
-class MethodController extends Controller
+class RulesController extends Controller
 {
     use HasResourceActions;
 
@@ -79,12 +80,14 @@ class MethodController extends Controller
      */
     protected function grid()
     {
-        $grid = new Grid(new Method);
+        $grid = new Grid(new Rules);
 
         $grid->id('ID');
-        $grid->name('Действие')->sortable()->editable();
-        $grid->sort('Сортировка')->sortable()->editable();
-
+        $grid->role('Пользователь')->select(Role::all()->pluck('name','id'));
+        $grid->name('Правило')->editable();
+        $grid->strict('Обязательное?')->switch();
+        $grid->value('Значение')->editable();
+        $grid->sort('Сортировка')->number()->editable();
         return $grid;
     }
 
@@ -96,7 +99,7 @@ class MethodController extends Controller
      */
     protected function detail($id)
     {
-        $show = new Show(Method::findOrFail($id));
+        $show = new Show(Rules::findOrFail($id));
 
         $show->id('ID');
         $show->created_at('Created at');
@@ -112,12 +115,14 @@ class MethodController extends Controller
      */
     protected function form()
     {
-        $form = new Form(new Method);
+        $form = new Form(new Rules);
 
-        $form->display('id');
-        $form->text('name');
-//        $form->number('sort')->default(10);
-
+        $form->display('ID');
+        $form->select('role','')->options(Role::all()->pluck('name','id'));
+        $form->text('name','Правило');
+        $form->switch('strict','Обязательное?');
+        $form->text('value','Значение');
+        $form->number('sort','Сортировка');
         return $form;
     }
 }

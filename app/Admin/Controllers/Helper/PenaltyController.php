@@ -2,15 +2,19 @@
 
 namespace App\Admin\Controllers\Helper;
 
-use App\Models\Helper\Method;
+use App\Models\Admin\AdminUser;
+use App\Models\Helper\Penalty;
 use App\Http\Controllers\Controller;
+use App\Models\Helper\PenaltyType;
+use Encore\Admin\Auth\Database\Role;
 use Encore\Admin\Controllers\HasResourceActions;
+use Encore\Admin\Facades\Admin;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Layout\Content;
 use Encore\Admin\Show;
 
-class MethodController extends Controller
+class PenaltyController extends Controller
 {
     use HasResourceActions;
 
@@ -79,12 +83,13 @@ class MethodController extends Controller
      */
     protected function grid()
     {
-        $grid = new Grid(new Method);
+        $grid = new Grid(new Penalty);
 
         $grid->id('ID');
-        $grid->name('Действие')->sortable()->editable();
-        $grid->sort('Сортировка')->sortable()->editable();
-
+        $grid->personnel('Персонал')->select(Role::all()->pluck('name','id'));
+        $grid->name('Наименование');
+        $grid->options('Опция');
+        $grid->value('Значение');
         return $grid;
     }
 
@@ -96,7 +101,7 @@ class MethodController extends Controller
      */
     protected function detail($id)
     {
-        $show = new Show(Method::findOrFail($id));
+        $show = new Show(Penalty::findOrFail($id));
 
         $show->id('ID');
         $show->created_at('Created at');
@@ -112,11 +117,13 @@ class MethodController extends Controller
      */
     protected function form()
     {
-        $form = new Form(new Method);
-
+        $form = new Form(new Penalty);
         $form->display('id');
-        $form->text('name');
-//        $form->number('sort')->default(10);
+        $form->select('personnel','Персонал')->options(Role::all()->pluck('name','id'));
+        $form->select('name','Наименование')->options(PenaltyType::all()->pluck('name','id'));
+        $form->text('options','Опция');
+        $form->text('value','Значение');
+//        $form->text('','');
 
         return $form;
     }
